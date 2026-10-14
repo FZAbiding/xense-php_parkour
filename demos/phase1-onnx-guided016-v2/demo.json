@@ -1,0 +1,19 @@
+{
+  "trial": "outputs/reproduction/official_benchmark/trial_030_interactive",
+  "video": "demos/phase1-onnx-guided016-v2/demo.mp4",
+  "source": "recorded_qpos_same_trial_quaternion_safe_interpolation",
+  "fps": 30,
+  "size": [
+    1280,
+    720
+  ],
+  "frames": 1435,
+  "duration_s": 47.833,
+  "sample_count": 1790,
+  "sample_duration_s": 47.816,
+  "sha256": {
+    "video": "e388da634d4608ec1128cda81745759b64b4f9d1cc05441fd99da5af3f2258cb",
+    "qpos": "ea9eeacc8309e01e9d42478822249cca8c746cf475c9f5f441ee042aae547f17",
+    "model": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+  }
+}

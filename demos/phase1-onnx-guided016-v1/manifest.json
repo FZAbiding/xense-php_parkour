@@ -1,0 +1,60 @@
+{
+  "version": "phase1-onnx-guided016-v1",
+  "trial": "outputs/reproduction/official_benchmark/trial_025",
+  "video": "demos/phase1-onnx-guided016-v1/demo.mp4",
+  "video_sha256": "75af55170780783f86317c6573a315e64e0f1834196d6cf6b0a9b88a287a8a2a",
+  "raw_capture_sha256": "6d500ee39ca13d93b6d8943dfcbf780500be59d8e0fecd5ecf6a2bd9f72b7c48",
+  "benchmark_script_sha256": "e56eb7880490aa53fa59ac5fc7260457f724cc13702c3c0f8ef6642f53b4e5c0",
+  "model_sha256": {
+    "depth_backbone.onnx": "5b22466a218944e3b0ab0f4f82a910e3eec35375ee03e7fb94eb65fa88431b56",
+    "student.onnx": "e426c4206181d511b838c76efc48e43636299b76cb5a15183977011589931628"
+  },
+  "terrain": "bundled terrain.obj",
+  "steer": "guided",
+  "guided_max_pulse": 0.16,
+  "approach_guard": false,
+  "guided_reversal_guard": false,
+  "quality": "nominal",
+  "run_status": "x_target_reached",
+  "consecutive_cleared": 5,
+  "full_course_complete": false,
+  "fps": 8,
+  "source_frames": 359,
+  "rendered_frames": 399,
+  "duration_s": 49.88,
+  "capture": {
+    "display": ":99",
+    "capture_box": [
+      0,
+      0,
+      1066,
+      666
+    ],
+    "source_size": [
+      1066,
+      666
+    ],
+    "video_size": [
+      960,
+      600
+    ],
+    "fps": 8,
+    "frames": 359,
+    "frames_captured": 359,
+    "frames_duplicated": 0,
+    "wall_s": 44.88,
+    "encoded_s": 44.88,
+    "capture_file": "demo_capture.mp4",
+    "error": null,
+    "status": "complete"
+  },
+  "trace_sha256": "437213a6e0aa190fad161f3e4d0b81a12cc2f7eb3ef26333afd5438cefc4d639",
+  "score_sha256": "ae28fbb466b8e181c34323b5f334b42992aa269ed76be3622ac74b9d5c3b77b9",
+  "audit_sha256": "d9dafa7069e70b71481745e0820f53bb08238c4b1f4cf0d8ac26011059416bac",
+  "recorded_at": "2026-10-14T18:50:34+0800",
+  "trial_finished_at": "2026-10-14T18:51:30+0800",
+  "sim_fps_median": 500.4,
+  "sim_fps_min": 245.6,
+  "sim_fps_longest_below_400": 1,
+  "depth_stale_events": 0
+}

@@ -46,6 +46,11 @@ with motion matching. If you already have an exported ONNX pair, go directly to 
 | [Training and evaluation](wbt_training/README.md) | Train teachers, distill a student, evaluate checkpoints, and export ONNX | Linux/NVIDIA with IsaacSim |
 | [Sim2sim](wbt_training/DEPLOY.md) | Run the exported depth policy in MuJoCo | Holosoma's MuJoCo and inference environments |
 
+For a detailed Chinese introduction to humanoid locomotion, RL, simulation,
+and this project's code, see [From VLA to PHP Parkour](PHP_HUMANOID_LOCOMOTION_BEGINNER_GUIDE.md).
+The [local reproduction log](PHP_REPRODUCTION_GUIDE.md) and [versioned demo videos](DEMO_VIDEO_WORKFLOW.md)
+document this checkout's ONNX sim2sim results separately from the paper's results.
+
 ## 🏃 Try the demo
 
 <p align="center">
