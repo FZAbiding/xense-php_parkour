@@ -59,7 +59,13 @@ def audit(folder: Path) -> dict:
     longest = longest_below(sim_values, 400)
     start_yaw = result.get("yaw_before_release_deg")
     heading_outlier = start_yaw is not None and abs(start_yaw) > 2.0
-    quality = ("no_sim_fps_samples" if not sim_values else
+    # The benchmark's finished timestamp has one-second precision. Its live
+    # guard can observe the final slow/stale log line later in that second,
+    # even though the offline log window above excludes it.
+    live_status = result.get("status")
+    quality = ("sustained_sim_slowdown" if live_status == "sim_fps_low" else
+               "depth_stale" if live_status == "depth_stale" else
+               "no_sim_fps_samples" if not sim_values else
                "depth_stale" if stale else
                "sustained_sim_slowdown" if longest >= 2 else
                "policy_rate_low" if longest_below(policy_values, 45) >= 2 else
@@ -74,6 +80,7 @@ def audit(folder: Path) -> dict:
             "sim_fps_min": min(sim_values, default=None),
             "sim_fps_below_400": sum(value < 400 for value in sim_values),
             "sim_fps_longest_below_400": longest,
+            "live_sim_fps_low_reports": result.get("sim_fps_low_reports", []),
             "sim_fps_slow_intervals": [{"at": at.isoformat(), "fps": value}
                                        for at, value in sim if value < 400],
             "policy_fps_samples": len(policy_values),

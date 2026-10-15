@@ -1,0 +1,242 @@
+{
+  "scope": "descriptive historical comparison, not a controlled effect estimate",
+  "first_crossing_x_m": [
+    8.0,
+    10.0,
+    10.8,
+    12.1,
+    13.0
+  ],
+  "trials": [
+    {
+      "name": "trial_025",
+      "trajectory_sha256": "437213a6e0aa190fad161f3e4d0b81a12cc2f7eb3ef26333afd5438cefc4d639",
+      "benchmark_script_sha256": "e56eb7880490aa53fa59ac5fc7260457f724cc13702c3c0f8ef6642f53b4e5c0",
+      "steer": "guided",
+      "target_x_m": 27.4,
+      "quality": "nominal",
+      "consecutive_cleared": 5,
+      "block_2_first_exit_y_m": -0.481,
+      "early_steer_events": [
+        {
+          "t": 12.92,
+          "x": 12.1,
+          "y": -0.48,
+          "yaw_deg": -20.0,
+          "vy": -0.36,
+          "predicted_y": -0.84,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        }
+      ],
+      "first_crossings": {
+        "8": {
+          "wall_s": 8.843,
+          "y_m": 0.594,
+          "vy_m_s": -0.004,
+          "yaw_deg": 8.3
+        },
+        "10": {
+          "wall_s": 10.695,
+          "y_m": 0.033,
+          "vy_m_s": -0.343,
+          "yaw_deg": -29.6
+        },
+        "10.8": {
+          "wall_s": 11.568,
+          "y_m": -0.048,
+          "vy_m_s": -0.302,
+          "yaw_deg": -18.0
+        },
+        "12.1": {
+          "wall_s": 12.924,
+          "y_m": -0.481,
+          "vy_m_s": -0.356,
+          "yaw_deg": -20.0
+        },
+        "13": {
+          "wall_s": 14.05,
+          "y_m": -0.786,
+          "vy_m_s": -0.073,
+          "yaw_deg": -14.2
+        }
+      }
+    },
+    {
+      "name": "trial_030_interactive",
+      "trajectory_sha256": "dfdaee63718e1922b7b51ae8195568d773d7e228f99c3fa8749f496c08809c0b",
+      "benchmark_script_sha256": "ec74fad60e7fe844a8101beef3c9ddcb7eef7e8f885040a7ecc3f55a897ed556",
+      "steer": "guided",
+      "target_x_m": 27.4,
+      "quality": "nominal",
+      "consecutive_cleared": 2,
+      "block_2_first_exit_y_m": -0.98,
+      "early_steer_events": [
+        {
+          "t": 11.85,
+          "x": 10.99,
+          "y": -0.48,
+          "yaw_deg": -20.7,
+          "vy": -0.77,
+          "predicted_y": -1.25,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        },
+        {
+          "t": 13.19,
+          "x": 12.56,
+          "y": -1.06,
+          "yaw_deg": -24.2,
+          "vy": -0.2,
+          "predicted_y": -1.26,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        }
+      ],
+      "first_crossings": {
+        "8": {
+          "wall_s": 8.797,
+          "y_m": 0.705,
+          "vy_m_s": 0.03,
+          "yaw_deg": 10.6
+        },
+        "10": {
+          "wall_s": 10.809,
+          "y_m": -0.006,
+          "vy_m_s": -0.302,
+          "yaw_deg": -29.6
+        },
+        "10.8": {
+          "wall_s": 11.679,
+          "y_m": -0.347,
+          "vy_m_s": -0.964,
+          "yaw_deg": -23.6
+        },
+        "12.1": {
+          "wall_s": 12.796,
+          "y_m": -0.98,
+          "vy_m_s": -0.322,
+          "yaw_deg": -17.1
+        },
+        "13": {
+          "wall_s": 13.772,
+          "y_m": -1.197,
+          "vy_m_s": 0.082,
+          "yaw_deg": 0.6
+        }
+      }
+    },
+    {
+      "name": "trial_031_interactive",
+      "trajectory_sha256": "38c855accfcefb17d45e3fe76db11084d1966fe471e2f029e3b970331087e927",
+      "benchmark_script_sha256": "ec74fad60e7fe844a8101beef3c9ddcb7eef7e8f885040a7ecc3f55a897ed556",
+      "steer": "guided",
+      "target_x_m": 65.0,
+      "quality": "nominal",
+      "consecutive_cleared": 1,
+      "block_2_first_exit_y_m": -1.246,
+      "early_steer_events": [
+        {
+          "t": 11.33,
+          "x": 10.82,
+          "y": -0.46,
+          "yaw_deg": -42.8,
+          "vy": -0.55,
+          "predicted_y": -1.01,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        },
+        {
+          "t": 12.51,
+          "x": 12.26,
+          "y": -1.39,
+          "yaw_deg": -30.2,
+          "vy": -0.86,
+          "predicted_y": -2.25,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        }
+      ],
+      "first_crossings": {
+        "8": {
+          "wall_s": 8.865,
+          "y_m": 0.671,
+          "vy_m_s": 0.008,
+          "yaw_deg": 7.7
+        },
+        "10": {
+          "wall_s": 10.438,
+          "y_m": 0.075,
+          "vy_m_s": -0.43,
+          "yaw_deg": -33.2
+        },
+        "10.8": {
+          "wall_s": 11.327,
+          "y_m": -0.458,
+          "vy_m_s": -0.549,
+          "yaw_deg": -42.8
+        },
+        "12.1": {
+          "wall_s": 12.333,
+          "y_m": -1.246,
+          "vy_m_s": -0.64,
+          "yaw_deg": -35.5
+        },
+        "13": {
+          "wall_s": 13.484,
+          "y_m": -1.627,
+          "vy_m_s": -0.29,
+          "yaw_deg": -13.0
+        }
+      }
+    },
+    {
+      "name": "trial_032_w_only",
+      "trajectory_sha256": "6dcd11a7faeefea26f04643fddc6178fa40f30513045291cbf62d81755090511",
+      "benchmark_script_sha256": "ec74fad60e7fe844a8101beef3c9ddcb7eef7e8f885040a7ecc3f55a897ed556",
+      "steer": "none",
+      "target_x_m": 27.4,
+      "quality": "nominal",
+      "consecutive_cleared": 1,
+      "block_2_first_exit_y_m": -1.342,
+      "early_steer_events": [],
+      "first_crossings": {
+        "8": {
+          "wall_s": 8.786,
+          "y_m": 0.844,
+          "vy_m_s": 0.049,
+          "yaw_deg": 14.4
+        },
+        "10": {
+          "wall_s": 10.964,
+          "y_m": 0.069,
+          "vy_m_s": -0.387,
+          "yaw_deg": -29.0
+        },
+        "10.8": {
+          "wall_s": 11.872,
+          "y_m": -0.454,
+          "vy_m_s": -0.571,
+          "yaw_deg": -26.6
+        },
+        "12.1": {
+          "wall_s": 13.059,
+          "y_m": -1.342,
+          "vy_m_s": -0.512,
+          "yaw_deg": -38.4
+        },
+        "13": {
+          "wall_s": 14.34,
+          "y_m": -1.882,
+          "vy_m_s": -0.343,
+          "yaw_deg": -40.3
+        }
+      }
+    }
+  ]
+}

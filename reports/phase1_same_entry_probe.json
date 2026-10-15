@@ -1,0 +1,98 @@
+{
+  "scope": "descriptive historical comparison, not a controlled effect estimate",
+  "first_crossing_x_m": [
+    8.0,
+    10.0,
+    10.8,
+    12.1,
+    13.0
+  ],
+  "trials": [
+    {
+      "name": "trial_032_w_only",
+      "trajectory_sha256": "6dcd11a7faeefea26f04643fddc6178fa40f30513045291cbf62d81755090511",
+      "benchmark_script_sha256": "ec74fad60e7fe844a8101beef3c9ddcb7eef7e8f885040a7ecc3f55a897ed556",
+      "steer": "none",
+      "target_x_m": 27.4,
+      "quality": "nominal",
+      "consecutive_cleared": 1,
+      "block_2_first_exit_y_m": -1.342,
+      "early_steer_events": [],
+      "first_crossings": {
+        "8": {
+          "wall_s": 8.786,
+          "y_m": 0.844,
+          "vy_m_s": 0.049,
+          "yaw_deg": 14.4
+        },
+        "10": {
+          "wall_s": 10.964,
+          "y_m": 0.069,
+          "vy_m_s": -0.387,
+          "yaw_deg": -29.0
+        },
+        "10.8": {
+          "wall_s": 11.872,
+          "y_m": -0.454,
+          "vy_m_s": -0.571,
+          "yaw_deg": -26.6
+        },
+        "12.1": {
+          "wall_s": 13.059,
+          "y_m": -1.342,
+          "vy_m_s": -0.512,
+          "yaw_deg": -38.4
+        },
+        "13": {
+          "wall_s": 14.34,
+          "y_m": -1.882,
+          "vy_m_s": -0.343,
+          "yaw_deg": -40.3
+        }
+      }
+    },
+    {
+      "name": "trial_033_guided",
+      "trajectory_sha256": "ff86479f4a751ecb386c88f1639250b3404c722a13db9e5f456e71afbfd0ceda",
+      "benchmark_script_sha256": "ec74fad60e7fe844a8101beef3c9ddcb7eef7e8f885040a7ecc3f55a897ed556",
+      "steer": "guided",
+      "target_x_m": 27.4,
+      "quality": "nominal",
+      "consecutive_cleared": 1,
+      "block_2_first_exit_y_m": null,
+      "early_steer_events": [],
+      "first_crossings": {
+        "8": {
+          "wall_s": 8.845,
+          "y_m": 1.274,
+          "vy_m_s": 0.155,
+          "yaw_deg": 21.1
+        },
+        "10": {
+          "wall_s": 11.462,
+          "y_m": 1.735,
+          "vy_m_s": 0.277,
+          "yaw_deg": 5.1
+        },
+        "10.8": {
+          "wall_s": 12.492,
+          "y_m": 1.798,
+          "vy_m_s": 0.225,
+          "yaw_deg": 0.6
+        },
+        "12.1": {
+          "wall_s": 14.19,
+          "y_m": 1.732,
+          "vy_m_s": -0.105,
+          "yaw_deg": 0.7
+        },
+        "13": {
+          "wall_s": 15.344,
+          "y_m": 1.675,
+          "vy_m_s": -0.016,
+          "yaw_deg": -6.7
+        }
+      }
+    }
+  ]
+}
