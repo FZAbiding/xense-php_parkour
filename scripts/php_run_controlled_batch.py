@@ -139,13 +139,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", action="store_true",
                         help="actually run the protected batch; default only checks resources")
-    parser.add_argument("--sequence", default="guided,none,guided,none,guided")
-    parser.add_argument("--start-id", type=int, default=33)
+    parser.add_argument("--sequence", default="none,guided,none,guided")
+    parser.add_argument("--start-id", type=int, default=36)
     parser.add_argument("--trial-root", type=Path, default=DEFAULT_ROOT)
-    parser.add_argument("--max-gpu-util", type=int, default=60)
+    parser.add_argument("--max-gpu-util", type=int, default=50)
     parser.add_argument("--max-gpu-memory-mib", type=int, default=10000)
-    parser.add_argument("--samples", type=int, default=3)
-    parser.add_argument("--interval", type=float, default=1.0)
+    parser.add_argument("--samples", type=int, default=7)
+    parser.add_argument("--interval", type=float, default=5.0)
     args = parser.parse_args()
     sequence = args.sequence.split(",")
     if not sequence or any(mode not in ("none", "guided") for mode in sequence):

@@ -25,6 +25,7 @@
 | 033 | 2026-10-15 | 同入口 `guided`、0.16 秒上限，完整状态与原始录屏保存 | **1/12** | `nominal`；仿真中位数 498.9 Hz，最低 420.5 Hz | 第 2 块旁侧接近、未登上；x≈10.8 m 已在 y=+1.798 m，首次 `a/d` 直到 x≈15.29 m。与 032 的[同入口轨迹对照](reports/phase1_same_entry_probe.md)只用于排障 |
 | 034 | 2026-10-15 | 同入口 W-only；与 033 交错 | **1/12，排除** | `sustained_sim_slowdown`，304.4、345.7 Hz 连续低速 | 在线保护在 x≈9.574 m 停止；批次自动停止，不能把该条作有效 W-only 对照 |
 | 035 | 2026-10-15 | 延长启动前 GPU 采样间隔至 5 秒后单独补跑 W-only | **0/12，排除** | 在线保护 210.7、198.2 Hz 连续低速；修正后的离线审计为 `sustained_sim_slowdown` | 结束时间整秒精度使旧审计漏了最后一条毫秒日志；已增加在线原因优先的审计回归测试。原批次 JSON 的旧 `nominal` 标签作历史记录，不可使用 |
+| 036 预检 | 2026-10-15 | 计划补 W-only；先用七次、每隔 5 秒的 GPU 空闲采样 | **未启动** | `shared_gpu_busy`；七次利用率 79%–92%，需全部 <50% 才启动 | 原始读数在 `outputs/reproduction/controlled_batch_1792054937.json`，`trial_036_none` 未创建；没有新成绩或视频 |
 
 每次原始证据在 `outputs/reproduction/official_benchmark/trial_NNN/`：`result.json` 固定参数和结束状态，`pelvis.csv` 是原始骨盆轨迹，`course_score.json` 是逐块判定，`audit.json` 是速率与深度审计，`sim.log`/`inference.log` 是进程日志，截图来自独立 `:99` 显示器。`outputs/` 被 Git 忽略，但本机仍保留。完整环境与问题见 [复现指南](PHP_REPRODUCTION_GUIDE.md)。
 
@@ -33,6 +34,8 @@
 2026-10-15 使用 025、030、031、032 的原始轨迹完成 [第二块前横向漂移图与逐点对照](reports/phase1_early_drift.md)。四次在 x≈10 m 尚接近中线，到 x≈10.8 m 025 已明显区别于其余三次；025 的第一条左右修正直到 x≈12.10 m，因此不能只用那次修正解释早期分叉。不同仿真入口等混杂因素仍在，下一步用同一入口采样本体、深度时序与接触信息。
 
 033–035 的同入口交错探针和质量问题详见 [新记录](reports/phase1_same_entry_probe.md)。目前只有 033 是新增的质量合格试次；034/035 因仿真降速排除，不能形成 `guided` 与 W-only 的有效样本分布。
+
+032/033 的保存状态还支持 [脚与台阶几何接触的离线重建](reports/phase1_contact_replay.md)和 [D435i 深度链路核对](reports/phase1_depth_pipeline_audit.md)。前者显示两次都接触第一块，但只有 032 的记录帧接触第二块；后者未发现明显的 preset/形状错误，仍缺逐帧深度证据。
 
 ## 021 设计及后续诊断
 
