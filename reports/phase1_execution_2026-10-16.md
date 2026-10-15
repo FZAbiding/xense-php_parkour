@@ -22,6 +22,8 @@
 
 实现见 [仿真采样入口](../scripts/php_sim_demo.py)、[MuJoCo 接触读取](../scripts/php_solver_contacts.py)、[旁路深度录制](../scripts/php_record_depth_diagnostic.py)及[资源保护入口](../scripts/php_run_depth_probe.py)。诊断入口通过环境变量仅向其 benchmark 子进程打开额外记录，并核验 `qpos`、`qvel`、接触记录的样本数一致。普通固定协议运行时会清除该变量。180 秒外层超时现在先向 benchmark 发 `SIGINT`，给它机会在 `finally` 中清理仿真、策略和独立 Xvfb，再使用强制结束作为最后兜底。
 
+这次修改了 `php_sim_demo.py` 的**文件哈希**。普通试次的诊断分支默认关闭，物理、控制、相机和原有采样路径未作参数改动；新试次仍须在 `visual_diagnostics.json` 保存实际脚本哈希，并单列为新代码批次。032/033 可作定位线索，若坚持字节级同入口统计，则要在新批次重新累积两组样本，不能悄悄把不同哈希直接拼成严格同条件分布。
+
 验证边界：相关脚本语法检查通过；5 个聚焦测试通过。新增测试使用真实的 MuJoCo 小模型，证实脚触地时读到正的法向力、抬起后不再记录该接触。还用 032 的保存回放模型离线调用过 MuJoCo `mj_contactForce`，接口工作正常；`php_sim_demo.py --help` 在现有 `php` 环境中通过实际入口导入检查。**尚未验证三路证据在真实诊断试次中同时归档**，因为共享 GPU 始终未达到启动门槛。
 
 ## 下一次空闲窗口的顺序

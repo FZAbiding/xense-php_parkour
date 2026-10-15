@@ -8,6 +8,7 @@ colors, camera defaults, sidebars, and a sampled qpos log are added for replay.
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import os
 import time
@@ -67,6 +68,10 @@ def setup_clean(self):
         "debug_frusta": False, "ui_sidebars": False,
         "presentation_only": True,
         "diagnostic_qvel_and_solver_contacts": diagnostic_enabled,
+        "sim_demo_script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "solver_contact_helper_sha256": (
+            hashlib.sha256(Path(__file__).with_name("php_solver_contacts.py").read_bytes()).hexdigest()
+            if diagnostic_enabled else None),
     }, indent=2) + "\n")
 MuJoCo.setup_viewer = setup_clean
 
