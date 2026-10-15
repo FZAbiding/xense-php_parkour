@@ -6,7 +6,7 @@
 
 项目源码：`amazon-far/php_parkour`，PHP 提交 `1710564612e451d3188aaa49857006af97c02acf`，固定的 Holosoma 子模块提交 `4a0bf04cde5930af5ed59da797568d32be972525`。机器为 Ubuntu 24.04、NVIDIA RTX 4090 24 GB、驱动 580.126.09；创建的 mamba 环境名为 `php`，Python 3.11.17。官方发布的学生模型是 `depth_backbone.onnx` 和 `student.onnx`，下载器对压缩包和两个文件做 SHA-256 校验。
 
-本机已运行发布的学生策略，并把测试从首块台阶延伸到官方默认 12 块路线。按严格首次离开判据，当前有两次在正常仿真速率下连续越过 4 块；一次连续越过 5 块的记录伴随仿真持续降速，尚需复验。尚未完成整条路线，也未重新训练或验证真机成功率。证据与问题见文末“实测结果”和[试验流水账](PHASE1_TRIAL_LOG.md)。
+本机已运行发布的学生策略，并把测试从首块台阶延伸到官方默认 12 块路线。按严格首次离开判据，`guided` 的当前最好质量合格试次连续越过 5 块；后续同权重试次分别为 2 块、1 块。2026-10-15 新增只保持 W、无左右修正的基线试次，质量合格但只连续越过 1 块。它们还不足以给出稳定成功率，也没有完成整条路线；教师或学生均未重新训练。证据与问题见文末“实测结果”、[试验流水账](PHASE1_TRIAL_LOG.md)和[下一阶段计划](NEXT_STAGE_PLAN.md)。
 
 ## 先建立一张地图
 
@@ -252,7 +252,7 @@ python scripts/php_score_course.py outputs/reproduction/official_benchmark/trial
 
 ## 资料
 
-当前演示分两份：旧版 [v1 视频](demos/phase1-onnx-guided016-v1/demo.mp4)记录了最好的一次正常质量严格连续 5/12；新版 [v2 视频与交互回放说明](demos/phase1-onnx-guided016-v2/README.md)用同次评测状态显示实体台阶并提供旋转、缩放，成绩为 2/12。两者都没有复现官方完整路线。具体录制、打包和质量核验步骤见 [演示视频流程](DEMO_VIDEO_WORKFLOW.md)；试次逐项比较见 [试验流水账](PHASE1_TRIAL_LOG.md)。
+现有三个版本：[v1 视频](demos/phase1-onnx-guided016-v1/demo.mp4)记录了最好的一次质量合格 `guided` 5/12；[v2 视频与交互回放](demos/phase1-onnx-guided016-v2/README.md)显示实体台阶和 2/12；[v3 W-only 视频与交互回放](demos/phase1-onnx-w-only-v3/README.md)是不加左右修正的 1/12 单次基线。三者都没有复现官方完整路线。具体录制、打包和质量核验步骤见 [演示视频流程](DEMO_VIDEO_WORKFLOW.md)；试次逐项比较见 [试验流水账](PHASE1_TRIAL_LOG.md)，后续方案见 [下一阶段计划](NEXT_STAGE_PLAN.md)。
 
 - [论文：Perceptive Humanoid Parkour](https://arxiv.org/html/2602.15827v1)
 - [项目主页](https://php-parkour.github.io/)

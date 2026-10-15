@@ -50,6 +50,7 @@ For a detailed Chinese introduction to humanoid locomotion, RL, simulation,
 and this project's code, see [From VLA to PHP Parkour](PHP_HUMANOID_LOCOMOTION_BEGINNER_GUIDE.md).
 The [local reproduction log](PHP_REPRODUCTION_GUIDE.md) and [versioned demo videos](DEMO_VIDEO_WORKFLOW.md)
 document this checkout's ONNX sim2sim results separately from the paper's results.
+See the [next-stage evaluation and training plan](NEXT_STAGE_PLAN.md) for the current roadmap.
 
 ## 🏃 Try the demo
 

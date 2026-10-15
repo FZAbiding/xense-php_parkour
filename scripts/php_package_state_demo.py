@@ -130,13 +130,18 @@ def main() -> None:
                                  "sha256": digest(path)}
                           for name, path in paths.items()}}
     (package / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    steer_description = (
+        "仅保持官方前进指令 W，无额外左右修正"
+        if result["steer"] == "none"
+        else f"额外 `{result['steer']}` 方向修正，短按上限 {result['guided_max_pulse']} 秒"
+    )
     (package / "README.md").write_text(
         f"# {args.version}\n\n"
         f"[观看 30 fps 实体仿真视频](demo.mp4) · [预览图](poster.jpg) · "
         f"[核验清单](manifest.json)\n\n"
-        f"官方 ONNX 权重、默认 12 块台阶；额外 `guided` 方向短按上限 "
-        f"{result['guided_max_pulse']} 秒。本次试验 `{args.trial.name}` 的严格连续成绩 "
-        f"**{score['consecutive_cleared']}/12**，实际离开路线于 x≈{score['max_x_m']} m；"
+        f"官方 ONNX 权重、默认 12 块台阶；{steer_description}。"
+        f"本次试验 `{args.trial.name}` 的严格连续成绩 "
+        f"**{score['consecutive_cleared']}/12**，最大前进 x≈{score['max_x_m']} m；"
         f"总通过块数 {score['blocks_cleared']}。运行质量 `{audit['quality']}`，"
         f"仿真速率中位数 {audit['sim_fps_median']} Hz。"
         "视觉颜色和镜头只改变展示，不改变碰撞几何或官方策略。\n\n"

@@ -1,0 +1,121 @@
+{
+  "version": "phase1-onnx-w-only-v3",
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/trial_032_w_only",
+  "method": "full-frame MuJoCo state replay of the same scored trial",
+  "source_truth": "qpos.csv and replay_model.mjb sampled during ONNX evaluation",
+  "interpolation": "MuJoCo mj_differentiatePos/mj_integratePos",
+  "visual_only_changes": "solid tan block colors, dark gray ground, camera/sidebars",
+  "input": {
+    "model_sha256": {
+      "depth_backbone.onnx": "5b22466a218944e3b0ab0f4f82a910e3eec35375ee03e7fb94eb65fa88431b56",
+      "student.onnx": "e426c4206181d511b838c76efc48e43636299b76cb5a15183977011589931628"
+    },
+    "speed_mode": "low",
+    "steer": "none",
+    "guided_max_pulse": 0.3,
+    "target_x": 27.4,
+    "forward_key": "held W as in prior evaluations"
+  },
+  "outcome": {
+    "status": "left_course",
+    "consecutive_cleared": 1,
+    "blocks_cleared_total": 1,
+    "max_x_m": 14.249,
+    "quality": "nominal",
+    "sim_fps_median": 499.8,
+    "policy_fps_median": 50.7
+  },
+  "video": {
+    "codec_name": "h264",
+    "width": 1280,
+    "height": 720,
+    "avg_frame_rate": "30/1",
+    "nb_frames": "513"
+  },
+  "state_samples": {
+    "count": 639,
+    "median_gap_ms": 28.3,
+    "max_gap_ms": 46.4
+  },
+  "raw_capture": {
+    "fps": 8,
+    "frames": 135,
+    "frames_duplicated": 0,
+    "status": "complete"
+  },
+  "other_trials": [],
+  "files": {
+    "video": {
+      "path": "demos/phase1-onnx-w-only-v3/demo.mp4",
+      "sha256": "fab59cfb7c287ba4f1d892a35cf5de1607d04c294190d659cd422b69f7a5410f"
+    },
+    "poster": {
+      "path": "demos/phase1-onnx-w-only-v3/poster.jpg",
+      "sha256": "747527f826158af608150ed78bd12f98b770569e9372d9ec8e1a0f7c9bcec3b8"
+    },
+    "portable_model": {
+      "path": "demos/phase1-onnx-w-only-v3/replay_model.mjb.gz",
+      "sha256": "07b0b19ba1dbb68b46a4d83d66a30bf40acb140135fcaf69623b77ef22941cd2"
+    },
+    "portable_states": {
+      "path": "demos/phase1-onnx-w-only-v3/qpos.csv.gz",
+      "sha256": "f882e5986565e72a002c362c690a187f3758662c3d02c4349ea3c28006b10e06"
+    },
+    "portable_raw_capture": {
+      "path": "demos/phase1-onnx-w-only-v3/raw_capture.mp4",
+      "sha256": "e958d81208daa6cb56b8bda1e53743233cd886077fde09e77d6bcca6b80270c9"
+    },
+    "portable_trajectory": {
+      "path": "demos/phase1-onnx-w-only-v3/pelvis.csv",
+      "sha256": "6dcd11a7faeefea26f04643fddc6178fa40f30513045291cbf62d81755090511"
+    },
+    "portable_result": {
+      "path": "demos/phase1-onnx-w-only-v3/result.json",
+      "sha256": "c75ffa4d057e8c40b5b8e163cd3bfbc17fb7583c0d34ff7a7ae1f54158d485c8"
+    },
+    "portable_score": {
+      "path": "demos/phase1-onnx-w-only-v3/course_score.json",
+      "sha256": "fc85b2144a45a02fff54d89092b868c1394a1b972a699af51745e5cee5769f41"
+    },
+    "portable_audit": {
+      "path": "demos/phase1-onnx-w-only-v3/audit.json",
+      "sha256": "882264594f203600c1ba6601218cdf3c6d92481d7c1affd4e1fae04d1fa3ed72"
+    },
+    "source_model": {
+      "path": "outputs/reproduction/official_benchmark/trial_032_w_only/replay_model.mjb",
+      "sha256": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+    },
+    "source_states": {
+      "path": "outputs/reproduction/official_benchmark/trial_032_w_only/qpos.csv",
+      "sha256": "38a52ccb075dcd1db02917778761ec503e94567db9f5a57c89e26cf7407b7138"
+    },
+    "raw_capture": {
+      "path": "outputs/reproduction/official_benchmark/trial_032_w_only/demo_capture.mp4",
+      "sha256": "e958d81208daa6cb56b8bda1e53743233cd886077fde09e77d6bcca6b80270c9"
+    },
+    "trajectory": {
+      "path": "outputs/reproduction/official_benchmark/trial_032_w_only/pelvis.csv",
+      "sha256": "6dcd11a7faeefea26f04643fddc6178fa40f30513045291cbf62d81755090511"
+    },
+    "result": {
+      "path": "outputs/reproduction/official_benchmark/trial_032_w_only/result.json",
+      "sha256": "c75ffa4d057e8c40b5b8e163cd3bfbc17fb7583c0d34ff7a7ae1f54158d485c8"
+    },
+    "course_score": {
+      "path": "outputs/reproduction/official_benchmark/trial_032_w_only/course_score.json",
+      "sha256": "fc85b2144a45a02fff54d89092b868c1394a1b972a699af51745e5cee5769f41"
+    },
+    "audit": {
+      "path": "outputs/reproduction/official_benchmark/trial_032_w_only/audit.json",
+      "sha256": "882264594f203600c1ba6601218cdf3c6d92481d7c1affd4e1fae04d1fa3ed72"
+    },
+    "render_script": {
+      "path": "scripts/php_render_state_video.py",
+      "sha256": "9c2ae728bfffa9adb1864a65dfb2c9da34799bd5a6a87039171876b05b01483f"
+    },
+    "replay_script": {
+      "path": "scripts/php_replay_demo.py",
+      "sha256": "be6726271ff5e81f1a5ac1f2474f9d3129514530df3417870c7cff7582d10216"
+    }
+  }
+}

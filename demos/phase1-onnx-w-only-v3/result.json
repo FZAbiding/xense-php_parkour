@@ -1,0 +1,62 @@
+{
+  "started": "2026-10-15T09:36:52+0800",
+  "status": "left_course",
+  "target_x": 27.4,
+  "max_seconds": 60.0,
+  "display": ":99",
+  "steer": "none",
+  "speed_mode": "low",
+  "pause_after_block": 0.0,
+  "guided_max_pulse": 0.3,
+  "guided_reversal_guard": false,
+  "approach_guard": false,
+  "demo_view": false,
+  "interactive_demo": true,
+  "demo_start_delay": 0.0,
+  "model_sha256": {
+    "depth_backbone.onnx": "5b22466a218944e3b0ab0f4f82a910e3eec35375ee03e7fb94eb65fa88431b56",
+    "student.onnx": "e426c4206181d511b838c76efc48e43636299b76cb5a15183977011589931628"
+  },
+  "benchmark_script_sha256": "ec74fad60e7fe844a8101beef3c9ddcb7eef7e8f885040a7ecc3f55a897ed556",
+  "terrain_obj": "bundled terrain.obj",
+  "startup_pose_samples": [
+    [
+      0.785,
+      -0.13
+    ],
+    [
+      0.785,
+      -0.13
+    ],
+    [
+      0.785,
+      -0.13
+    ],
+    [
+      0.785,
+      -0.13
+    ],
+    [
+      0.785,
+      -0.13
+    ],
+    [
+      0.785,
+      -0.13
+    ]
+  ],
+  "z_before_release": 0.7845584154129028,
+  "yaw_before_release_deg": -0.13,
+  "walk_started": "2026-10-15T09:37:04+0800",
+  "elapsed_s": 16.59,
+  "final_xyz": [
+    14.249,
+    -3.01,
+    0.778
+  ],
+  "max_x": 14.249,
+  "steer_events": [],
+  "guard_suppressed_events": [],
+  "pause_events": [],
+  "finished": "2026-10-15T09:37:21+0800"
+}

@@ -2,7 +2,13 @@
 
 目标：**每个可展示版本都有一段真实仿真视频和可核对的实验记录**。视频负责展示动作，成绩只来自同一次运行的 `pelvis.csv` 与 `php_score_course.py`；不能用视觉印象或最大前进距离代替逐块评分。当前只覆盖第一阶段官方 ONNX 推理，不涉及重新训练。
 
-## 当前交互版 v2（2026-10-14）
+## W-only 基线 v3（2026-10-15）
+
+[30 fps 实体仿真视频](demos/phase1-onnx-w-only-v3/demo.mp4) · [交互回放与成绩说明](demos/phase1-onnx-w-only-v3/README.md) · [版本清单](demos/phase1-onnx-w-only-v3/manifest.json)。官方双 ONNX、默认 12 块台阶，只保持 W 前进，不额外发送左右方向修正。032 试次质量 `nominal`，严格连续 **1/12**：第 2 块首次出块 y=−1.342 m，超出 ±1 m 判据。物理仿真中位数 499.8 Hz，策略中位数 50.7 Hz，深度过期 0 次。它是单次 W-only 基线，不代表稳定成功率；与旧版额外 `guided` 的 5/12 不能直接解释为方向修正的因果收益。下一阶段的复测协议见 [计划](NEXT_STAGE_PLAN.md)。
+
+交互启动方式与 v2 相同，只需把 `--trial` 换成 `demos/phase1-onnx-w-only-v3`。录屏、完整关节状态和评分来自同次试验；30 fps 成片是状态回放，不是重新执行策略。
+
+## 交互版 v2（2026-10-14）
 
 [30 fps、1280×720 实体台阶视频](demos/phase1-onnx-guided016-v2/demo.mp4) · [预览图](demos/phase1-onnx-guided016-v2/poster.jpg) · [版本说明](demos/phase1-onnx-guided016-v2/README.md) · [哈希与评分清单](demos/phase1-onnx-guided016-v2/manifest.json)。视频从 `trial_030_interactive` **同一次评测保存的完整关节状态**在 MuJoCo 中重放，帧间按 MuJoCo 关节空间插值；对应 8 fps 原始窗口录屏和原始轨迹仍在 `outputs/reproduction/official_benchmark/trial_030_interactive/`。画面是重放可视化，不是新一轮策略运行，评分仍取原试次的 `pelvis.csv`。
 

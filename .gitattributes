@@ -2,5 +2,5 @@
 motion_matching/**/assets/robots/**/*.obj binary
 motion_matching/**/assets/robots/**/*.STL binary
 
-# The recorded trajectory is CSV with CRLF endings; preserve its manifest hash.
-demos/phase1-onnx-guided016-v2/pelvis.csv whitespace=cr-at-eol
+# Recorded trajectories are CSV with CRLF endings; preserve their manifest hashes.
+demos/*/pelvis.csv whitespace=cr-at-eol
