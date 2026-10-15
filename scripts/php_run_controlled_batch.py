@@ -9,6 +9,7 @@ after the batch rather than choosing the best outcome.
 from __future__ import annotations
 
 import argparse
+from contextlib import nullcontext
 import hashlib
 import json
 import re
@@ -54,7 +55,8 @@ def preflight(samples: int, interval_s: float, max_util: int,
     }
 
 
-def run_trial(directory: Path, steer: str, python: str) -> dict:
+def run_trial(directory: Path, steer: str, python: str,
+              *, depth_diagnostic: bool = False) -> dict:
     if directory.exists():
         raise FileExistsError(f"refusing to overwrite {directory}")
     if Path("/tmp/.X11-unix/X99").exists():
@@ -70,12 +72,22 @@ def run_trial(directory: Path, steer: str, python: str) -> dict:
                          "--display", ":99", "--output", str(directory)]
     benchmark_exit = None
     recorder_exit = None
+    diagnostic_exit = None
     launch_error = None
     with (directory / "record.log").open("w") as record_log, \
-            (directory / "benchmark.log").open("w") as benchmark_log:
-        recorder = subprocess.Popen(recorder_command, cwd=ROOT, stdout=record_log,
-                                    stderr=subprocess.STDOUT)
+            (directory / "benchmark.log").open("w") as benchmark_log, \
+            ((directory / "depth_diagnostic.log").open("w") if depth_diagnostic
+             else nullcontext(None)) as diagnostic_log:
+        diagnostic = None
+        if depth_diagnostic:
+            diagnostic = subprocess.Popen(
+                ["nice", "-n", "15", python,
+                 "scripts/php_record_depth_diagnostic.py", "--trial", str(directory)],
+                cwd=ROOT, stdout=diagnostic_log, stderr=subprocess.STDOUT)
+        recorder = None
         try:
+            recorder = subprocess.Popen(recorder_command, cwd=ROOT, stdout=record_log,
+                                        stderr=subprocess.STDOUT)
             try:
                 benchmark = subprocess.run(benchmark_command, cwd=ROOT,
                                            stdout=benchmark_log,
@@ -88,17 +100,35 @@ def run_trial(directory: Path, steer: str, python: str) -> dict:
             except subprocess.TimeoutExpired:
                 recorder.terminate()
                 recorder_exit = recorder.wait(timeout=5)
+            if diagnostic is not None:
+                try:
+                    diagnostic_exit = diagnostic.wait(timeout=25)
+                except subprocess.TimeoutExpired:
+                    diagnostic.terminate()
+                    diagnostic_exit = diagnostic.wait(timeout=5)
         finally:
-            if recorder.poll() is None:
+            if recorder is not None and recorder.poll() is None:
                 recorder.terminate()
                 try:
                     recorder.wait(timeout=5)
                 except subprocess.TimeoutExpired:
                     recorder.kill()
                     recorder.wait(timeout=5)
+            if diagnostic is not None and diagnostic.poll() is None:
+                diagnostic.terminate()
+                try:
+                    diagnostic.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    diagnostic.kill()
+                    diagnostic.wait(timeout=5)
     record = {"trial": str(directory.relative_to(ROOT)), "steer": steer,
               "benchmark_exit": benchmark_exit,
               "recorder_exit": recorder_exit}
+    if depth_diagnostic:
+        record["diagnostic_exit"] = diagnostic_exit
+        summary = directory / "depth_diagnostic.json"
+        if summary.exists():
+            record["depth_diagnostic"] = json.loads(summary.read_text())
     if launch_error:
         record["error"] = launch_error
         return record
@@ -132,6 +162,9 @@ def run_trial(directory: Path, steer: str, python: str) -> dict:
         (directory / "course_score.json").read_text())["consecutive_cleared"]
     record["quality"] = json.loads(
         (directory / "audit.json").read_text())["quality"]
+    if depth_diagnostic and (diagnostic_exit != 0 or
+                             record.get("depth_diagnostic", {}).get("status") != "complete"):
+        record["error"] = "depth diagnostic incomplete"
     return record
 
 

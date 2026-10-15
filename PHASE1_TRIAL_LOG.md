@@ -26,6 +26,8 @@
 | 034 | 2026-10-15 | 同入口 W-only；与 033 交错 | **1/12，排除** | `sustained_sim_slowdown`，304.4、345.7 Hz 连续低速 | 在线保护在 x≈9.574 m 停止；批次自动停止，不能把该条作有效 W-only 对照 |
 | 035 | 2026-10-15 | 延长启动前 GPU 采样间隔至 5 秒后单独补跑 W-only | **0/12，排除** | 在线保护 210.7、198.2 Hz 连续低速；修正后的离线审计为 `sustained_sim_slowdown` | 结束时间整秒精度使旧审计漏了最后一条毫秒日志；已增加在线原因优先的审计回归测试。原批次 JSON 的旧 `nominal` 标签作历史记录，不可使用 |
 | 036 预检 | 2026-10-15 | 计划补 W-only；先用七次、每隔 5 秒的 GPU 空闲采样 | **未启动** | `shared_gpu_busy`；七次利用率 79%–92%，需全部 <50% 才启动 | 原始读数在 `outputs/reproduction/controlled_batch_1792054937.json`，`trial_036_none` 未创建；没有新成绩或视频 |
+| 036 再预检 | 2026-10-15 | 同一 W-only 试次，严格 7 次×5 秒资源门槛 | **未启动** | `shared_gpu_busy`；利用率 80%–90%，两次显存超过 10000 MiB | 原始读数在 `outputs/reproduction/controlled_batch_1792061035.json`；试次编号仍保留 036，详见[本轮执行记录](reports/phase1_next_stage_execution_2026-10-15.md) |
+| 深度诊断 001 预检 | 2026-10-15 | 与主成绩分开的被动深度帧记录，W-only | **未启动** | `shared_gpu_busy`；利用率 76%–93% | 原始读数在 `outputs/reproduction/depth_probe_1792061176.json`；`diagnostic_001_none` 未创建，不计入成绩表 |
 
 每次原始证据在 `outputs/reproduction/official_benchmark/trial_NNN/`：`result.json` 固定参数和结束状态，`pelvis.csv` 是原始骨盆轨迹，`course_score.json` 是逐块判定，`audit.json` 是速率与深度审计，`sim.log`/`inference.log` 是进程日志，截图来自独立 `:99` 显示器。`outputs/` 被 Git 忽略，但本机仍保留。完整环境与问题见 [复现指南](PHP_REPRODUCTION_GUIDE.md)。
 
