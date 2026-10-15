@@ -28,6 +28,8 @@
 | 036 预检 | 2026-10-15 | 计划补 W-only；先用七次、每隔 5 秒的 GPU 空闲采样 | **未启动** | `shared_gpu_busy`；七次利用率 79%–92%，需全部 <50% 才启动 | 原始读数在 `outputs/reproduction/controlled_batch_1792054937.json`，`trial_036_none` 未创建；没有新成绩或视频 |
 | 036 再预检 | 2026-10-15 | 同一 W-only 试次，严格 7 次×5 秒资源门槛 | **未启动** | `shared_gpu_busy`；利用率 80%–90%，两次显存超过 10000 MiB | 原始读数在 `outputs/reproduction/controlled_batch_1792061035.json`；试次编号仍保留 036，详见[本轮执行记录](reports/phase1_next_stage_execution_2026-10-15.md) |
 | 深度诊断 001 预检 | 2026-10-15 | 与主成绩分开的被动深度帧记录，W-only | **未启动** | `shared_gpu_busy`；利用率 76%–93% | 原始读数在 `outputs/reproduction/depth_probe_1792061176.json`；`diagnostic_001_none` 未创建，不计入成绩表 |
+| 036 续行预检 | 2026-10-16 | 固定协议 W-only，7 次×5 秒资源门槛 | **未启动** | `shared_gpu_busy`；利用率 76%–94%，两次显存超过门槛 | 原始读数在 `outputs/reproduction/controlled_batch_1792090383.json`；[过程与诊断增强](reports/phase1_execution_2026-10-16.md) |
+| 深度诊断 001 续行预检 | 2026-10-16 | 独立的深度、关节速度与求解器接触采样 | **未启动** | `shared_gpu_busy`；利用率 86%–96% | 原始读数在 `outputs/reproduction/depth_probe_1792090515.json`；仍没有真实诊断数据 |
 
 每次原始证据在 `outputs/reproduction/official_benchmark/trial_NNN/`：`result.json` 固定参数和结束状态，`pelvis.csv` 是原始骨盆轨迹，`course_score.json` 是逐块判定，`audit.json` 是速率与深度审计，`sim.log`/`inference.log` 是进程日志，截图来自独立 `:99` 显示器。`outputs/` 被 Git 忽略，但本机仍保留。完整环境与问题见 [复现指南](PHP_REPRODUCTION_GUIDE.md)。
 

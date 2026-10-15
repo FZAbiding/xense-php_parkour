@@ -18,11 +18,16 @@ import mujoco.viewer
 
 from holosoma.simulator.mujoco.mujoco import MuJoCo
 from holosoma.run_sim import main
+from php_solver_contacts import geom_maps, snapshot
 
 
 trial = Path(os.environ["PHP_DEMO_TRIAL_DIR"])
 trial.mkdir(parents=True, exist_ok=True)
 start_file = trial / "walk_start.txt"
+diagnostic_trial = os.environ.get("PHP_DIAGNOSTIC_TRIAL_DIR")
+if diagnostic_trial and Path(diagnostic_trial).resolve() != trial.resolve():
+    raise ValueError("diagnostic directory must be the same isolated demo trial")
+diagnostic_enabled = bool(diagnostic_trial)
 
 original_launch = mujoco.viewer.launch_passive
 def launch_clean(*args, **kwargs):
@@ -35,6 +40,8 @@ def setup_clean(self):
     original_setup(self)
     model = self.root_model
     terrain_geoms = []
+    if diagnostic_enabled:
+        self._php_terrain_names, self._php_foot_names = geom_maps(model)
     for index in range(model.ngeom):
         name = mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_GEOM, index) or ""
         if not (name == "floor" or name.startswith("floor_")):
@@ -59,6 +66,7 @@ def setup_clean(self):
         "camera_azimuth_deg": 110.0, "camera_elevation_deg": -20.0,
         "debug_frusta": False, "ui_sidebars": False,
         "presentation_only": True,
+        "diagnostic_qvel_and_solver_contacts": diagnostic_enabled,
     }, indent=2) + "\n")
 MuJoCo.setup_viewer = setup_clean
 
@@ -74,11 +82,27 @@ def render_and_record(self, sync_frame_time=True):
         self._php_demo_qpos_writer = csv.writer(self._php_demo_qpos_handle)
         self._php_demo_qpos_writer.writerow(["wall_s", "sim_s", *
                                              (f"qpos_{i}" for i in range(self.root_model.nq))])
+        if diagnostic_enabled:
+            self._php_demo_qvel_handle = (trial / "qvel.csv").open("w", newline="", buffering=1)
+            self._php_demo_qvel_writer = csv.writer(self._php_demo_qvel_handle)
+            self._php_demo_qvel_writer.writerow(["wall_s", "sim_s", *
+                                                 (f"qvel_{i}" for i in range(self.root_model.nv))])
+            self._php_demo_contacts_handle = (trial / "solver_contacts.jsonl").open("w", buffering=1)
     now = time.monotonic() - self._php_demo_start_s
     if now - self._php_demo_last_sample_s >= 1 / 60:
         self._php_demo_qpos_writer.writerow([round(now, 5),
                                              round(float(self.root_data.time), 5),
                                              *self.root_data.qpos])
+        if diagnostic_enabled:
+            self._php_demo_qvel_writer.writerow([round(now, 5),
+                                                 round(float(self.root_data.time), 5),
+                                                 *self.root_data.qvel])
+            contacts = snapshot(self.root_model, self.root_data,
+                                self._php_terrain_names, self._php_foot_names)
+            self._php_demo_contacts_handle.write(json.dumps({
+                "wall_s": round(now, 5), "sim_s": round(float(self.root_data.time), 5),
+                "contacts": contacts,
+            }) + "\n")
         self._php_demo_last_sample_s = now
 MuJoCo.render = render_and_record
 

@@ -12,7 +12,9 @@ import argparse
 from contextlib import nullcontext
 import hashlib
 import json
+import os
 import re
+import signal
 import subprocess
 import sys
 import time
@@ -70,6 +72,10 @@ def run_trial(directory: Path, steer: str, python: str,
                          "--guided-max-pulse", "0.16", "--target-x", "27.4",
                          "--max-seconds", "60", "--interactive-demo",
                          "--display", ":99", "--output", str(directory)]
+    benchmark_env = os.environ.copy()
+    benchmark_env.pop("PHP_DIAGNOSTIC_TRIAL_DIR", None)
+    if depth_diagnostic:
+        benchmark_env["PHP_DIAGNOSTIC_TRIAL_DIR"] = str(directory.resolve())
     benchmark_exit = None
     recorder_exit = None
     diagnostic_exit = None
@@ -88,13 +94,22 @@ def run_trial(directory: Path, steer: str, python: str,
         try:
             recorder = subprocess.Popen(recorder_command, cwd=ROOT, stdout=record_log,
                                         stderr=subprocess.STDOUT)
+            benchmark = subprocess.Popen(benchmark_command, cwd=ROOT,
+                                         stdout=benchmark_log,
+                                         stderr=subprocess.STDOUT, env=benchmark_env,
+                                         start_new_session=True)
             try:
-                benchmark = subprocess.run(benchmark_command, cwd=ROOT,
-                                           stdout=benchmark_log,
-                                           stderr=subprocess.STDOUT, timeout=180)
-                benchmark_exit = benchmark.returncode
+                benchmark_exit = benchmark.wait(timeout=180)
             except subprocess.TimeoutExpired:
                 launch_error = "benchmark exceeded 180 s wall-time limit"
+                # SIGINT lets the benchmark run its finally block, which stops
+                # its own Xvfb, simulator, and inference child process groups.
+                benchmark.send_signal(signal.SIGINT)
+                try:
+                    benchmark_exit = benchmark.wait(timeout=30)
+                except subprocess.TimeoutExpired:
+                    benchmark.kill()
+                    benchmark_exit = benchmark.wait(timeout=5)
             try:
                 recorder_exit = recorder.wait(timeout=25)
             except subprocess.TimeoutExpired:
@@ -162,6 +177,23 @@ def run_trial(directory: Path, steer: str, python: str,
         (directory / "course_score.json").read_text())["consecutive_cleared"]
     record["quality"] = json.loads(
         (directory / "audit.json").read_text())["quality"]
+    if depth_diagnostic:
+        qvel = directory / "qvel.csv"
+        contacts = directory / "solver_contacts.jsonl"
+        qpos = directory / "qpos.csv"
+        if not all(path.is_file() for path in (qpos, qvel, contacts)):
+            record["error"] = "diagnostic state or solver-contact trace missing"
+            return record
+        with qpos.open() as qpos_stream, qvel.open() as qvel_stream, \
+                contacts.open() as contact_stream:
+            qpos_rows = sum(1 for _ in qpos_stream) - 1
+            qvel_rows = sum(1 for _ in qvel_stream) - 1
+            contact_rows = sum(1 for _ in contact_stream)
+        record["diagnostic_samples"] = {
+            "qpos": qpos_rows, "qvel": qvel_rows, "solver_contacts": contact_rows}
+        if qpos_rows < 1 or qpos_rows != qvel_rows or qpos_rows != contact_rows:
+            record["error"] = "diagnostic traces have mismatched sample counts"
+            return record
     if depth_diagnostic and (diagnostic_exit != 0 or
                              record.get("depth_diagnostic", {}).get("status") != "complete"):
         record["error"] = "depth diagnostic incomplete"

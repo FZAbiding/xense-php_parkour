@@ -40,6 +40,7 @@ def capture(trial: Path, shm_name: str, endpoint: str,
     seqs: list[int] = []
     producer_times: list[float] = []
     receiver_times: list[float] = []
+    receiver_monotonic_times: list[float] = []
     started = time.monotonic()
     last_seq = None
     error = None
@@ -70,6 +71,7 @@ def capture(trial: Path, shm_name: str, endpoint: str,
             seqs.append(beat["seq"])
             producer_times.append(beat["t_capture"])
             receiver_times.append(time.time())
+            receiver_monotonic_times.append(time.monotonic())
             last_seq = beat["seq"]
     finally:
         if shm is not None:
@@ -79,10 +81,14 @@ def capture(trial: Path, shm_name: str, endpoint: str,
         np.savez_compressed(npz_path, frames=np.stack(frames),
                             producer_seq=np.asarray(seqs, dtype=np.int64),
                             producer_heartbeat_unix_s=np.asarray(producer_times),
-                            receiver_unix_s=np.asarray(receiver_times))
+                            receiver_unix_s=np.asarray(receiver_times),
+                            receiver_monotonic_s=np.asarray(receiver_monotonic_times))
     else:
         error = error or "no depth frames captured"
     result_present = (trial / "result.json").exists()
+    walk_start = trial / "walk_start.txt"
+    walk_start_monotonic = (float(walk_start.read_text())
+                            if walk_start.is_file() else None)
     report = {
         "status": "complete" if frames and result_present and not error else "incomplete",
         "error": error, "frame_count": len(frames), "shape": list(SHAPE),
@@ -95,9 +101,11 @@ def capture(trial: Path, shm_name: str, endpoint: str,
         "frame_max": float(np.max(frames)) if frames else None,
         "frame_mean": float(np.mean(frames)) if frames else None,
         "result_present": result_present,
+        "walk_start_monotonic_s": walk_start_monotonic,
         "meaning": "Heartbeat t_capture is publish time, not exact camera exposure time; "
-                   "sidecar frames are sampled after publish and are not proven to be "
-                   "the exact pixels used by each policy tick.",
+                   "receiver_monotonic_s minus walk_start_monotonic_s aligns "
+                   "samples approximately to qpos wall_s; sidecar frames are not "
+                   "proven to be the exact pixels used by each policy tick.",
     }
     json_path.write_text(json.dumps(report, indent=2) + "\n")
     return report

@@ -53,6 +53,8 @@ class DepthSidecarTest(unittest.TestCase):
                 with np.load(trial / "depth_diagnostic.npz") as recorded:
                     self.assertEqual(recorded["frames"].shape[1:], SHAPE)
                     self.assertTrue(np.isfinite(recorded["frames"]).all())
+                    self.assertEqual(len(recorded["receiver_monotonic_s"]),
+                                     report["frame_count"])
             finally:
                 producer.join(timeout=2)
                 shm.close()
