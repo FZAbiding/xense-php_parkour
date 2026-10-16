@@ -64,12 +64,16 @@ def preflight(samples: int, interval_s: float, max_util: int,
 
 
 def run_trial(directory: Path, steer: str, python: str,
-              *, depth_diagnostic: bool = False) -> dict:
+              *, depth_diagnostic: bool = False,
+              preflight_report: dict | None = None) -> dict:
     if directory.exists():
         raise FileExistsError(f"refusing to overwrite {directory}")
     if Path("/tmp/.X11-unix/X99").exists():
         raise RuntimeError("isolated display :99 is occupied")
     directory.mkdir(parents=True)
+    if preflight_report is not None:
+        (directory / "preflight.json").write_text(
+            json.dumps(preflight_report, indent=2) + "\n")
     recorder_command = ["nice", "-n", "15", python,
                         "scripts/php_record_demo.py", "--trial", str(directory),
                         "--display", ":99", "--fps", "8", "--width", "960"]
@@ -252,7 +256,11 @@ def main() -> None:
             break
         directory = args.trial_root / f"trial_{args.start_id + offset:03d}_{mode}"
         try:
-            record = run_trial(directory, mode, sys.executable)
+            record = run_trial(
+                directory, mode, sys.executable,
+                preflight_report={"runner_sha256": batch["runner_sha256"],
+                                  "preflight": check},
+            )
         except Exception as exc:
             record = {"trial": str(directory.relative_to(ROOT)), "steer": mode,
                       "error": f"{type(exc).__name__}: {exc}"}

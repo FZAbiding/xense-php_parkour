@@ -76,6 +76,9 @@ def main() -> None:
                  "demo_capture.json", "sim.log", "inference.log",
                  "visual_diagnostics.json"):
         shutil.copyfile(args.trial / name, package / name)
+    preflight = (args.trial / "preflight.json").is_file()
+    if preflight:
+        shutil.copyfile(args.trial / "preflight.json", package / "preflight.json")
     shutil.copyfile(args.trial / "demo_capture.mp4", package / "raw_capture.mp4")
     diagnostic = (args.trial / "depth_diagnostic.json").is_file()
     diagnostic_names = ("depth_diagnostic.json", "depth_diagnostic.npz",
@@ -115,6 +118,9 @@ def main() -> None:
         for name in diagnostic_names:
             paths[f"portable_{name}"] = package / name
             paths[f"source_{name}"] = args.trial / name
+    if preflight:
+        paths["portable_preflight"] = package / "preflight.json"
+        paths["source_preflight"] = args.trial / "preflight.json"
     manifest = {"version": args.version, "trial": str(args.trial),
                 "trial_kind": "separate_depth_diagnostic" if diagnostic else "fixed_protocol",
                 "method": "full-frame MuJoCo state replay of the same scored trial",
@@ -139,6 +145,7 @@ def main() -> None:
                                   "max_gap_ms": round(max(gaps) * 1000, 1)},
                 "raw_capture": {key: capture[key] for key in
                                 ("fps", "frames", "frames_duplicated", "status")},
+                "preflight_recorded": preflight,
                 "other_trials": other_trials,
                 "files": {name: {"path": str(path.relative_to(ROOT)),
                                  "sha256": digest(path)}
@@ -153,6 +160,9 @@ def main() -> None:
         "这是一条单独的深度/接触诊断试次，额外采集负载可能改变运行条件，"
         "不能并入固定协议成绩分布；旁路深度帧不保证与策略每个 tick 的输入完全相同。\n\n"
         if diagnostic else "")
+    preflight_note = (
+        "[启动资源预检](preflight.json)保存了这次试验实际采用的门槛、逐次 GPU/CPU 读数"
+        "和运行器哈希。\n\n" if preflight else "")
     (package / "README.md").write_text(
         f"# {args.version}\n\n"
         f"[观看 30 fps 实体仿真视频](demo.mp4) · [预览图](poster.jpg) · "
@@ -167,6 +177,7 @@ def main() -> None:
         "帧间采用关节与四元数安全插值；原始窗口录屏也保留在试验目录。"
         "视频是评测状态的可视化，成绩来自同一次 `pelvis.csv` 的逐块评分。\n\n"
         f"{diagnostic_note}"
+        f"{preflight_note}"
         "此目录还包含压缩模型、关节状态、原始窗口录屏与评分依据。"
         "在仓库根目录启动可拖动、缩放的回放：\n\n"
         "```bash\n"

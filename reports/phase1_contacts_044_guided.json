@@ -1,0 +1,170 @@
+{
+  "method": "offline mj_forward on recorded qpos; nonpositive geometry contact distance",
+  "limits": "sampled positions only; no historical qvel, contact forces, depth, or impulses",
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/trial_044_guided",
+  "model_sha256": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64",
+  "qpos_sha256": "9448dd9280602dd1d4a1519252e02ee26ba9f50c7be04a7e37579ff652990234",
+  "sampled_frames": 1192,
+  "foot_terrain_touch_frames": {
+    "floor": {
+      "frames_with_touch": 772,
+      "left_frames": 481,
+      "right_frames": 479,
+      "first": {
+        "wall_s": 0.00643,
+        "sim_s": 7.922,
+        "x_m": 0.029,
+        "y_m": 0.0016
+      },
+      "last": {
+        "wall_s": 30.86914,
+        "sim_s": 38.77,
+        "x_m": 18.101,
+        "y_m": 3.2845
+      }
+    },
+    "floor_1": {
+      "frames_with_touch": 55,
+      "left_frames": 39,
+      "right_frames": 22,
+      "first": {
+        "wall_s": 5.41798,
+        "sim_s": 13.33,
+        "x_m": 4.1629,
+        "y_m": -0.1754
+      },
+      "last": {
+        "wall_s": 7.00943,
+        "sim_s": 14.69,
+        "x_m": 5.675,
+        "y_m": 0.193
+      }
+    },
+    "floor_2": {
+      "frames_with_touch": 57,
+      "left_frames": 40,
+      "right_frames": 24,
+      "first": {
+        "wall_s": 10.25077,
+        "sim_s": 18.13,
+        "x_m": 9.3382,
+        "y_m": 0.521
+      },
+      "last": {
+        "wall_s": 11.68333,
+        "sim_s": 19.474,
+        "x_m": 10.7016,
+        "y_m": -0.1562
+      }
+    },
+    "floor_3": {
+      "frames_with_touch": 191,
+      "left_frames": 127,
+      "right_frames": 140,
+      "first": {
+        "wall_s": 19.04247,
+        "sim_s": 26.914,
+        "x_m": 14.8824,
+        "y_m": -0.4852
+      },
+      "last": {
+        "wall_s": 24.32487,
+        "sim_s": 32.242,
+        "x_m": 15.1055,
+        "y_m": 0.5816
+      }
+    }
+  },
+  "first_x_crossings": {
+    "5": {
+      "wall_s": 6.10114,
+      "sim_s": 14.002,
+      "x_m": 5.001,
+      "y_m": -0.0393,
+      "foot_terrain_touches": [
+        {
+          "terrain": "floor_1",
+          "foot": "right",
+          "min_contact_dist_m": -0.00013
+        }
+      ]
+    },
+    "8": {
+      "wall_s": 8.76729,
+      "sim_s": 16.69,
+      "x_m": 8.0248,
+      "y_m": 0.878,
+      "foot_terrain_touches": [
+        {
+          "terrain": "floor",
+          "foot": "left",
+          "min_contact_dist_m": -1e-05
+        },
+        {
+          "terrain": "floor",
+          "foot": "right",
+          "min_contact_dist_m": -0.00131
+        }
+      ]
+    },
+    "9.4": {
+      "wall_s": 10.2973,
+      "sim_s": 18.178,
+      "x_m": 9.4145,
+      "y_m": 0.4825,
+      "foot_terrain_touches": [
+        {
+          "terrain": "floor_2",
+          "foot": "left",
+          "min_contact_dist_m": -0.00117
+        }
+      ]
+    },
+    "10": {
+      "wall_s": 10.8283,
+      "sim_s": 18.706,
+      "x_m": 10.0237,
+      "y_m": 0.1283,
+      "foot_terrain_touches": [
+        {
+          "terrain": "floor_2",
+          "foot": "right",
+          "min_contact_dist_m": -0.0005
+        }
+      ]
+    },
+    "10.8": {
+      "wall_s": 11.75438,
+      "sim_s": 19.57,
+      "x_m": 10.8188,
+      "y_m": -0.2382,
+      "foot_terrain_touches": []
+    },
+    "12.1": {
+      "wall_s": 12.85586,
+      "sim_s": 20.77,
+      "x_m": 12.1053,
+      "y_m": -1.1707,
+      "foot_terrain_touches": [
+        {
+          "terrain": "floor",
+          "foot": "right",
+          "min_contact_dist_m": -0.00012
+        }
+      ]
+    },
+    "13.5": {
+      "wall_s": 14.46373,
+      "sim_s": 22.37,
+      "x_m": 13.5143,
+      "y_m": -1.1976,
+      "foot_terrain_touches": [
+        {
+          "terrain": "floor",
+          "foot": "left",
+          "min_contact_dist_m": -0.00021
+        }
+      ]
+    }
+  }
+}

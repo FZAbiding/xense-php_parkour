@@ -51,6 +51,27 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def first_saved_pose(path: Path) -> dict[str, float] | None:
+    """Read the first walking state; this is after release, not the release packet."""
+    if not path.is_file():
+        return None
+    with path.open(newline="") as stream:
+        row = next(csv.DictReader(stream), None)
+    if row is None:
+        return None
+    w, x, y, z = (float(row[f"qpos_{i}"]) for i in (3, 4, 5, 6))
+    pitch_sin = max(-1.0, min(1.0, 2 * (w * y - z * x)))
+    return {
+        "wall_s": round(float(row["wall_s"]), 5),
+        "x_m": round(float(row["qpos_0"]), 4),
+        "y_m": round(float(row["qpos_1"]), 4),
+        "z_m": round(float(row["qpos_2"]), 4),
+        "pitch_deg": round(math.degrees(math.asin(pitch_sin)), 2),
+        "yaw_deg": round(math.degrees(math.atan2(
+            2 * (w * z + x * y), 1 - 2 * (y * y + z * z))), 2),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--trial", action="append", dest="names")
@@ -60,7 +81,8 @@ def main() -> None:
     args = parser.parse_args()
     names = args.names or DEFAULT_NAMES
     figure, axes = plt.subplots(3, 1, figsize=(11, 9), sharex=True)
-    colors = ("#2b7a78", "#d9822b", "#7a52a3", "#be4343", "#2363a6")
+    colors = ("#2b7a78", "#d9822b", "#7a52a3", "#be4343", "#2363a6",
+              "#8a5685", "#696969", "#a2a038")
     observed_y = []
     summary = {"scope": "descriptive historical comparison, not a controlled effect estimate",
                "first_crossing_x_m": list(CHECKPOINTS), "trials": []}
@@ -104,6 +126,7 @@ def main() -> None:
             "target_x_m": result["target_x"],
             "quality": audit["quality"],
             "consecutive_cleared": score["consecutive_cleared"],
+            "first_saved_pose": first_saved_pose(directory / "qpos.csv"),
             "block_2_first_exit_y_m": score["blocks"][1]["first_exit_y_m"],
             "early_steer_events": events,
             "first_crossings": points,

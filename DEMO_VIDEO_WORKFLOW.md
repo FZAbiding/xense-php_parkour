@@ -10,8 +10,9 @@
 | [`guided` v3 视频](demos/phase1-onnx-guided016-v3/demo.mp4) · [交互包](demos/phase1-onnx-guided016-v3/README.md) | 037 | 2/12，`nominal` | 仅两条合格样本 `[2,1]`，取首条并公开全部结果 |
 | [深度诊断 v1 视频](demos/phase1-onnx-depth-diagnostic-v1/demo.mp4) · [交互包](demos/phase1-onnx-depth-diagnostic-v1/README.md) | 诊断 002 | 3/12，`nominal` | 被动深度/求解器接触记录的**独立诊断**，不计入固定协议 |
 | [`guided` v4 视频](demos/phase1-onnx-guided016-v4/demo.mp4) · [交互包](demos/phase1-onnx-guided016-v4/README.md) | 044 | 1/12，`nominal` | viewer 启动修复后的新代码哈希首条正式试次 |
+| [W-only v5 视频](demos/phase1-onnx-w-only-v5/demo.mp4) · [交互包](demos/phase1-onnx-w-only-v5/README.md) | 045 | 1/12，`nominal` | 同一修复后代码；包内 `preflight.json` 记录显式 60% GPU 启动门槛，第二块正侧绕过 |
 
-四套均包含 1280×720、H.264、30 fps 视频、原始窗口录制、状态/模型压缩包、评分与哈希清单。使用 `/home/xense/miniforge3/envs/php/bin/python scripts/php_open_demo.py --trial demos/<版本ID>` 在本机交互浏览，可拖动旋转、滚轮缩放，关闭后释放 `:99`。深度诊断包额外附逐帧深度、关节速度和接触采样。视频是**同次评分轨迹的状态回放**，按关节空间插值至 30 fps；这消除了旧 8 fps 窗口录像的卡顿，但不意味着策略以 30 Hz 运行或动作被重新执行。详细证据和失败试次见[本轮报告](reports/phase1_cohort_depth_and_startup_2026-10-16.md)。
+这五套均包含 1280×720、H.264、30 fps 视频、原始窗口录制、状态/模型压缩包、评分与哈希清单。使用 `/home/xense/miniforge3/envs/php/bin/python scripts/php_open_demo.py --trial demos/<版本ID>` 在本机交互浏览，可拖动旋转、滚轮缩放，关闭后释放 `:99`。深度诊断包额外附逐帧深度、关节速度和接触采样。视频是**同次评分轨迹的状态回放**，按关节空间插值至 30 fps；这消除了旧 8 fps 窗口录像的卡顿，但不意味着策略以 30 Hz 运行或动作被重新执行。详细证据和失败试次见[前轮报告](reports/phase1_cohort_depth_and_startup_2026-10-16.md)及[045–047 续行报告](reports/phase1_followup_045_047_2026-10-16.md)。
 
 ## W-only 基线 v3（2026-10-15）
 

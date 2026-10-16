@@ -1,0 +1,19 @@
+{
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/trial_045_none",
+  "quality": "nominal",
+  "start_yaw_deg": -0.06,
+  "start_heading_within_2_deg": true,
+  "walk_start": "2026-10-16T23:34:21.393000",
+  "finished": "2026-10-16T23:34:36",
+  "sim_fps_samples": 8,
+  "sim_fps_median": 499.8,
+  "sim_fps_min": 413.9,
+  "sim_fps_below_400": 0,
+  "sim_fps_longest_below_400": 0,
+  "live_sim_fps_low_reports": [],
+  "sim_fps_slow_intervals": [],
+  "policy_fps_samples": 15,
+  "policy_fps_median": 50.7,
+  "policy_fps_longest_below_45": 0,
+  "depth_stale_events": 0
+}

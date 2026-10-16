@@ -58,7 +58,10 @@ def main() -> None:
     if check["ready"]:
         try:
             record["result"] = run_trial(directory, args.steer, sys.executable,
-                                         depth_diagnostic=True)
+                                         depth_diagnostic=True,
+                                         preflight_report={
+                                             "runner_sha256": record["probe_script_sha256"],
+                                             "preflight": check})
         except Exception as exc:
             record["result"] = {"error": f"{type(exc).__name__}: {exc}"}
     else:
