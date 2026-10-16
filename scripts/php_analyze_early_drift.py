@@ -24,7 +24,7 @@ DEFAULT_NAMES = (
     "trial_031_interactive",
     "trial_032_w_only",
 )
-CHECKPOINTS = (8.0, 10.0, 10.8, 12.1, 13.0)
+CHECKPOINTS = (6.5, 7.0, 8.0, 8.7, 9.4, 10.0, 10.8, 12.1, 13.0)
 
 
 def read_trace(path: Path) -> list[dict[str, float]]:
@@ -78,7 +78,11 @@ def main() -> None:
     parser.add_argument("--trial-root", type=Path, default=TRIALS)
     parser.add_argument("--output", type=Path,
                         default=ROOT / "reports/phase1_early_drift.png")
+    parser.add_argument("--x-min", type=float, default=7.5)
+    parser.add_argument("--x-max", type=float, default=13.5)
     args = parser.parse_args()
+    if args.x_min >= args.x_max:
+        parser.error("x-min must be below x-max")
     names = args.names or DEFAULT_NAMES
     figure, axes = plt.subplots(3, 1, figsize=(11, 9), sharex=True)
     colors = ("#2b7a78", "#d9822b", "#7a52a3", "#be4343", "#2363a6",
@@ -94,11 +98,14 @@ def main() -> None:
         score = json.loads((directory / "course_score.json").read_text())
         audit = json.loads((directory / "audit.json").read_text())
         color = colors[index % len(colors)]
-        stop = next((i + 1 for i, row in enumerate(rows) if row["x"] >= 13.5),
+        stop = next((i + 1 for i, row in enumerate(rows) if row["x"] >= args.x_max),
                     len(rows))
-        segment = [row for row in rows[:stop] if 7.5 <= row["x"] <= 13.5]
+        segment = [row for row in rows[:stop] if args.x_min <= row["x"] <= args.x_max]
         observed_y.extend(row["y"] for row in segment)
-        label = f"{name} ({result['steer']}, {score['consecutive_cleared']}/12)"
+        extent = (f"{score['consecutive_cleared']} blocks, short"
+                  if result["target_x"] < 27.4 else
+                  f"{score['consecutive_cleared']}/12")
+        label = f"{name} ({result['steer']}, {extent}, {audit['quality']})"
         axes[0].plot([row["x"] for row in segment], [row["y"] for row in segment],
                      color=color, linewidth=1.6, label=label)
         axes[1].plot([row["x"] for row in segment], [yaw_deg(row) for row in segment],
@@ -106,7 +113,8 @@ def main() -> None:
         axes[2].plot([row["x"] for row in segment], [row["vy"] for row in segment],
                      color=color, linewidth=1.4)
         events = [event for event in result.get("steer_events", [])
-                  if event.get("key") in ("a", "d") and 7.5 <= event["x"] <= 13.5]
+                  if event.get("key") in ("a", "d")
+                  and args.x_min <= event["x"] <= args.x_max]
         axes[0].scatter([event["x"] for event in events],
                         [event["y"] for event in events], marker="v", s=38,
                         color=color, edgecolors="black", linewidths=0.35, zorder=5)
@@ -144,7 +152,7 @@ def main() -> None:
     axes[1].set_ylabel("World yaw (deg)")
     axes[2].set_ylabel("World lateral velocity (m/s)")
     axes[2].set_xlabel("Forward pelvis x (m)")
-    axes[2].set_xlim(7.5, 13.5)
+    axes[2].set_xlim(args.x_min, args.x_max)
     figure.suptitle("PHP released ONNX: early lateral drift near block 2\n"
                      "Shaded = block footprint; dotted = first-exit scoring x; triangles = a/d commands")
     figure.tight_layout()

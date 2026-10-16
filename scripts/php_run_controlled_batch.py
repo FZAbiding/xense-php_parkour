@@ -65,6 +65,9 @@ def preflight(samples: int, interval_s: float, max_util: int,
 
 def run_trial(directory: Path, steer: str, python: str,
               *, depth_diagnostic: bool = False,
+              post_first_guard: bool = False,
+              post_first_min_yaw: float = 15.0,
+              target_x: float = 27.4,
               preflight_report: dict | None = None) -> dict:
     if directory.exists():
         raise FileExistsError(f"refusing to overwrite {directory}")
@@ -79,9 +82,12 @@ def run_trial(directory: Path, steer: str, python: str,
                         "--display", ":99", "--fps", "8", "--width", "960"]
     benchmark_command = ["nice", "-n", "15", python,
                          "scripts/php_official_benchmark.py", "--steer", steer,
-                         "--guided-max-pulse", "0.16", "--target-x", "27.4",
+                         "--guided-max-pulse", "0.16", "--target-x", str(target_x),
                          "--max-seconds", "60", "--interactive-demo",
                          "--display", ":99", "--output", str(directory)]
+    if post_first_guard:
+        benchmark_command.extend(["--post-first-guard", "--post-first-min-yaw",
+                                  str(post_first_min_yaw)])
     benchmark_env = os.environ.copy()
     benchmark_env.pop("PHP_DIAGNOSTIC_TRIAL_DIR", None)
     benchmark_env.pop("PHP_STARTUP_TRACE", None)
@@ -159,15 +165,20 @@ def run_trial(directory: Path, steer: str, python: str,
     if launch_error:
         record["error"] = launch_error
         return record
+    result_path = directory / "result.json"
+    if result_path.exists():
+        record["status"] = json.loads(result_path.read_text()).get("status")
     capture = directory / "demo_capture.json"
     if recorder_exit != 0 or not capture.exists() or json.loads(
             capture.read_text()).get("status") != "complete":
-        record["error"] = "raw video capture incomplete"
+        record["error"] = ("no walking capture: " + record["status"]
+                           if record.get("status") == "bad_start_pose"
+                           else "raw video capture incomplete")
         return record
-    if not (directory / "result.json").exists():
+    if not result_path.exists():
         record["error"] = "benchmark did not write result.json"
         return record
-    result = json.loads((directory / "result.json").read_text())
+    result = json.loads(result_path.read_text())
     record["status"] = result["status"]
     if benchmark_exit != 0 or not (directory / "pelvis.csv").exists():
         record["error"] = "benchmark failed or trajectory missing"
@@ -217,6 +228,11 @@ def main() -> None:
     parser.add_argument("--run", action="store_true",
                         help="actually run the protected batch; default only checks resources")
     parser.add_argument("--sequence", default="none,guided,none,guided")
+    parser.add_argument("--post-first-guard", action="store_true",
+                        help="diagnostic guided-only correction after block 1")
+    parser.add_argument("--post-first-min-yaw", type=float, default=15.0)
+    parser.add_argument("--target-x", type=float, default=27.4,
+                        help="stop x; 13.8 isolates the first two blocks in a diagnostic")
     parser.add_argument("--start-id", type=int, default=36)
     parser.add_argument("--trial-root", type=Path, default=DEFAULT_ROOT)
     parser.add_argument("--max-gpu-util", type=int, default=50)
@@ -229,8 +245,14 @@ def main() -> None:
     sequence = args.sequence.split(",")
     if not sequence or any(mode not in ("none", "guided") for mode in sequence):
         parser.error("--sequence must contain only comma-separated none/guided")
+    if args.post_first_guard and any(mode != "guided" for mode in sequence):
+        parser.error("--post-first-guard requires a guided-only sequence")
     if args.start_id < 1 or args.samples < 1 or args.interval < 0:
         parser.error("start-id and samples must be positive; interval must be nonnegative")
+    if args.target_x <= 0:
+        parser.error("target-x must be positive")
+    if not 0 < args.post_first_min_yaw < 90:
+        parser.error("post-first-min-yaw must be in (0, 90)")
     if (not 0 < args.max_gpu_util <= 100 or args.max_gpu_memory_mib <= 0 or
             args.max_cpu_load_1m <= 0):
         parser.error("resource thresholds must be positive")
@@ -240,9 +262,12 @@ def main() -> None:
     if not args.trial_root.is_relative_to(ROOT):
         parser.error("--trial-root must be inside the PHP checkout")
     batch = {"protocol": "released ONNX; bundled 12-block terrain; low speed; "
-                         "interactive state capture; target x=27.4 m; max 60 s",
+                         f"interactive state capture; target x={args.target_x} m; max 60 s",
              "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
              "sequence": sequence, "start_id": args.start_id,
+             "post_first_guard": args.post_first_guard,
+             "post_first_min_yaw_deg": args.post_first_min_yaw,
+             "target_x": args.target_x,
              "trials": [], "preflights": []}
     for offset, mode in enumerate(sequence if args.run else sequence[:1]):
         check = preflight(args.samples, args.interval, args.max_gpu_util,
@@ -258,6 +283,9 @@ def main() -> None:
         try:
             record = run_trial(
                 directory, mode, sys.executable,
+                post_first_guard=args.post_first_guard,
+                post_first_min_yaw=args.post_first_min_yaw,
+                target_x=args.target_x,
                 preflight_report={"runner_sha256": batch["runner_sha256"],
                                   "preflight": check},
             )

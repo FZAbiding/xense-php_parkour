@@ -1,0 +1,19 @@
+{
+  "trial": "outputs/reproduction/official_benchmark/trial_050_guided",
+  "video": "demos/phase1-onnx-two-block-short-v1/demo.mp4",
+  "source": "recorded_qpos_same_trial_quaternion_safe_interpolation",
+  "fps": 30,
+  "size": [
+    1280,
+    720
+  ],
+  "frames": 474,
+  "duration_s": 15.8,
+  "sample_count": 595,
+  "sample_duration_s": 15.793,
+  "sha256": {
+    "video": "106894217990883b6f1794aa8c2f83995e207a3417ac773658711ea5361a24c1",
+    "qpos": "e0ba769e47f1df567747b6044979d4162292d2175dc5b0c7e1f5ad1aa84f116e",
+    "model": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+  }
+}

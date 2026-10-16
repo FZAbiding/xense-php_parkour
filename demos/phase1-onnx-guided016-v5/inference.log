@@ -1,0 +1,110 @@
+/home/xense/miniforge3/envs/php/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2346: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/home/xense/miniforge3/envs/php/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2346: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+2026-10-17 02:58:33.479 | INFO     | __main__:run_policy:104 - 🚀 Starting Policy with Tyro configuration...
+2026-10-17 02:58:33.479 | INFO     | __main__:run_policy:105 - 🤖 Robot: g1_29dof
+2026-10-17 02:58:33.479 | INFO     | __main__:run_policy:106 - 📋 Observation groups: ['actor_obs', 'depth_obs']
+2026-10-17 02:58:33.479 | INFO     | __main__:run_policy:107 - ⚙️ RL Rate: 50.0 Hz
+2026-10-17 02:58:33.480 | INFO     | __main__:run_policy:108 - 📁 Model path: ['/home/xense/src/php_parkour/outputs/reproduction/student/depth_backbone.onnx', '/home/xense/src/php_parkour/outputs/reproduction/student/student.onnx']
+2026-10-17 02:58:33.484 | INFO     | __main__:run_policy:119 - Using DepthDistillationPolicy
+1792177113.487900 [0]     python: selected interface "lo" is not multicast-capable: disabling multicast
+UnitreeInterface initialized: G1-HG (29 motors, HG messages) on interface: lo
+[DEBUG] LowCommandWriter - No motor command available!
+2026-10-17 02:58:33.894 | INFO     | holosoma_inference.policies.depth_distillation:_load_depth_backbone:251 - [DepthDistillation] backbone: input=[1, 58, 87] -> latent_dim=32, frames=1
+2026-10-17 02:58:33.966 | INFO     | holosoma_inference.policies.depth_distillation:_load_student_model:291 - [DepthDistillation] action_scale from metadata: [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1.]
+2026-10-17 02:58:33.966 | INFO     | holosoma_inference.policies.depth_distillation:_load_student_model:303 - [DepthDistillation] student: inputs=['obs', 'time_step']
+2026-10-17 02:58:33.966 | INFO     | holosoma_inference.policies.base:_resolve_control_gains:469 - Using KP/KD from config (override)
+2026-10-17 02:58:34.013 | INFO     | holosoma_inference.inputs.impl.keyboard:create:279 - Keyboard direction keys are hold-to-move (release returns to stand).
+2026-10-17 02:58:34.018 | INFO     | holosoma_inference.sensors.depth_shm:_adopt:117 - [DepthShmSensor] attached to 'depth_img_shm' shape=(1, 1, 58, 87)
+2026-10-17 02:58:34.019 | INFO     | __main__:run_policy:122 - ✅ Policy initialized successfully!
+2026-10-17 02:58:34.019 | INFO     | __main__:_print_control_guide:33 - ================================================================================
+2026-10-17 02:58:34.019 | INFO     | __main__:_print_control_guide:34 - 🎮 POLICY CONTROLS
+2026-10-17 02:58:34.019 | INFO     | __main__:_print_control_guide:35 - ================================================================================
+2026-10-17 02:58:34.019 | INFO     | __main__:_print_control_guide:36 - 
+2026-10-17 02:58:34.019 | INFO     | __main__:_print_control_guide:58 - ⌨️  Using KEYBOARD control mode
+2026-10-17 02:58:34.019 | INFO     | __main__:_print_control_guide:59 - 
+2026-10-17 02:58:34.019 | INFO     | __main__:_print_control_guide:60 - ⚠️  IMPORTANT: Make sure THIS TERMINAL is active to receive keyboard input!
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:61 - ⚠️  All commands below must be entered in THIS terminal window.
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:62 - 
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:63 - General Controls:
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:64 -   ]  - Start the policy
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:65 -   o  - Stop the policy
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:66 -   i  - Set robot to default pose
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:73 - 
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:74 - Locomotion Controls:
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:75 -   =          - Switch walking/standing mode
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:76 -   w/s        - Increase/decrease forward velocity
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:77 -   a/d        - Increase/decrease lateral velocity
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:78 -   q/e        - Increase/decrease angular velocity (turn left/right)
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:79 -   z          - Set all velocities to zero
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:81 - 
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:82 - 🎬 MuJoCo Simulator Controls (⚠️  ONLY in MuJoCo window, NOT this terminal!):
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:83 -   7/8        - Decrease/increase elastic band length
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:84 -   9          - Toggle elastic band enable/disable
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:85 -   BACKSPACE  - Reset simulation
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:95 - 
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:96 - ================================================================================
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:97 - 👆 Press the appropriate button/key to begin!
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:98 - ================================================================================
+2026-10-17 02:58:34.020 | INFO     | __main__:_print_control_guide:99 - 
+2026-10-17 02:58:40.840 | INFO     | holosoma_inference.policies.base:_handle_start_policy:846 - Using policy actions
+2026-10-17 02:58:40.840 | INFO     | holosoma_inference.policies.depth_distillation:_handle_start_policy:647 - Depth distillation policy started
+2026-10-17 02:58:40.840 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-17 02:58:41.031 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 49.95 | read_state: 0.048±0.009ms | preprocessing: 0.020±0.012ms | inference: 2.911±3.730ms | postprocessing: 0.004±0.003ms | action_pub: 0.045±0.009ms | total: 0.773±1.999ms
+2026-10-17 02:58:41.083 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 1 (forward)
+2026-10-17 02:58:41.083 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-17 02:58:42.023 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.44 | read_state: 0.051±0.035ms | preprocessing: 0.001±0.001ms | inference: 1.750±2.089ms | postprocessing: 0.007±0.001ms | action_pub: 0.049±0.012ms | total: 2.023±2.150ms
+2026-10-17 02:58:43.023 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.27 | read_state: 0.041±0.008ms | preprocessing: 0.000±0.000ms | inference: 2.039±2.344ms | postprocessing: 0.006±0.001ms | action_pub: 0.041±0.006ms | total: 2.190±2.344ms
+2026-10-17 02:58:44.021 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.12 | read_state: 0.037±0.010ms | preprocessing: 0.000±0.000ms | inference: 1.567±2.084ms | postprocessing: 0.006±0.001ms | action_pub: 0.039±0.009ms | total: 1.748±2.089ms
+2026-10-17 02:58:45.035 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.72 | read_state: 0.039±0.012ms | preprocessing: 0.000±0.000ms | inference: 2.177±3.041ms | postprocessing: 0.006±0.001ms | action_pub: 0.039±0.004ms | total: 2.319±3.042ms
+2026-10-17 02:58:46.025 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.60 | read_state: 0.039±0.005ms | preprocessing: 0.000±0.000ms | inference: 1.725±2.437ms | postprocessing: 0.006±0.001ms | action_pub: 0.040±0.004ms | total: 1.870±2.439ms
+2026-10-17 02:58:47.022 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.15 | read_state: 0.035±0.009ms | preprocessing: 0.000±0.000ms | inference: 1.223±1.296ms | postprocessing: 0.005±0.001ms | action_pub: 0.036±0.004ms | total: 1.355±1.298ms
+2026-10-17 02:58:48.026 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.52 | read_state: 0.051±0.026ms | preprocessing: 0.000±0.000ms | inference: 1.389±2.298ms | postprocessing: 0.007±0.001ms | action_pub: 0.044±0.005ms | total: 1.558±2.297ms
+2026-10-17 02:58:49.032 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.97 | read_state: 0.081±0.180ms | preprocessing: 0.000±0.000ms | inference: 1.564±1.404ms | postprocessing: 0.007±0.001ms | action_pub: 0.050±0.015ms | total: 1.772±1.430ms
+2026-10-17 02:58:50.024 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.39 | read_state: 0.062±0.039ms | preprocessing: 0.000±0.000ms | inference: 2.826±3.941ms | postprocessing: 0.024±0.064ms | action_pub: 0.123±0.112ms | total: 3.119±3.992ms
+2026-10-17 02:58:51.034 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.23 | read_state: 0.056±0.025ms | preprocessing: 0.000±0.000ms | inference: 3.451±4.554ms | postprocessing: 0.016±0.039ms | action_pub: 0.164±0.109ms | total: 3.796±4.566ms
+2026-10-17 02:58:52.030 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.22 | read_state: 0.053±0.016ms | preprocessing: 0.001±0.001ms | inference: 2.366±2.651ms | postprocessing: 0.014±0.031ms | action_pub: 0.116±0.075ms | total: 2.641±2.688ms
+2026-10-17 02:58:53.030 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.63 | read_state: 0.075±0.179ms | preprocessing: 0.000±0.001ms | inference: 2.048±2.080ms | postprocessing: 0.010±0.013ms | action_pub: 0.061±0.034ms | total: 2.269±2.141ms
+2026-10-17 02:58:53.188 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 2 (left_45)
+2026-10-17 02:58:53.188 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-17 02:58:53.371 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 1 (forward)
+2026-10-17 02:58:53.371 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-17 02:58:54.029 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.41 | read_state: 0.043±0.010ms | preprocessing: 0.000±0.000ms | inference: 2.391±3.070ms | postprocessing: 0.007±0.001ms | action_pub: 0.048±0.013ms | total: 2.566±3.073ms
+2026-10-17 02:58:54.388 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 2 (left_45)
+2026-10-17 02:58:54.388 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-17 02:58:54.568 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 1 (forward)
+2026-10-17 02:58:54.568 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-17 02:58:55.036 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.04 | read_state: 0.055±0.036ms | preprocessing: 0.001±0.001ms | inference: 2.312±2.316ms | postprocessing: 0.038±0.052ms | action_pub: 0.126±0.054ms | total: 2.627±2.319ms
+2026-10-17 02:58:55.608 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 2 (left_45)
+2026-10-17 02:58:55.609 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-17 02:58:55.788 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 1 (forward)
+2026-10-17 02:58:55.788 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-17 02:58:56.033 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.46 | read_state: 0.090±0.231ms | preprocessing: 0.000±0.000ms | inference: 2.290±2.022ms | postprocessing: 0.017±0.031ms | action_pub: 0.114±0.070ms | total: 2.654±2.061ms
+2026-10-17 02:58:57.031 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.57 | read_state: 0.041±0.004ms | preprocessing: 0.000±0.000ms | inference: 2.772±3.975ms | postprocessing: 0.010±0.024ms | action_pub: 0.058±0.040ms | total: 2.946±3.982ms
+2026-10-17 02:58:58.037 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.17 | read_state: 0.045±0.005ms | preprocessing: 0.000±0.000ms | inference: 2.183±3.169ms | postprocessing: 0.007±0.001ms | action_pub: 0.088±0.209ms | total: 2.387±3.173ms
+2026-10-17 02:58:59.008 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 0 (stand)
+2026-10-17 02:58:59.008 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-17 02:58:59.033 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.19 | read_state: 0.054±0.019ms | preprocessing: 0.000±0.000ms | inference: 2.261±1.725ms | postprocessing: 0.038±0.051ms | action_pub: 0.130±0.060ms | total: 2.577±1.759ms
+2026-10-17 02:58:59.369 | INFO     | __main__:run_policy:129 - ✅ Policy execution completed!
+Command: stand (idx=0) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: forward (idx=1) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: left_45 (idx=2) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: forward (idx=1) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: left_45 (idx=2) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: forward (idx=1) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: left_45 (idx=2) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: forward (idx=1) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: stand (idx=0) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+/home/xense/miniforge3/envs/php/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

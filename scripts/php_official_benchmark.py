@@ -160,6 +160,19 @@ def capture_view(conn, viewer, display_name: str, path: Path) -> None:
                          position.y + geometry.height), xdisplay=display_name).save(path)
 
 
+def post_first_guard_direction(x: float, y: float, z: float,
+                               yaw_deg: float, vy: float,
+                               min_yaw_deg: float = 15.0) -> str | None:
+    """Select a conservative direction during the first flat transfer."""
+    if not (6.3 < x < 8.4 and z < 0.95):
+        return None
+    if y < -0.30 and yaw_deg < -min_yaw_deg and vy < -0.2:
+        return "a"
+    if y > 0.30 and yaw_deg > min_yaw_deg and vy > 0.2:
+        return "d"
+    return None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--display", default=":99")
@@ -179,6 +192,10 @@ def main() -> None:
                         help="after block 4, skip a guided pulse when lateral motion is already returning and yaw is small")
     parser.add_argument("--approach-guard", action="store_true",
                         help="in guided mode, counter strong yaw/lateral drift before block 2")
+    parser.add_argument("--post-first-guard", action="store_true",
+                        help="diagnostic: counter outward yaw after block 1, before block 2")
+    parser.add_argument("--post-first-min-yaw", type=float, default=15.0,
+                        help="diagnostic outward yaw threshold in degrees (default: 15)")
     parser.add_argument("--demo-view", action="store_true",
                         help="hide MuJoCo menus for recording on the dedicated X display")
     parser.add_argument("--interactive-demo", action="store_true",
@@ -196,6 +213,10 @@ def main() -> None:
         parser.error("demo-start-delay must be nonnegative")
     if not 0 < args.guided_max_pulse <= 0.30:
         parser.error("guided-max-pulse must be in (0, 0.30]")
+    if not 0 < args.post_first_min_yaw < 90:
+        parser.error("post-first-min-yaw must be in (0, 90)")
+    if args.post_first_guard and args.steer != "guided":
+        parser.error("post-first-guard requires --steer guided")
     if not Xvfb.exists() or not PYTHON.exists():
         parser.error("php Python or unpacked Xvfb is missing; see PHP_REPRODUCTION_GUIDE.md")
     if Path(f"/tmp/.X11-unix/X{args.display[1:]}").exists():
@@ -226,6 +247,8 @@ def main() -> None:
               "guided_max_pulse": args.guided_max_pulse,
               "guided_reversal_guard": args.guided_reversal_guard,
               "approach_guard": args.approach_guard,
+              "post_first_guard": args.post_first_guard,
+              "post_first_min_yaw_deg": args.post_first_min_yaw,
               "demo_view": args.demo_view,
               "interactive_demo": args.interactive_demo,
               "demo_start_delay": args.demo_start_delay,
@@ -472,20 +495,26 @@ def main() -> None:
                     max_ground_z = 1.15 if args.steer in ("post_climb", "predictive", "guided") else 0.95
                     phase = "later"
                     if args.steer == "guided":
+                        post_first_guard = (args.post_first_guard and 6.3 < x < 8.4
+                                            and z < 0.95)
                         approach_guard = (args.approach_guard and 8.7 < x < 10.8
                                           and z < 0.95)
                         early_guard = 10.8 < x < 13.8 and z < 0.95
                         active_window = next((window for window in guided_windows
                                               if window[1] < x < window[2]
                                               and z < window[3]), None)
-                        eligible = approach_guard or early_guard or active_window is not None
-                        phase = "before_block_2" if approach_guard else "early_guard" if early_guard else (
+                        eligible = post_first_guard or approach_guard or early_guard or active_window is not None
+                        phase = "post_first_guard" if post_first_guard else "before_block_2" if approach_guard else "early_guard" if early_guard else (
                             f"after_block_{active_window[0]}" if active_window else "none")
                     if held_steer is None and now >= steer_cooldown_until and eligible and z < max_ground_z:
                         qw, qx, qy, qz = values[3:7]
                         yaw = math.degrees(math.atan2(2 * (qw * qz + qx * qy),
                                                        1 - 2 * (qy * qy + qz * qz)))
-                        if args.steer == "guided" and phase == "before_block_2":
+                        if args.steer == "guided" and phase == "post_first_guard":
+                            wanted = post_first_guard_direction(
+                                x, y, z, yaw, values[8], args.post_first_min_yaw)
+                            predicted_y = y + values[8]
+                        elif args.steer == "guided" and phase == "before_block_2":
                             wanted = ("a" if yaw < -20 and values[8] < -0.4 else
                                       "d" if yaw > 20 and values[8] > 0.4 else None)
                             predicted_y = y + values[8]

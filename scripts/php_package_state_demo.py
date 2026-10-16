@@ -59,8 +59,11 @@ def main() -> None:
         times = [float(row["wall_s"]) for row in csv.DictReader(stream)]
     gaps = [right - left for left, right in zip(times, times[1:])]
     poster = package / "poster.jpg"
+    poster_at = (min(10.5, render["duration_s"] - 1.0)
+                 if result["target_x"] < 27.4 else
+                 min(20.0, render["duration_s"] / 2))
     subprocess.run([str(FFMPEG), "-hide_banner", "-loglevel", "error", "-y",
-                    "-ss", str(min(20.0, render["duration_s"] / 2)),
+                    "-ss", str(poster_at),
                     "-i", str(video), "-frames:v", "1", "-q:v", "2", str(poster)],
                    check=True)
     # Keep the interactive scene and score evidence with the version. The
@@ -81,6 +84,11 @@ def main() -> None:
         shutil.copyfile(args.trial / "preflight.json", package / "preflight.json")
     shutil.copyfile(args.trial / "demo_capture.mp4", package / "raw_capture.mp4")
     diagnostic = (args.trial / "depth_diagnostic.json").is_file()
+    post_first_pulses = sum(event.get("phase") == "post_first_guard"
+                            and event.get("key") in ("a", "d")
+                            for event in result.get("steer_events", []))
+    direction_pulses = sum(event.get("key") in ("a", "d")
+                           for event in result.get("steer_events", []))
     diagnostic_names = ("depth_diagnostic.json", "depth_diagnostic.npz",
                         "qvel.csv", "solver_contacts.jsonl")
     if diagnostic:
@@ -122,7 +130,9 @@ def main() -> None:
         paths["portable_preflight"] = package / "preflight.json"
         paths["source_preflight"] = args.trial / "preflight.json"
     manifest = {"version": args.version, "trial": str(args.trial),
-                "trial_kind": "separate_depth_diagnostic" if diagnostic else "fixed_protocol",
+                "trial_kind": ("separate_depth_diagnostic" if diagnostic else
+                               "post_first_guard_diagnostic" if result.get("post_first_guard")
+                               else "fixed_protocol"),
                 "method": "full-frame MuJoCo state replay of the same scored trial",
                 "source_truth": "qpos.csv and replay_model.mjb sampled during ONNX evaluation",
                 "interpolation": "MuJoCo mj_differentiatePos/mj_integratePos",
@@ -130,6 +140,10 @@ def main() -> None:
                 "input": {"model_sha256": result["model_sha256"],
                           "speed_mode": result["speed_mode"], "steer": result["steer"],
                           "guided_max_pulse": result["guided_max_pulse"],
+                          "post_first_guard": result.get("post_first_guard", False),
+                          "post_first_min_yaw_deg": result.get("post_first_min_yaw_deg"),
+                          "post_first_pulses": post_first_pulses,
+                          "direction_pulses_total": direction_pulses,
                           "target_x": result["target_x"],
                           "forward_key": "held W as in prior evaluations"},
                 "outcome": {"status": result["status"],
@@ -154,22 +168,37 @@ def main() -> None:
     steer_description = (
         "仅保持官方前进指令 W，无额外左右修正"
         if result["steer"] == "none"
+        else f"配置了 `{result['steer']}`，本次未触发左右修正，实际仅保持官方前进指令 W"
+        if direction_pulses == 0
         else f"额外 `{result['steer']}` 方向修正，短按上限 {result['guided_max_pulse']} 秒"
     )
     diagnostic_note = (
         "这是一条单独的深度/接触诊断试次，额外采集负载可能改变运行条件，"
         "不能并入固定协议成绩分布；旁路深度帧不保证与策略每个 tick 的输入完全相同。\n\n"
         if diagnostic else "")
+    if result.get("post_first_guard"):
+        diagnostic_note += (
+            "这是额外打开第一块后纠偏的诊断试次，不能并入固定协议成绩分布；"
+            f"第一块后实际触发方向脉冲 {post_first_pulses} 次。"
+            + ("本次该开关没有对模型发出方向指令，前两块表现是模型自行完成。"
+               if post_first_pulses == 0 else
+               "方向脉冲属于外部控制，不代表官方 ONNX 单独完成的效果。")
+            + "\n\n")
     preflight_note = (
         "[启动资源预检](preflight.json)保存了这次试验实际采用的门槛、逐次 GPU/CPU 读数"
         "和运行器哈希。\n\n" if preflight else "")
+    score_description = (
+        f"前 {score['consecutive_cleared']} 块合格；在 x={result['target_x']} m 主动停止，"
+        "未评估全程 12 块"
+        if result["target_x"] < 27.4 else
+        f"严格连续成绩 {score['consecutive_cleared']}/12")
     (package / "README.md").write_text(
         f"# {args.version}\n\n"
         f"[观看 30 fps 实体仿真视频](demo.mp4) · [预览图](poster.jpg) · "
         f"[核验清单](manifest.json)\n\n"
         f"官方 ONNX 权重、默认 12 块台阶；{steer_description}。"
-        f"本次试验 `{args.trial.name}` 的严格连续成绩 "
-        f"**{score['consecutive_cleared']}/12**，最大前进 x≈{score['max_x_m']} m；"
+        f"本次试验 `{args.trial.name}` **{score_description}**，"
+        f"最大前进 x≈{score['max_x_m']} m；"
         f"总通过块数 {score['blocks_cleared']}。运行质量 `{audit['quality']}`，"
         f"仿真速率中位数 {audit['sim_fps_median']} Hz。"
         "视觉颜色和镜头只改变展示，不改变碰撞几何或官方策略。\n\n"

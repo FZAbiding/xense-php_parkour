@@ -1,0 +1,454 @@
+{
+  "scope": "descriptive historical comparison, not a controlled effect estimate",
+  "first_crossing_x_m": [
+    6.5,
+    7.0,
+    8.0,
+    8.7,
+    9.4,
+    10.0,
+    10.8,
+    12.1,
+    13.0
+  ],
+  "trials": [
+    {
+      "name": "trial_045_none",
+      "trajectory_sha256": "3077b584467e77352c4d03991d6e82bff1d82a0368b8ab388fcb6023bb75f1b0",
+      "benchmark_script_sha256": "ec74fad60e7fe844a8101beef3c9ddcb7eef7e8f885040a7ecc3f55a897ed556",
+      "steer": "none",
+      "target_x_m": 27.4,
+      "quality": "nominal",
+      "consecutive_cleared": 1,
+      "first_saved_pose": {
+        "wall_s": 0.00907,
+        "x_m": -0.0578,
+        "y_m": 0.0001,
+        "z_m": 0.7853,
+        "pitch_deg": 1.07,
+        "yaw_deg": 0.97
+      },
+      "block_2_first_exit_y_m": null,
+      "early_steer_events": [],
+      "first_crossings": {
+        "6.5": {
+          "wall_s": 7.669,
+          "y_m": 0.336,
+          "vy_m_s": 0.226,
+          "yaw_deg": 34.0
+        },
+        "7": {
+          "wall_s": 7.852,
+          "y_m": 0.451,
+          "vy_m_s": 0.269,
+          "yaw_deg": 38.8
+        },
+        "8": {
+          "wall_s": 8.667,
+          "y_m": 1.157,
+          "vy_m_s": 0.312,
+          "yaw_deg": 32.6
+        },
+        "8.7": {
+          "wall_s": 9.671,
+          "y_m": 1.63,
+          "vy_m_s": 0.33,
+          "yaw_deg": 31.5
+        },
+        "9.4": {
+          "wall_s": 10.977,
+          "y_m": 2.083,
+          "vy_m_s": 0.256,
+          "yaw_deg": 27.9
+        },
+        "10": {
+          "wall_s": 11.827,
+          "y_m": 2.387,
+          "vy_m_s": 0.255,
+          "yaw_deg": 21.9
+        },
+        "10.8": {
+          "wall_s": 13.006,
+          "y_m": 2.693,
+          "vy_m_s": 0.149,
+          "yaw_deg": 18.8
+        },
+        "12.1": {
+          "wall_s": 14.574,
+          "y_m": 2.981,
+          "vy_m_s": 0.389,
+          "yaw_deg": 15.1
+        }
+      }
+    },
+    {
+      "name": "trial_048_guided",
+      "trajectory_sha256": "a3ed0c89077ad72d0970e5092e85719ced72e5296d4e3659cffdc26af44fab2b",
+      "benchmark_script_sha256": "ec74fad60e7fe844a8101beef3c9ddcb7eef7e8f885040a7ecc3f55a897ed556",
+      "steer": "guided",
+      "target_x_m": 27.4,
+      "quality": "nominal",
+      "consecutive_cleared": 1,
+      "first_saved_pose": {
+        "wall_s": 0.00411,
+        "x_m": 0.0051,
+        "y_m": 0.0008,
+        "z_m": 0.7857,
+        "pitch_deg": 2.64,
+        "yaw_deg": 1.79
+      },
+      "block_2_first_exit_y_m": -1.597,
+      "early_steer_events": [
+        {
+          "t": 12.1,
+          "x": 10.89,
+          "y": -0.63,
+          "yaw_deg": -44.2,
+          "vy": -0.68,
+          "predicted_y": -1.31,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        },
+        {
+          "t": 13.31,
+          "x": 12.07,
+          "y": -1.56,
+          "yaw_deg": -43.0,
+          "vy": -0.47,
+          "predicted_y": -2.03,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        },
+        {
+          "t": 14.52,
+          "x": 12.79,
+          "y": -2.02,
+          "yaw_deg": -26.6,
+          "vy": -0.77,
+          "predicted_y": -2.78,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        }
+      ],
+      "first_crossings": {
+        "6.5": {
+          "wall_s": 7.374,
+          "y_m": 0.445,
+          "vy_m_s": 0.473,
+          "yaw_deg": 20.3
+        },
+        "7": {
+          "wall_s": 7.771,
+          "y_m": 0.611,
+          "vy_m_s": 0.214,
+          "yaw_deg": 24.5
+        },
+        "8": {
+          "wall_s": 8.879,
+          "y_m": 0.942,
+          "vy_m_s": 0.102,
+          "yaw_deg": 16.6
+        },
+        "8.7": {
+          "wall_s": 9.914,
+          "y_m": 0.921,
+          "vy_m_s": -0.362,
+          "yaw_deg": -6.3
+        },
+        "9.4": {
+          "wall_s": 10.547,
+          "y_m": 0.61,
+          "vy_m_s": -1.035,
+          "yaw_deg": -33.5
+        },
+        "10": {
+          "wall_s": 11.122,
+          "y_m": 0.138,
+          "vy_m_s": -0.696,
+          "yaw_deg": -38.8
+        },
+        "10.8": {
+          "wall_s": 12.039,
+          "y_m": -0.588,
+          "vy_m_s": -0.656,
+          "yaw_deg": -38.0
+        },
+        "12.1": {
+          "wall_s": 13.368,
+          "y_m": -1.597,
+          "vy_m_s": -0.613,
+          "yaw_deg": -40.6
+        },
+        "13": {
+          "wall_s": 14.852,
+          "y_m": -2.176,
+          "vy_m_s": -0.238,
+          "yaw_deg": -19.3
+        }
+      }
+    },
+    {
+      "name": "trial_049_guided",
+      "trajectory_sha256": "0087de9cf5b4864132147a161a780fca7b9c0d71da8bf0b60b763a23cb632872",
+      "benchmark_script_sha256": "61695166e5b3e6a3126f9535835c36d4ef9ea7928349203afe4501df449ce264",
+      "steer": "guided",
+      "target_x_m": 27.4,
+      "quality": "sustained_sim_slowdown",
+      "consecutive_cleared": 2,
+      "first_saved_pose": {
+        "wall_s": 0.02417,
+        "x_m": -0.0031,
+        "y_m": 0.0022,
+        "z_m": 0.7856,
+        "pitch_deg": 2.39,
+        "yaw_deg": 1.1
+      },
+      "block_2_first_exit_y_m": -0.705,
+      "early_steer_events": [
+        {
+          "t": 12.64,
+          "x": 11.12,
+          "y": -0.4,
+          "yaw_deg": -27.5,
+          "vy": -0.56,
+          "predicted_y": -0.96,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        },
+        {
+          "t": 14.31,
+          "x": 12.03,
+          "y": -0.68,
+          "yaw_deg": -20.0,
+          "vy": -0.25,
+          "predicted_y": -0.93,
+          "phase": "early_guard",
+          "pulse_s": 0.16,
+          "key": "a"
+        }
+      ],
+      "first_crossings": {
+        "6.5": {
+          "wall_s": 7.201,
+          "y_m": 0.421,
+          "vy_m_s": 0.261,
+          "yaw_deg": 11.4
+        },
+        "7": {
+          "wall_s": 7.351,
+          "y_m": 0.511,
+          "vy_m_s": 0.305,
+          "yaw_deg": 21.1
+        },
+        "8": {
+          "wall_s": 8.408,
+          "y_m": 0.441,
+          "vy_m_s": 0.154,
+          "yaw_deg": 2.6
+        },
+        "8.7": {
+          "wall_s": 9.352,
+          "y_m": 0.357,
+          "vy_m_s": -0.046,
+          "yaw_deg": -8.9
+        },
+        "9.4": {
+          "wall_s": 9.807,
+          "y_m": 0.092,
+          "vy_m_s": -0.462,
+          "yaw_deg": -25.1
+        },
+        "10": {
+          "wall_s": 10.264,
+          "y_m": -0.003,
+          "vy_m_s": -0.232,
+          "yaw_deg": -14.1
+        },
+        "10.8": {
+          "wall_s": 12.041,
+          "y_m": -0.331,
+          "vy_m_s": -0.102,
+          "yaw_deg": -24.4
+        },
+        "12.1": {
+          "wall_s": 14.524,
+          "y_m": -0.705,
+          "vy_m_s": -0.276,
+          "yaw_deg": -20.9
+        },
+        "13": {
+          "wall_s": 15.652,
+          "y_m": -0.968,
+          "vy_m_s": -0.015,
+          "yaw_deg": -15.4
+        }
+      }
+    },
+    {
+      "name": "trial_050_guided",
+      "trajectory_sha256": "6c4981c9f562296f6e0d2a1ceeee3c0b80e14744f4d6f5a0691d122604f9e96b",
+      "benchmark_script_sha256": "921b67674a87d61d8a8edb3870698a5dd65f821849bb0aeaaf198407002471be",
+      "steer": "guided",
+      "target_x_m": 13.8,
+      "quality": "nominal",
+      "consecutive_cleared": 2,
+      "first_saved_pose": {
+        "wall_s": 0.00492,
+        "x_m": -0.0201,
+        "y_m": 0.0022,
+        "z_m": 0.7856,
+        "pitch_deg": 2.56,
+        "yaw_deg": 1.19
+      },
+      "block_2_first_exit_y_m": -0.46,
+      "early_steer_events": [],
+      "first_crossings": {
+        "6.5": {
+          "wall_s": 7.649,
+          "y_m": 0.156,
+          "vy_m_s": 0.197,
+          "yaw_deg": 6.3
+        },
+        "7": {
+          "wall_s": 8.015,
+          "y_m": 0.263,
+          "vy_m_s": 0.592,
+          "yaw_deg": 14.4
+        },
+        "8": {
+          "wall_s": 8.987,
+          "y_m": 0.412,
+          "vy_m_s": 0.409,
+          "yaw_deg": 7.4
+        },
+        "8.7": {
+          "wall_s": 9.809,
+          "y_m": 0.389,
+          "vy_m_s": -0.265,
+          "yaw_deg": -6.1
+        },
+        "9.4": {
+          "wall_s": 10.231,
+          "y_m": 0.212,
+          "vy_m_s": -0.407,
+          "yaw_deg": -12.0
+        },
+        "10": {
+          "wall_s": 10.717,
+          "y_m": 0.016,
+          "vy_m_s": -0.183,
+          "yaw_deg": -19.2
+        },
+        "10.8": {
+          "wall_s": 11.58,
+          "y_m": -0.109,
+          "vy_m_s": -0.623,
+          "yaw_deg": -12.4
+        },
+        "12.1": {
+          "wall_s": 12.514,
+          "y_m": -0.46,
+          "vy_m_s": -0.305,
+          "yaw_deg": -6.6
+        },
+        "13": {
+          "wall_s": 13.339,
+          "y_m": -0.547,
+          "vy_m_s": -0.203,
+          "yaw_deg": -9.4
+        }
+      }
+    },
+    {
+      "name": "trial_052_guided",
+      "trajectory_sha256": "24b14410529ba22835139b7ee3e4d4f8fd7fa64f6cb87eeb2571254596b22136",
+      "benchmark_script_sha256": "8b61875a77e962dfce047ee2f157bcd0d524b7837ff652717f04f54284ee6fd0",
+      "steer": "guided",
+      "target_x_m": 13.8,
+      "quality": "sustained_sim_slowdown",
+      "consecutive_cleared": 2,
+      "first_saved_pose": {
+        "wall_s": 0.01288,
+        "x_m": -0.0007,
+        "y_m": 0.0014,
+        "z_m": 0.7856,
+        "pitch_deg": 2.59,
+        "yaw_deg": 1.65
+      },
+      "block_2_first_exit_y_m": -0.576,
+      "early_steer_events": [
+        {
+          "t": 7.41,
+          "x": 6.86,
+          "y": 0.31,
+          "yaw_deg": 12.0,
+          "vy": 0.22,
+          "predicted_y": 0.52,
+          "phase": "post_first_guard",
+          "pulse_s": 0.16,
+          "key": "d"
+        }
+      ],
+      "first_crossings": {
+        "6.5": {
+          "wall_s": 7.195,
+          "y_m": 0.229,
+          "vy_m_s": 0.293,
+          "yaw_deg": 16.2
+        },
+        "7": {
+          "wall_s": 7.564,
+          "y_m": 0.345,
+          "vy_m_s": 0.099,
+          "yaw_deg": 7.8
+        },
+        "8": {
+          "wall_s": 8.664,
+          "y_m": 0.299,
+          "vy_m_s": 0.06,
+          "yaw_deg": -5.3
+        },
+        "8.7": {
+          "wall_s": 9.461,
+          "y_m": 0.248,
+          "vy_m_s": 0.092,
+          "yaw_deg": -6.3
+        },
+        "9.4": {
+          "wall_s": 9.945,
+          "y_m": 0.073,
+          "vy_m_s": -0.271,
+          "yaw_deg": -17.0
+        },
+        "10": {
+          "wall_s": 10.487,
+          "y_m": 0.007,
+          "vy_m_s": -0.2,
+          "yaw_deg": -12.8
+        },
+        "10.8": {
+          "wall_s": 11.348,
+          "y_m": -0.297,
+          "vy_m_s": -0.027,
+          "yaw_deg": -11.3
+        },
+        "12.1": {
+          "wall_s": 13.584,
+          "y_m": -0.576,
+          "vy_m_s": -0.214,
+          "yaw_deg": -13.5
+        },
+        "13": {
+          "wall_s": 15.874,
+          "y_m": -0.76,
+          "vy_m_s": 0.228,
+          "yaw_deg": -14.5
+        }
+      }
+    }
+  ]
+}

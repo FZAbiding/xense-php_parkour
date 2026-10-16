@@ -1,0 +1,26 @@
+{
+  "display": ":99",
+  "capture_box": [
+    0,
+    0,
+    1066,
+    666
+  ],
+  "source_size": [
+    1066,
+    666
+  ],
+  "video_size": [
+    960,
+    600
+  ],
+  "fps": 8,
+  "frames": 116,
+  "frames_captured": 116,
+  "frames_duplicated": 0,
+  "wall_s": 14.5,
+  "encoded_s": 14.5,
+  "capture_file": "demo_capture.mp4",
+  "error": null,
+  "status": "complete"
+}
