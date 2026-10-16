@@ -2,6 +2,17 @@
 
 目标：**每个可展示版本都有一段真实仿真视频和可核对的实验记录**。视频负责展示动作，成绩只来自同一次运行的 `pelvis.csv` 与 `php_score_course.py`；不能用视觉印象或最大前进距离代替逐块评分。当前只覆盖第一阶段官方 ONNX 推理，不涉及重新训练。
 
+## 2026-10-16 新版本索引
+
+| 版本与 30 fps 视频 | 源试次 | 严格连续成绩 | 解释 |
+|---|---|---:|---|
+| [W-only v4 视频](demos/phase1-onnx-w-only-v4/demo.mp4) · [交互包](demos/phase1-onnx-w-only-v4/README.md) | 038 | 2/12，`nominal` | W-only 固定协议三条合格样本 `[1,2,2]` 的中位档 |
+| [`guided` v3 视频](demos/phase1-onnx-guided016-v3/demo.mp4) · [交互包](demos/phase1-onnx-guided016-v3/README.md) | 037 | 2/12，`nominal` | 仅两条合格样本 `[2,1]`，取首条并公开全部结果 |
+| [深度诊断 v1 视频](demos/phase1-onnx-depth-diagnostic-v1/demo.mp4) · [交互包](demos/phase1-onnx-depth-diagnostic-v1/README.md) | 诊断 002 | 3/12，`nominal` | 被动深度/求解器接触记录的**独立诊断**，不计入固定协议 |
+| [`guided` v4 视频](demos/phase1-onnx-guided016-v4/demo.mp4) · [交互包](demos/phase1-onnx-guided016-v4/README.md) | 044 | 1/12，`nominal` | viewer 启动修复后的新代码哈希首条正式试次 |
+
+四套均包含 1280×720、H.264、30 fps 视频、原始窗口录制、状态/模型压缩包、评分与哈希清单。使用 `/home/xense/miniforge3/envs/php/bin/python scripts/php_open_demo.py --trial demos/<版本ID>` 在本机交互浏览，可拖动旋转、滚轮缩放，关闭后释放 `:99`。深度诊断包额外附逐帧深度、关节速度和接触采样。视频是**同次评分轨迹的状态回放**，按关节空间插值至 30 fps；这消除了旧 8 fps 窗口录像的卡顿，但不意味着策略以 30 Hz 运行或动作被重新执行。详细证据和失败试次见[本轮报告](reports/phase1_cohort_depth_and_startup_2026-10-16.md)。
+
 ## W-only 基线 v3（2026-10-15）
 
 [30 fps 实体仿真视频](demos/phase1-onnx-w-only-v3/demo.mp4) · [交互回放与成绩说明](demos/phase1-onnx-w-only-v3/README.md) · [版本清单](demos/phase1-onnx-w-only-v3/manifest.json)。官方双 ONNX、默认 12 块台阶，只保持 W 前进，不额外发送左右方向修正。032 试次质量 `nominal`，严格连续 **1/12**：第 2 块首次出块 y=−1.342 m，超出 ±1 m 判据。物理仿真中位数 499.8 Hz，策略中位数 50.7 Hz，深度过期 0 次。它是单次 W-only 基线，不代表稳定成功率；与旧版额外 `guided` 的 5/12 不能直接解释为方向修正的因果收益。下一阶段的复测协议见 [计划](NEXT_STAGE_PLAN.md)。

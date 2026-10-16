@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -27,11 +28,14 @@ def main() -> None:
     parser.add_argument("--interval", type=float, default=5.0)
     parser.add_argument("--max-gpu-util", type=int, default=50)
     parser.add_argument("--max-gpu-memory-mib", type=int, default=10000)
+    parser.add_argument("--max-cpu-load-1m", type=float,
+                        default=(os.cpu_count() or 1) * 0.75)
     args = parser.parse_args()
     if args.trial_id < 1 or args.samples < 1 or args.interval < 0:
         parser.error("trial-id and samples must be positive; interval must be nonnegative")
-    if not 0 < args.max_gpu_util <= 100 or args.max_gpu_memory_mib <= 0:
-        parser.error("GPU thresholds must be positive")
+    if (not 0 < args.max_gpu_util <= 100 or args.max_gpu_memory_mib <= 0 or
+            args.max_cpu_load_1m <= 0):
+        parser.error("resource thresholds must be positive")
     if args.run and Path("/tmp/.X11-unix/X99").exists():
         parser.error("isolated display :99 is occupied")
 
@@ -40,7 +44,7 @@ def main() -> None:
     if args.run and directory.exists():
         parser.error(f"refusing to overwrite {directory}")
     check = preflight(args.samples, args.interval, args.max_gpu_util,
-                      args.max_gpu_memory_mib)
+                      args.max_gpu_memory_mib, args.max_cpu_load_1m)
     record = {
         "kind": "separate_depth_probe_not_fixed_protocol",
         "trial": str(directory.relative_to(ROOT)),
@@ -58,7 +62,7 @@ def main() -> None:
         except Exception as exc:
             record["result"] = {"error": f"{type(exc).__name__}: {exc}"}
     else:
-        record["stopped_reason"] = "shared_gpu_busy"
+        record["stopped_reason"] = "shared_host_busy"
     output = ROOT / "outputs/reproduction" / f"depth_probe_{int(time.time())}.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     if output.exists():

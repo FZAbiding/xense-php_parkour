@@ -82,6 +82,7 @@ def test_sim_launcher_uses_pinned_holosoma_and_forwards_overrides(fake_runtime, 
         "--robot.asset.xml-file",
         "g1/g1_29dof_halfspherehand.xml",
         "--simulator.config.bridge.enabled=True",
+        "--simulator.config.sim.fps=500",
         "--simulator.config.no-render",
     ]
 

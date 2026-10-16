@@ -30,10 +30,18 @@
 | 深度诊断 001 预检 | 2026-10-15 | 与主成绩分开的被动深度帧记录，W-only | **未启动** | `shared_gpu_busy`；利用率 76%–93% | 原始读数在 `outputs/reproduction/depth_probe_1792061176.json`；`diagnostic_001_none` 未创建，不计入成绩表 |
 | 036 续行预检 | 2026-10-16 | 固定协议 W-only，7 次×5 秒资源门槛 | **未启动** | `shared_gpu_busy`；利用率 76%–94%，两次显存超过门槛 | 原始读数在 `outputs/reproduction/controlled_batch_1792090383.json`；[过程与诊断增强](reports/phase1_execution_2026-10-16.md) |
 | 深度诊断 001 续行预检 | 2026-10-16 | 独立的深度、关节速度与求解器接触采样 | **未启动** | `shared_gpu_busy`；利用率 86%–96% | 原始读数在 `outputs/reproduction/depth_probe_1792090515.json`；仍没有真实诊断数据 |
+| 036–038 | 2026-10-16 | 固定协议交错 W-only / `guided` / W-only | **1/12、2/12、2/12** | 三条均 `nominal` | 第二或第三块首次出块横向越界；对应 [W-only v4](demos/phase1-onnx-w-only-v4/README.md)、[`guided` v3](demos/phase1-onnx-guided016-v3/README.md) 视频 |
+| 039 | 2026-10-16 | 固定协议 `guided` | **排除** | `sustained_sim_slowdown` | x≈2.776 m 在线停止，不能算 0/12 模型成绩 |
+| 040–041 | 2026-10-16 | 固定协议 W-only / `guided` | **2/12、1/12** | 两条均 `nominal` | 旧哈希合格分布 W-only `[1,2,2]`、`guided` `[2,1]`；样本不足以声称改进 |
+| 042–043 | 2026-10-16 | 固定协议 W-only / `guided` | **未评估** | `setup_failed`、`policy_not_started` | gantry 释放前没有新鲜骨盆包；诊断 003 堆栈定位 viewer overlay 锁循环 |
+| 深度诊断 001–004 | 2026-10-16 | 单独被动记录深度、关节状态和求解器接触 | **002 为 3/12** | 002 `nominal`；001/003 启动失败，004 持续降速 | 002 共 521 帧深度与 1656 组状态/接触；[诊断视频](demos/phase1-onnx-depth-diagnostic-v1/README.md)单列，不混入固定协议 |
+| 044 | 2026-10-16 | viewer overlay 延后更新后的固定协议 `guided` | **1/12** | `nominal`，仿真中位数 500.5 Hz | 通过 7 次资源门槛，正常启动并完成；第 2 块出块 y=−1.170 m。[v4 视频](demos/phase1-onnx-guided016-v4/README.md)；新入口哈希单列 |
 
 每次原始证据在 `outputs/reproduction/official_benchmark/trial_NNN/`：`result.json` 固定参数和结束状态，`pelvis.csv` 是原始骨盆轨迹，`course_score.json` 是逐块判定，`audit.json` 是速率与深度审计，`sim.log`/`inference.log` 是进程日志，截图来自独立 `:99` 显示器。`outputs/` 被 Git 忽略，但本机仍保留。完整环境与问题见 [复现指南](PHP_REPRODUCTION_GUIDE.md)。
 
 032 之后的同条件对照、样本数门槛和训练路线见 [下一阶段计划](NEXT_STAGE_PLAN.md)。025 使用原始仿真入口和 `--demo-view`，030–032 使用状态记录入口和 `--interactive-demo`；它们权重与地形相同，但严格比较仍应在同一入口上交错复测。
+
+2026-10-16 的固定协议结果、深度/接触证据、viewer 启动锁循环定位、视频与下一步验收统一见 [补样本和诊断报告](reports/phase1_cohort_depth_and_startup_2026-10-16.md)。诊断 002 的 3/12 不属于固定协议成绩，044 使用查看器修复后的新脚本哈希，均不可直接并入 036–041 的同代码对照。
 
 2026-10-15 使用 025、030、031、032 的原始轨迹完成 [第二块前横向漂移图与逐点对照](reports/phase1_early_drift.md)。四次在 x≈10 m 尚接近中线，到 x≈10.8 m 025 已明显区别于其余三次；025 的第一条左右修正直到 x≈12.10 m，因此不能只用那次修正解释早期分叉。不同仿真入口等混杂因素仍在，下一步用同一入口采样本体、深度时序与接触信息。
 

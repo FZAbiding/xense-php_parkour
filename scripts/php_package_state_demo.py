@@ -73,9 +73,16 @@ def main() -> None:
                                    mtime=0, compresslevel=6) as sink:
                     shutil.copyfileobj(source, sink)
     for name in ("result.json", "course_score.json", "audit.json", "pelvis.csv",
-                 "demo_capture.json", "sim.log", "inference.log"):
+                 "demo_capture.json", "sim.log", "inference.log",
+                 "visual_diagnostics.json"):
         shutil.copyfile(args.trial / name, package / name)
     shutil.copyfile(args.trial / "demo_capture.mp4", package / "raw_capture.mp4")
+    diagnostic = (args.trial / "depth_diagnostic.json").is_file()
+    diagnostic_names = ("depth_diagnostic.json", "depth_diagnostic.npz",
+                        "qvel.csv", "solver_contacts.jsonl")
+    if diagnostic:
+        for name in diagnostic_names:
+            shutil.copyfile(args.trial / name, package / name)
     other_trials = []
     for folder in args.other_trial:
         folder = folder.resolve()
@@ -93,6 +100,7 @@ def main() -> None:
              "portable_result": package / "result.json",
              "portable_score": package / "course_score.json",
              "portable_audit": package / "audit.json",
+             "portable_visual_diagnostics": package / "visual_diagnostics.json",
              "source_model": args.trial / "replay_model.mjb",
              "source_states": args.trial / "qpos.csv",
              "raw_capture": args.trial / "demo_capture.mp4",
@@ -100,9 +108,15 @@ def main() -> None:
              "result": args.trial / "result.json",
              "course_score": args.trial / "course_score.json",
              "audit": args.trial / "audit.json",
+             "visual_diagnostics": args.trial / "visual_diagnostics.json",
              "render_script": ROOT / "scripts/php_render_state_video.py",
              "replay_script": ROOT / "scripts/php_replay_demo.py"}
+    if diagnostic:
+        for name in diagnostic_names:
+            paths[f"portable_{name}"] = package / name
+            paths[f"source_{name}"] = args.trial / name
     manifest = {"version": args.version, "trial": str(args.trial),
+                "trial_kind": "separate_depth_diagnostic" if diagnostic else "fixed_protocol",
                 "method": "full-frame MuJoCo state replay of the same scored trial",
                 "source_truth": "qpos.csv and replay_model.mjb sampled during ONNX evaluation",
                 "interpolation": "MuJoCo mj_differentiatePos/mj_integratePos",
@@ -135,6 +149,10 @@ def main() -> None:
         if result["steer"] == "none"
         else f"额外 `{result['steer']}` 方向修正，短按上限 {result['guided_max_pulse']} 秒"
     )
+    diagnostic_note = (
+        "这是一条单独的深度/接触诊断试次，额外采集负载可能改变运行条件，"
+        "不能并入固定协议成绩分布；旁路深度帧不保证与策略每个 tick 的输入完全相同。\n\n"
+        if diagnostic else "")
     (package / "README.md").write_text(
         f"# {args.version}\n\n"
         f"[观看 30 fps 实体仿真视频](demo.mp4) · [预览图](poster.jpg) · "
@@ -148,6 +166,7 @@ def main() -> None:
         "视频按同一次评测保存的 `qpos.csv` 与 `replay_model.mjb` 在 MuJoCo 中逐帧回放，"
         "帧间采用关节与四元数安全插值；原始窗口录屏也保留在试验目录。"
         "视频是评测状态的可视化，成绩来自同一次 `pelvis.csv` 的逐块评分。\n\n"
+        f"{diagnostic_note}"
         "此目录还包含压缩模型、关节状态、原始窗口录屏与评分依据。"
         "在仓库根目录启动可拖动、缩放的回放：\n\n"
         "```bash\n"

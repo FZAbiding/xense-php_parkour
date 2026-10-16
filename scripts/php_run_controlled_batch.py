@@ -41,10 +41,14 @@ def gpu_sample() -> dict[str, int]:
 
 
 def preflight(samples: int, interval_s: float, max_util: int,
-              max_memory_mib: int) -> dict:
+              max_memory_mib: int, max_cpu_load_1m: float | None = None) -> dict:
+    if max_cpu_load_1m is None:
+        max_cpu_load_1m = (os.cpu_count() or 1) * 0.75
     readings = []
     for index in range(samples):
-        readings.append(gpu_sample())
+        reading = gpu_sample()
+        reading["cpu_load_1m"] = round(os.getloadavg()[0], 2)
+        readings.append(reading)
         if index + 1 < samples:
             time.sleep(interval_s)
     return {
@@ -52,8 +56,10 @@ def preflight(samples: int, interval_s: float, max_util: int,
         "readings": readings,
         "max_util_percent_exclusive": max_util,
         "max_memory_used_mib_exclusive": max_memory_mib,
+        "max_cpu_load_1m_exclusive": max_cpu_load_1m,
         "ready": all(row["util_percent"] < max_util and
-                     row["memory_used_mib"] < max_memory_mib for row in readings),
+                     row["memory_used_mib"] < max_memory_mib and
+                     row["cpu_load_1m"] < max_cpu_load_1m for row in readings),
     }
 
 
@@ -74,8 +80,10 @@ def run_trial(directory: Path, steer: str, python: str,
                          "--display", ":99", "--output", str(directory)]
     benchmark_env = os.environ.copy()
     benchmark_env.pop("PHP_DIAGNOSTIC_TRIAL_DIR", None)
+    benchmark_env.pop("PHP_STARTUP_TRACE", None)
     if depth_diagnostic:
         benchmark_env["PHP_DIAGNOSTIC_TRIAL_DIR"] = str(directory.resolve())
+        benchmark_env["PHP_STARTUP_TRACE"] = "1"
     benchmark_exit = None
     recorder_exit = None
     diagnostic_exit = None
@@ -209,6 +217,8 @@ def main() -> None:
     parser.add_argument("--trial-root", type=Path, default=DEFAULT_ROOT)
     parser.add_argument("--max-gpu-util", type=int, default=50)
     parser.add_argument("--max-gpu-memory-mib", type=int, default=10000)
+    parser.add_argument("--max-cpu-load-1m", type=float,
+                        default=(os.cpu_count() or 1) * 0.75)
     parser.add_argument("--samples", type=int, default=7)
     parser.add_argument("--interval", type=float, default=5.0)
     args = parser.parse_args()
@@ -217,8 +227,9 @@ def main() -> None:
         parser.error("--sequence must contain only comma-separated none/guided")
     if args.start_id < 1 or args.samples < 1 or args.interval < 0:
         parser.error("start-id and samples must be positive; interval must be nonnegative")
-    if not 0 < args.max_gpu_util <= 100 or args.max_gpu_memory_mib <= 0:
-        parser.error("GPU thresholds must be positive")
+    if (not 0 < args.max_gpu_util <= 100 or args.max_gpu_memory_mib <= 0 or
+            args.max_cpu_load_1m <= 0):
+        parser.error("resource thresholds must be positive")
     if args.run and Path("/tmp/.X11-unix/X99").exists():
         parser.error("isolated display :99 is occupied")
     args.trial_root = args.trial_root.resolve()
@@ -231,13 +242,13 @@ def main() -> None:
              "trials": [], "preflights": []}
     for offset, mode in enumerate(sequence if args.run else sequence[:1]):
         check = preflight(args.samples, args.interval, args.max_gpu_util,
-                          args.max_gpu_memory_mib)
+                          args.max_gpu_memory_mib, args.max_cpu_load_1m)
         batch["preflights"].append(check)
         print(json.dumps({"preflight": check, "next_mode": mode}), flush=True)
         if not args.run:
             return
         if not check["ready"]:
-            batch["stopped_reason"] = "shared_gpu_busy"
+            batch["stopped_reason"] = "shared_host_busy"
             break
         directory = args.trial_root / f"trial_{args.start_id + offset:03d}_{mode}"
         try:

@@ -1,0 +1,91 @@
+{
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/diagnostic_002_none",
+  "kind": "passive diagnostic, excluded from fixed-protocol cohort",
+  "score_consecutive_cleared": 3,
+  "quality": "nominal",
+  "state_samples": 1656,
+  "contact_rows": 1656,
+  "walk_duration_s": 43.828,
+  "depth": {
+    "frames_total": 521,
+    "frames_during_walk": 438,
+    "first_seq": 1,
+    "last_seq": 521,
+    "sequence_gaps": 0,
+    "receiver_interval_median_ms": 100.01,
+    "receiver_interval_p95_ms": 106.52,
+    "finite_fraction": 1.0,
+    "pixel_min": -0.55555,
+    "pixel_max": 0.5,
+    "pixel_below_minus_half_fraction": 0.0017912,
+    "publish_to_receive_median_ms": 0.19
+  },
+  "contacts_by_terrain": {
+    "floor": {
+      "sampled_contacts": 7874,
+      "positive_force_samples": 7666,
+      "max_normal_force_n": 910.86,
+      "first_x_m": 0.049,
+      "last_x_m": 24.318
+    },
+    "floor_1": {
+      "sampled_contacts": 88,
+      "positive_force_samples": 68,
+      "max_normal_force_n": 1845.15,
+      "first_x_m": 4.344,
+      "last_x_m": 5.669
+    },
+    "floor_2": {
+      "sampled_contacts": 315,
+      "positive_force_samples": 290,
+      "max_normal_force_n": 300.8,
+      "first_x_m": 9.213,
+      "last_x_m": 10.724
+    },
+    "floor_3": {
+      "sampled_contacts": 1446,
+      "positive_force_samples": 1396,
+      "max_normal_force_n": 2778.78,
+      "first_x_m": 14.538,
+      "last_x_m": 15.745
+    },
+    "floor_4": {
+      "sampled_contacts": 1002,
+      "positive_force_samples": 956,
+      "max_normal_force_n": 552.49,
+      "first_x_m": 19.26,
+      "last_x_m": 20.671
+    }
+  },
+  "limits": "Frames are passive post-publish shared-memory copies, not exact policy-tick inputs; contacts and states are sampled near 60 Hz, not every 500 Hz physics step.",
+  "depth_landmarks": [
+    {
+      "target_x_m": 8.0,
+      "reached": true,
+      "state_wall_s": 8.258,
+      "depth_seq": 167,
+      "depth_receiver_minus_state_ms": 48.1
+    },
+    {
+      "target_x_m": 10.0,
+      "reached": true,
+      "state_wall_s": 9.977,
+      "depth_seq": 184,
+      "depth_receiver_minus_state_ms": 29.23
+    },
+    {
+      "target_x_m": 15.0,
+      "reached": true,
+      "state_wall_s": 19.833,
+      "depth_seq": 282,
+      "depth_receiver_minus_state_ms": -27.13
+    },
+    {
+      "target_x_m": 20.0,
+      "reached": true,
+      "state_wall_s": 32.286,
+      "depth_seq": 407,
+      "depth_receiver_minus_state_ms": 24.23
+    }
+  ]
+}

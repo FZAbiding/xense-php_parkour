@@ -1,0 +1,179 @@
+{
+  "trace": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/trial_044_guided/pelvis.csv",
+  "max_x_m": 17.908,
+  "blocks_cleared": 1,
+  "consecutive_cleared": 1,
+  "full_course_complete": false,
+  "blocks_mounted": 3,
+  "blocks_recovered_later": 1,
+  "blocks": [
+    {
+      "block": 1,
+      "height_m": 0.38,
+      "x_range_m": [
+        4.3,
+        5.7
+      ],
+      "status": "cleared",
+      "mounted_at_s": 5.72,
+      "first_exit_at_s": 7.97,
+      "first_exit_y_m": 0.633,
+      "recovered_later_at_s": null,
+      "cleared_at_s": 7.97
+    },
+    {
+      "block": 2,
+      "height_m": 0.38,
+      "x_range_m": [
+        9.4,
+        10.6
+      ],
+      "status": "off_course_at_exit",
+      "mounted_at_s": 10.39,
+      "first_exit_at_s": 12.86,
+      "first_exit_y_m": -1.17,
+      "recovered_later_at_s": 15.16,
+      "cleared_at_s": null
+    },
+    {
+      "block": 3,
+      "height_m": 0.76,
+      "x_range_m": [
+        14.34,
+        15.66
+      ],
+      "status": "off_course_at_exit",
+      "mounted_at_s": 18.44,
+      "first_exit_at_s": 29.07,
+      "first_exit_y_m": 2.687,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 4,
+      "height_m": 0.76,
+      "x_range_m": [
+        19.43,
+        20.57
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 5,
+      "height_m": 0.38,
+      "x_range_m": [
+        24.18,
+        25.82
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 6,
+      "height_m": 0.38,
+      "x_range_m": [
+        29.3,
+        30.7
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 7,
+      "height_m": 0.76,
+      "x_range_m": [
+        34.35,
+        35.65
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 8,
+      "height_m": 0.76,
+      "x_range_m": [
+        39.4,
+        40.6
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 9,
+      "height_m": 0.38,
+      "x_range_m": [
+        44.21,
+        45.79
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 10,
+      "height_m": 0.38,
+      "x_range_m": [
+        49.26,
+        50.74
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 11,
+      "height_m": 0.76,
+      "x_range_m": [
+        54.39,
+        55.61
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 12,
+      "height_m": 0.76,
+      "x_range_m": [
+        59.39,
+        60.61
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    }
+  ]
+}

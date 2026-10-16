@@ -8,6 +8,7 @@ colors, camera defaults, sidebars, and a sampled qpos log are added for replay.
 from __future__ import annotations
 
 import csv
+import faulthandler
 import hashlib
 import json
 import os
@@ -29,6 +30,7 @@ diagnostic_trial = os.environ.get("PHP_DIAGNOSTIC_TRIAL_DIR")
 if diagnostic_trial and Path(diagnostic_trial).resolve() != trial.resolve():
     raise ValueError("diagnostic directory must be the same isolated demo trial")
 diagnostic_enabled = bool(diagnostic_trial)
+startup_trace_enabled = bool(os.environ.get("PHP_STARTUP_TRACE"))
 
 original_launch = mujoco.viewer.launch_passive
 def launch_clean(*args, **kwargs):
@@ -73,11 +75,38 @@ def setup_clean(self):
             hashlib.sha256(Path(__file__).with_name("php_solver_contacts.py").read_bytes()).hexdigest()
             if diagnostic_enabled else None),
     }, indent=2) + "\n")
+    if startup_trace_enabled:
+        self._php_trace_handle = (trial / "sim_startup_trace.log").open("w", buffering=1)
+        self._php_trace_handle.write(f"viewer_setup_done monotonic={time.monotonic():.6f}\n")
+        faulthandler.dump_traceback_later(3, repeat=True, file=self._php_trace_handle)
 MuJoCo.setup_viewer = setup_clean
+
+# MuJoCo's viewer invokes key callbacks while holding its internal mutex.
+# Holosoma's G/Y callbacks call viewer.set_texts(), which attempts that same
+# mutex again and can deadlock the viewer thread against the physics thread's
+# viewer.sync(). Defer only the overlay update to the physics/render thread.
+original_update_text_overlay = MuJoCo._update_text_overlay
+def defer_text_overlay(self):
+    self._php_overlay_pending = True
+MuJoCo._update_text_overlay = defer_text_overlay
 
 original_render = MuJoCo.render
 def render_and_record(self, sync_frame_time=True):
+    if startup_trace_enabled and not hasattr(self, "_php_first_render_started"):
+        self._php_first_render_started = True
+        self._php_trace_handle.write(f"first_render_enter monotonic={time.monotonic():.6f}\n")
+    if getattr(self, "_php_overlay_pending", False):
+        self._php_overlay_pending = False
+        original_update_text_overlay(self)
     original_render(self, sync_frame_time=sync_frame_time)
+    if startup_trace_enabled and not hasattr(self, "_php_first_render_finished"):
+        self._php_first_render_finished = True
+        self._php_trace_handle.write(f"first_render_exit monotonic={time.monotonic():.6f}\n")
+    if (startup_trace_enabled and not hasattr(self, "_php_startup_trace_done")
+            and float(self.root_data.time) >= 2.0):
+        self._php_startup_trace_done = True
+        faulthandler.cancel_dump_traceback_later()
+        self._php_trace_handle.write(f"sim_time_2s monotonic={time.monotonic():.6f}\n")
     if not hasattr(self, "_php_demo_start_s"):
         if not start_file.exists():
             return

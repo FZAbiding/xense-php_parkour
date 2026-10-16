@@ -1,0 +1,19 @@
+{
+  "trial": "outputs/reproduction/official_benchmark/trial_038_none",
+  "video": "demos/phase1-onnx-w-only-v4/demo.mp4",
+  "source": "recorded_qpos_same_trial_quaternion_safe_interpolation",
+  "fps": 30,
+  "size": [
+    1280,
+    720
+  ],
+  "frames": 609,
+  "duration_s": 20.3,
+  "sample_count": 789,
+  "sample_duration_s": 20.27,
+  "sha256": {
+    "video": "0579754b5afc15a66ec88d5e88d5818f72be8279461d91574f3729a1bb3076dc",
+    "qpos": "ef4d348c0a11068748796803657a0875db8ceb45a6e66042dd1adaf526dd00ed",
+    "model": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+  }
+}
