@@ -24,7 +24,8 @@ DEFAULT_NAMES = (
     "trial_031_interactive",
     "trial_032_w_only",
 )
-CHECKPOINTS = (6.5, 7.0, 8.0, 8.7, 9.4, 10.0, 10.8, 12.1, 13.0)
+CHECKPOINTS = (1.0, 2.0, 3.0, 4.0, 4.3, 5.7, 6.5, 7.0,
+               8.0, 8.7, 9.4, 10.0, 10.8, 12.1, 13.0)
 
 
 def read_trace(path: Path) -> list[dict[str, float]]:
@@ -140,8 +141,12 @@ def main() -> None:
             "first_crossings": points,
         })
     for axis in axes:
-        axis.axvspan(9.4, 10.6, color="#d4c6a5", alpha=0.28)
-        axis.axvline(12.1, color="#555555", linestyle=":", linewidth=1)
+        if args.x_min < 5.7 and args.x_max > 4.3:
+            axis.axvspan(4.3, 5.7, color="#d4c6a5", alpha=0.28)
+        if args.x_min < 10.6 and args.x_max > 9.4:
+            axis.axvspan(9.4, 10.6, color="#d4c6a5", alpha=0.28)
+        if args.x_min < 12.1 < args.x_max:
+            axis.axvline(12.1, color="#555555", linestyle=":", linewidth=1)
         axis.grid(alpha=0.2)
     axes[0].axhline(1, color="#888888", linestyle="--", linewidth=0.8)
     axes[0].axhline(-1, color="#888888", linestyle="--", linewidth=0.8)
@@ -153,8 +158,11 @@ def main() -> None:
     axes[2].set_ylabel("World lateral velocity (m/s)")
     axes[2].set_xlabel("Forward pelvis x (m)")
     axes[2].set_xlim(args.x_min, args.x_max)
-    figure.suptitle("PHP released ONNX: early lateral drift near block 2\n"
-                     "Shaded = block footprint; dotted = first-exit scoring x; triangles = a/d commands")
+    visible = ["shaded = block footprint", "triangles = a/d commands"]
+    if args.x_min < 12.1 < args.x_max:
+        visible.insert(1, "dotted = block-2 exit scoring x")
+    figure.suptitle("PHP released ONNX: lateral drift and heading\n"
+                     + "; ".join(visible))
     figure.tight_layout()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(args.output, dpi=170)

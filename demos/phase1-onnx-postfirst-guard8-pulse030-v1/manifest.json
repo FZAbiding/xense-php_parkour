@@ -1,0 +1,148 @@
+{
+  "version": "phase1-onnx-postfirst-guard8-pulse030-v1",
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/trial_059_guided",
+  "trial_kind": "post_first_guard_diagnostic",
+  "method": "full-frame MuJoCo state replay of the same scored trial",
+  "source_truth": "qpos.csv and replay_model.mjb sampled during ONNX evaluation",
+  "interpolation": "MuJoCo mj_differentiatePos/mj_integratePos",
+  "visual_only_changes": "solid tan block colors, dark gray ground, camera/sidebars, shadow casting disabled",
+  "input": {
+    "model_sha256": {
+      "depth_backbone.onnx": "5b22466a218944e3b0ab0f4f82a910e3eec35375ee03e7fb94eb65fa88431b56",
+      "student.onnx": "e426c4206181d511b838c76efc48e43636299b76cb5a15183977011589931628"
+    },
+    "speed_mode": "low",
+    "steer": "guided",
+    "guided_max_pulse": 0.3,
+    "post_first_guard": true,
+    "post_first_min_yaw_deg": 8.0,
+    "post_first_pulses": 1,
+    "post_first_actual_pulse_s": [
+      0.3
+    ],
+    "direction_pulses_total": 1,
+    "target_x": 13.8,
+    "forward_key": "held W as in prior evaluations"
+  },
+  "outcome": {
+    "status": "left_course",
+    "consecutive_cleared": 0,
+    "blocks_cleared_total": 0,
+    "max_x_m": 6.898,
+    "quality": "nominal",
+    "sim_fps_median": 500.4,
+    "policy_fps_median": 50.3
+  },
+  "video": {
+    "codec_name": "h264",
+    "width": 1280,
+    "height": 720,
+    "avg_frame_rate": "30/1",
+    "nb_frames": "306"
+  },
+  "state_samples": {
+    "count": 386,
+    "median_gap_ms": 28.5,
+    "max_gap_ms": 51.1,
+    "scored_trajectory_duration_s": 9.616,
+    "state_capture_tail_s": 0.584
+  },
+  "raw_capture": {
+    "fps": 8,
+    "frames": 80,
+    "frames_duplicated": 0,
+    "status": "complete"
+  },
+  "preflight_recorded": true,
+  "other_trials": [],
+  "files": {
+    "video": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/demo.mp4",
+      "sha256": "4aa448d2d03ad678c34ac34c2517d8e7be4c56d9fc9531347ea6cdf8fbf536f8"
+    },
+    "poster": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/poster.jpg",
+      "sha256": "1f8ebf8b3132cd94b7b180aa8e49d77e6680178b6d8ef8e9dc6b19630d8dfe31"
+    },
+    "portable_model": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/replay_model.mjb.gz",
+      "sha256": "07b0b19ba1dbb68b46a4d83d66a30bf40acb140135fcaf69623b77ef22941cd2"
+    },
+    "portable_states": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/qpos.csv.gz",
+      "sha256": "48b9cafb305590d02fb3d5ecb49408d58736dcade1001270fb82a302dfc69b57"
+    },
+    "portable_raw_capture": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/raw_capture.mp4",
+      "sha256": "4fb2dab73df50393ca9e3657690d08e44405257d37290d5023f3ea8f6c2ace24"
+    },
+    "portable_trajectory": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/pelvis.csv",
+      "sha256": "c3d4d871a3d476fd09ee42ad7a4fa5b8d1e2d006fc13b705ae2f71c1aff9ba87"
+    },
+    "portable_result": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/result.json",
+      "sha256": "0e41295e737d2ba6a6ab6010f8fecfebe31dfad5b232cb9daf47d4520e2c7f8c"
+    },
+    "portable_score": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/course_score.json",
+      "sha256": "4ea6dc9c04a29bcc88e3fd0e359ef43346973c6e30d89812cdcf2b9de26ee9c6"
+    },
+    "portable_audit": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/audit.json",
+      "sha256": "f8e0bdabae78a56f2910b230fa06764f641a0dc3dfd889893c822f6913323d88"
+    },
+    "portable_visual_diagnostics": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/visual_diagnostics.json",
+      "sha256": "0e1410258056b40f7c0f9d6d478144c54e067d49968fcb023cce3eca7cab0a73"
+    },
+    "source_model": {
+      "path": "outputs/reproduction/official_benchmark/trial_059_guided/replay_model.mjb",
+      "sha256": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+    },
+    "source_states": {
+      "path": "outputs/reproduction/official_benchmark/trial_059_guided/qpos.csv",
+      "sha256": "279eacb54652a7881e70a40e355abb6d8d7e8682392459054fc565b2cf11e908"
+    },
+    "raw_capture": {
+      "path": "outputs/reproduction/official_benchmark/trial_059_guided/demo_capture.mp4",
+      "sha256": "4fb2dab73df50393ca9e3657690d08e44405257d37290d5023f3ea8f6c2ace24"
+    },
+    "trajectory": {
+      "path": "outputs/reproduction/official_benchmark/trial_059_guided/pelvis.csv",
+      "sha256": "c3d4d871a3d476fd09ee42ad7a4fa5b8d1e2d006fc13b705ae2f71c1aff9ba87"
+    },
+    "result": {
+      "path": "outputs/reproduction/official_benchmark/trial_059_guided/result.json",
+      "sha256": "0e41295e737d2ba6a6ab6010f8fecfebe31dfad5b232cb9daf47d4520e2c7f8c"
+    },
+    "course_score": {
+      "path": "outputs/reproduction/official_benchmark/trial_059_guided/course_score.json",
+      "sha256": "4ea6dc9c04a29bcc88e3fd0e359ef43346973c6e30d89812cdcf2b9de26ee9c6"
+    },
+    "audit": {
+      "path": "outputs/reproduction/official_benchmark/trial_059_guided/audit.json",
+      "sha256": "f8e0bdabae78a56f2910b230fa06764f641a0dc3dfd889893c822f6913323d88"
+    },
+    "visual_diagnostics": {
+      "path": "outputs/reproduction/official_benchmark/trial_059_guided/visual_diagnostics.json",
+      "sha256": "0e1410258056b40f7c0f9d6d478144c54e067d49968fcb023cce3eca7cab0a73"
+    },
+    "render_script": {
+      "path": "scripts/php_render_state_video.py",
+      "sha256": "544232c691f80eed2d5f5f65f72ab00558d4875aa21136b43840739c8b635b8b"
+    },
+    "replay_script": {
+      "path": "scripts/php_replay_demo.py",
+      "sha256": "be6726271ff5e81f1a5ac1f2474f9d3129514530df3417870c7cff7582d10216"
+    },
+    "portable_preflight": {
+      "path": "demos/phase1-onnx-postfirst-guard8-pulse030-v1/preflight.json",
+      "sha256": "49f34f65b9afaaeaf1c5f0018b816e4c2db6737b5489016f3a3d992131b3dbed"
+    },
+    "source_preflight": {
+      "path": "outputs/reproduction/official_benchmark/trial_059_guided/preflight.json",
+      "sha256": "49f34f65b9afaaeaf1c5f0018b816e4c2db6737b5489016f3a3d992131b3dbed"
+    }
+  }
+}

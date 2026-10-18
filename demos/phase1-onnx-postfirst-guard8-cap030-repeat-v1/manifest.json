@@ -1,0 +1,148 @@
+{
+  "version": "phase1-onnx-postfirst-guard8-cap030-repeat-v1",
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/trial_060_guided",
+  "trial_kind": "post_first_guard_diagnostic",
+  "method": "full-frame MuJoCo state replay of the same scored trial",
+  "source_truth": "qpos.csv and replay_model.mjb sampled during ONNX evaluation",
+  "interpolation": "MuJoCo mj_differentiatePos/mj_integratePos",
+  "visual_only_changes": "solid tan block colors, dark gray ground, camera/sidebars, shadow casting disabled",
+  "input": {
+    "model_sha256": {
+      "depth_backbone.onnx": "5b22466a218944e3b0ab0f4f82a910e3eec35375ee03e7fb94eb65fa88431b56",
+      "student.onnx": "e426c4206181d511b838c76efc48e43636299b76cb5a15183977011589931628"
+    },
+    "speed_mode": "low",
+    "steer": "guided",
+    "guided_max_pulse": 0.3,
+    "post_first_guard": true,
+    "post_first_min_yaw_deg": 8.0,
+    "post_first_pulses": 1,
+    "post_first_actual_pulse_s": [
+      0.16
+    ],
+    "direction_pulses_total": 2,
+    "target_x": 13.8,
+    "forward_key": "held W as in prior evaluations"
+  },
+  "outcome": {
+    "status": "x_target_reached",
+    "consecutive_cleared": 1,
+    "blocks_cleared_total": 1,
+    "max_x_m": 13.834,
+    "quality": "nominal",
+    "sim_fps_median": 501.5,
+    "policy_fps_median": 50.5
+  },
+  "video": {
+    "codec_name": "h264",
+    "width": 1280,
+    "height": 720,
+    "avg_frame_rate": "30/1",
+    "nb_frames": "402"
+  },
+  "state_samples": {
+    "count": 513,
+    "median_gap_ms": 22.0,
+    "max_gap_ms": 72.7,
+    "scored_trajectory_duration_s": 12.851,
+    "state_capture_tail_s": 0.547
+  },
+  "raw_capture": {
+    "fps": 8,
+    "frames": 106,
+    "frames_duplicated": 0,
+    "status": "complete"
+  },
+  "preflight_recorded": true,
+  "other_trials": [],
+  "files": {
+    "video": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/demo.mp4",
+      "sha256": "60d0600cfd5bcb007c40c50142016d25852da35deb269f094a4cc49d62ad5f41"
+    },
+    "poster": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/poster.jpg",
+      "sha256": "e19a490539463f1dc953b5270f6eaa65afb33e90cd543e299169a42c2c193f94"
+    },
+    "portable_model": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/replay_model.mjb.gz",
+      "sha256": "07b0b19ba1dbb68b46a4d83d66a30bf40acb140135fcaf69623b77ef22941cd2"
+    },
+    "portable_states": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/qpos.csv.gz",
+      "sha256": "e63444a60c2e9e7e8aef65fe4df3cc0a32d15e47032b86602d05e474011cda00"
+    },
+    "portable_raw_capture": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/raw_capture.mp4",
+      "sha256": "dae5593e96ce8f7508d1cebecf02e094200069a74a0950af19f105f20dedb254"
+    },
+    "portable_trajectory": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/pelvis.csv",
+      "sha256": "77f376a3a621519f5def178c752d4723ff859226fc0906a21657929e8d628d2b"
+    },
+    "portable_result": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/result.json",
+      "sha256": "084527bf9532f60e2773e71fcd0c3a5975758a4435abe751ab9407f95d2fb27e"
+    },
+    "portable_score": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/course_score.json",
+      "sha256": "28ca0a185fad8709224050af613dd3b4d4c918a366e09612a15325c358279633"
+    },
+    "portable_audit": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/audit.json",
+      "sha256": "2ed3078b453f7673103ce1ee5bd96b31aeb4fb7c2c88c038a4c36a61da8d8026"
+    },
+    "portable_visual_diagnostics": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/visual_diagnostics.json",
+      "sha256": "0e1410258056b40f7c0f9d6d478144c54e067d49968fcb023cce3eca7cab0a73"
+    },
+    "source_model": {
+      "path": "outputs/reproduction/official_benchmark/trial_060_guided/replay_model.mjb",
+      "sha256": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+    },
+    "source_states": {
+      "path": "outputs/reproduction/official_benchmark/trial_060_guided/qpos.csv",
+      "sha256": "302ff68cf55e9d3fb228886961413da66599b4401e0b5e87641f7e642f716a65"
+    },
+    "raw_capture": {
+      "path": "outputs/reproduction/official_benchmark/trial_060_guided/demo_capture.mp4",
+      "sha256": "dae5593e96ce8f7508d1cebecf02e094200069a74a0950af19f105f20dedb254"
+    },
+    "trajectory": {
+      "path": "outputs/reproduction/official_benchmark/trial_060_guided/pelvis.csv",
+      "sha256": "77f376a3a621519f5def178c752d4723ff859226fc0906a21657929e8d628d2b"
+    },
+    "result": {
+      "path": "outputs/reproduction/official_benchmark/trial_060_guided/result.json",
+      "sha256": "084527bf9532f60e2773e71fcd0c3a5975758a4435abe751ab9407f95d2fb27e"
+    },
+    "course_score": {
+      "path": "outputs/reproduction/official_benchmark/trial_060_guided/course_score.json",
+      "sha256": "28ca0a185fad8709224050af613dd3b4d4c918a366e09612a15325c358279633"
+    },
+    "audit": {
+      "path": "outputs/reproduction/official_benchmark/trial_060_guided/audit.json",
+      "sha256": "2ed3078b453f7673103ce1ee5bd96b31aeb4fb7c2c88c038a4c36a61da8d8026"
+    },
+    "visual_diagnostics": {
+      "path": "outputs/reproduction/official_benchmark/trial_060_guided/visual_diagnostics.json",
+      "sha256": "0e1410258056b40f7c0f9d6d478144c54e067d49968fcb023cce3eca7cab0a73"
+    },
+    "render_script": {
+      "path": "scripts/php_render_state_video.py",
+      "sha256": "544232c691f80eed2d5f5f65f72ab00558d4875aa21136b43840739c8b635b8b"
+    },
+    "replay_script": {
+      "path": "scripts/php_replay_demo.py",
+      "sha256": "be6726271ff5e81f1a5ac1f2474f9d3129514530df3417870c7cff7582d10216"
+    },
+    "portable_preflight": {
+      "path": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/preflight.json",
+      "sha256": "d42c43d632c1e110a75d55296814b071ae21cab94faebfa7311ba3b8c140e0b9"
+    },
+    "source_preflight": {
+      "path": "outputs/reproduction/official_benchmark/trial_060_guided/preflight.json",
+      "sha256": "d42c43d632c1e110a75d55296814b071ae21cab94faebfa7311ba3b8c140e0b9"
+    }
+  }
+}

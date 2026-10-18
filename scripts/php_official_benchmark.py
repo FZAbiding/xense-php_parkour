@@ -173,6 +173,18 @@ def post_first_guard_direction(x: float, y: float, z: float,
     return None
 
 
+def release_pose_summary(values: tuple[float, ...]) -> dict:
+    """Preserve the physical launch state for later stratified comparisons."""
+    qw, qx, qy, qz = values[3:7]
+    pitch_sin = max(-1.0, min(1.0, 2 * (qw * qy - qz * qx)))
+    return {
+        "position_m": [round(value, 5) for value in values[:3]],
+        "quaternion_wxyz": [round(value, 6) for value in values[3:7]],
+        "pitch_deg": round(math.degrees(math.asin(pitch_sin)), 2),
+        "linear_velocity_m_s": [round(value, 4) for value in values[7:10]],
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--display", default=":99")
@@ -348,6 +360,7 @@ def main() -> None:
         z_before_release = pre[2]
         result["z_before_release"] = z_before_release
         qw, qx, qy, qz = pre[3:7]
+        result["release_pose"] = release_pose_summary(pre)
         result["yaw_before_release_deg"] = round(math.degrees(math.atan2(
             2 * (qw * qz + qx * qy), 1 - 2 * (qy * qy + qz * qz))), 2)
         if not pose_ready:

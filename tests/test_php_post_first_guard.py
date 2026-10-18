@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
-from php_official_benchmark import post_first_guard_direction
+from php_official_benchmark import post_first_guard_direction, release_pose_summary
 
 
 class PostFirstGuardTest(unittest.TestCase):
@@ -24,6 +24,13 @@ class PostFirstGuardTest(unittest.TestCase):
         self.assertIsNone(post_first_guard_direction(7.0, 0.45, 0.75, -35, -0.4))
         self.assertIsNone(post_first_guard_direction(7.0, 0.45, 0.75, 12, 0.4))
         self.assertIsNone(post_first_guard_direction(7.0, 0.45, 0.75, 35, -0.4))
+
+    def test_release_pose_keeps_position_pitch_and_velocity(self):
+        summary = release_pose_summary((0.1, -0.2, 0.785, 0.999048,
+                                        0.0, 0.043619, 0.0, 0.01, -0.02, 0.03))
+        self.assertEqual(summary["position_m"], [0.1, -0.2, 0.785])
+        self.assertEqual(summary["linear_velocity_m_s"], [0.01, -0.02, 0.03])
+        self.assertAlmostEqual(summary["pitch_deg"], 5.0, places=1)
 
 
 if __name__ == "__main__":

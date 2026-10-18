@@ -1,0 +1,60 @@
+{
+  "protocol": "released ONNX; bundled 12-block terrain; low speed; interactive state capture; target x=13.8 m; max 60 s",
+  "runner_sha256": "c39bbec3300f1139e1ba2c3dcaba3afec99ab07c57ef0b3eec30c516035aa5d8",
+  "sequence": [
+    "guided"
+  ],
+  "start_id": 59,
+  "post_first_guard": true,
+  "post_first_min_yaw_deg": 8.0,
+  "guided_max_pulse_s": 0.3,
+  "target_x": 13.8,
+  "trials": [],
+  "preflights": [
+    {
+      "checked_at_utc": "2026-10-17T09:28:36.820269+00:00",
+      "readings": [
+        {
+          "util_percent": 85,
+          "memory_used_mib": 5978,
+          "cpu_load_1m": 4.92
+        },
+        {
+          "util_percent": 90,
+          "memory_used_mib": 5786,
+          "cpu_load_1m": 4.77
+        },
+        {
+          "util_percent": 89,
+          "memory_used_mib": 6010,
+          "cpu_load_1m": 6.47
+        },
+        {
+          "util_percent": 85,
+          "memory_used_mib": 5818,
+          "cpu_load_1m": 6.19
+        },
+        {
+          "util_percent": 91,
+          "memory_used_mib": 7140,
+          "cpu_load_1m": 5.86
+        },
+        {
+          "util_percent": 87,
+          "memory_used_mib": 5786,
+          "cpu_load_1m": 5.87
+        },
+        {
+          "util_percent": 75,
+          "memory_used_mib": 6979,
+          "cpu_load_1m": 7.48
+        }
+      ],
+      "max_util_percent_exclusive": 50,
+      "max_memory_used_mib_exclusive": 10000,
+      "max_cpu_load_1m_exclusive": 10.0,
+      "ready": false
+    }
+  ],
+  "stopped_reason": "shared_host_busy"
+}

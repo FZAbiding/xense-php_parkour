@@ -2,6 +2,20 @@
 
 目标：**每个可展示版本都有一段真实仿真视频和可核对的实验记录**。视频负责展示动作，成绩只来自同一次运行的 `pelvis.csv` 与 `php_score_course.py`；不能用视觉印象或最大前进距离代替逐块评分。当前只覆盖第一阶段官方 ONNX 推理，不涉及重新训练。
 
+## 2026-10-17 第二块短程诊断视频
+
+| 版本与视频 | 源试次 | 实际方向输入 | 第二块结果 |
+|---|---|---|---|
+| [第一块后纠偏 8° v1](demos/phase1-onnx-postfirst-guard8-v1/demo.mp4) · [交互包](demos/phase1-onnx-postfirst-guard8-v1/README.md) | 056 | 第一块后 2 次 0.16 秒 `d`，LOW `right_45` 已核实 | 脚踩上第二块，但首次出块 y=−1.115 m，超限 0.115 m；质量 `nominal` |
+| [原 `guided` 短程对照 v1](demos/phase1-onnx-guided-short-v1/demo.mp4) · [交互包](demos/phase1-onnx-guided-short-v1/README.md) | 057 | 第一块后早期脉冲 0 次，后段原有 `a` 脉冲 2 次 | 第二块首次出块 y=−0.970 m，余量 0.030 m；质量 `nominal` |
+| [第一块后纠偏 8° 重复试验](demos/phase1-onnx-postfirst-guard8-repeat-v1/demo.mp4) · [交互包](demos/phase1-onnx-postfirst-guard8-repeat-v1/README.md) | 058 | 第一块后 2 次 0.16 秒 `d` | 第二块前缘 y≈+1.52 m，未发生脚/第二块接触；质量 `nominal` |
+| [0.30 秒脉冲探索 v1](demos/phase1-onnx-postfirst-guard8-pulse030-v1/demo.mp4) · [交互包](demos/phase1-onnx-postfirst-guard8-pulse030-v1/README.md) | 059 | x≈6.31 m 实际发出 1 次 0.30 秒 `d` | 第一块尾端此前已偏航约 +75°，最终离开路线，第 2 块未到达；质量 `nominal` |
+| [0.30 秒上限重复试验](demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/demo.mp4) · [交互包](demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/README.md) | 060 | 上限 0.30 秒，但实际早期只发出 1 次 **0.16 秒** `d` | 第二块脚部接触后出块 y=+1.168 m，超限 0.168 m；质量 `nominal` |
+
+五条都采用 x=13.8 m 的短程终点；056–058 和 060 到达该点后主动停止，059 则提前离开路线。它们不能写成完整 12 块路线的 1/12 或 2/12 成绩，也不能从未配对轨迹推断外部纠偏的因果收益。视频都由同一次评测保存的模型和关节状态生成 1280×720、30 fps 的实体仿真画面；压缩状态、原始窗口录像、评分、预检和哈希清单留在各自交互包。状态录制通常比评分轨迹多约 0.5 秒收尾，版本清单标出该段，收尾不计成绩。[短程续行报告](reports/phase1_short_guard_followup_2026-10-17.md)同时列出无效试次、足部接触重建和纠偏前已出现的横向分叉。059/060 的配置上限相同，但实际早期输入时长不同，不能合并声称“0.30 秒脉冲做了两次”。
+
+本轮共享 GPU 持续高负载，成片改用独立 `:98` Xvfb 上的 `MUJOCO_GL=glfw`、`LIBGL_ALWAYS_SOFTWARE=1`、`GALLIUM_DRIVER=llvmpipe`、`LP_NUM_THREADS=2` 和 `nice -n 15`；1 秒、31 帧的 1280×720 探针耗时约 3.92 秒。逐帧目视发现该软件驱动的阴影贴图会在远处地面和台阶产生条纹；将回放模型的 `light_castshadow` 关闭后，单帧检查条纹消失，因此本轮成片统一传入 `--disable-shadows`。软件渲染与关闭投影只改变画面，输入仍是原试次的 `replay_model.mjb` 和 `qpos.csv`，源模型哈希保持不变。它没有重新运行策略，也不会提升物理仿真或策略频率；观看完整视频和启动可拖动缩放的交互回放仍按各版本 README 操作。
+
 ## 2026-10-16 新版本索引
 
 | 版本与 30 fps 视频 | 源试次 | 严格连续成绩 | 解释 |

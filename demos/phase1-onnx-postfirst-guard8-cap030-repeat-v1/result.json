@@ -1,0 +1,180 @@
+{
+  "started": "2026-10-18T17:28:11+0800",
+  "status": "x_target_reached",
+  "target_x": 13.8,
+  "max_seconds": 60.0,
+  "display": ":99",
+  "steer": "guided",
+  "speed_mode": "low",
+  "pause_after_block": 0.0,
+  "guided_max_pulse": 0.3,
+  "guided_reversal_guard": false,
+  "approach_guard": false,
+  "post_first_guard": true,
+  "post_first_min_yaw_deg": 8.0,
+  "demo_view": false,
+  "interactive_demo": true,
+  "demo_start_delay": 0.0,
+  "model_sha256": {
+    "depth_backbone.onnx": "5b22466a218944e3b0ab0f4f82a910e3eec35375ee03e7fb94eb65fa88431b56",
+    "student.onnx": "e426c4206181d511b838c76efc48e43636299b76cb5a15183977011589931628"
+  },
+  "benchmark_script_sha256": "70909580a189a0855723980fae786caa76a6f13a45414021502c2205fffdd088",
+  "terrain_obj": "bundled terrain.obj",
+  "guided_windows": [
+    [
+      3,
+      15.2,
+      19.227623,
+      1.15
+    ],
+    [
+      4,
+      20.2,
+      23.977983000000002,
+      1.15
+    ],
+    [
+      5,
+      25.2,
+      29.100692000000002,
+      0.95
+    ],
+    [
+      6,
+      30.2,
+      34.148379,
+      0.95
+    ],
+    [
+      7,
+      35.2,
+      39.200235,
+      1.15
+    ],
+    [
+      8,
+      40.2,
+      44.014551,
+      1.15
+    ],
+    [
+      9,
+      45.2,
+      49.062625,
+      0.95
+    ],
+    [
+      10,
+      50.2,
+      54.186898,
+      0.95
+    ],
+    [
+      11,
+      55.2,
+      59.186898,
+      1.15
+    ],
+    [
+      12,
+      60.2,
+      64.413102,
+      1.15
+    ]
+  ],
+  "startup_pose_samples": [
+    [
+      0.785,
+      -0.04
+    ],
+    [
+      0.785,
+      -0.02
+    ],
+    [
+      0.785,
+      -0.01
+    ],
+    [
+      0.785,
+      -0.02
+    ],
+    [
+      0.785,
+      -0.02
+    ],
+    [
+      0.785,
+      -0.02
+    ]
+  ],
+  "z_before_release": 0.7847041487693787,
+  "release_pose": {
+    "position_m": [
+      -0.03423,
+      0.00093,
+      0.7847
+    ],
+    "quaternion_wxyz": [
+      0.999989,
+      3.4e-05,
+      0.004592,
+      -0.000137
+    ],
+    "pitch_deg": 0.53,
+    "linear_velocity_m_s": [
+      -0.02,
+      0.0,
+      -0.0008
+    ]
+  },
+  "yaw_before_release_deg": -0.02,
+  "walk_started": "2026-10-18T17:28:23+0800",
+  "elapsed_s": 12.85,
+  "final_xyz": [
+    13.834,
+    2.537,
+    0.365
+  ],
+  "max_x": 13.834,
+  "steer_events": [
+    {
+      "t": 9.58,
+      "x": 6.5,
+      "y": 0.32,
+      "yaw_deg": 21.4,
+      "vy": 0.55,
+      "predicted_y": 0.87,
+      "phase": "post_first_guard",
+      "pulse_s": 0.16,
+      "key": "d"
+    },
+    {
+      "t": 9.76,
+      "x": 6.98,
+      "y": 0.49,
+      "key": null
+    },
+    {
+      "t": 12.09,
+      "x": 11.77,
+      "y": 0.62,
+      "yaw_deg": 26.4,
+      "vy": 1.85,
+      "predicted_y": 2.47,
+      "phase": "early_guard",
+      "pulse_s": 0.16,
+      "key": "d"
+    },
+    {
+      "t": 12.28,
+      "x": 12.24,
+      "y": 1.31,
+      "key": null
+    }
+  ],
+  "guard_suppressed_events": [],
+  "pause_events": [],
+  "finished": "2026-10-18T17:28:36+0800"
+}

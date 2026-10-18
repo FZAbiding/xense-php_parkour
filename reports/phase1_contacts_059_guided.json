@@ -1,0 +1,53 @@
+{
+  "method": "offline mj_forward on recorded qpos; nonpositive geometry contact distance",
+  "limits": "sampled positions only; no historical qvel, contact forces, depth, or impulses",
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/trial_059_guided",
+  "model_sha256": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64",
+  "qpos_sha256": "279eacb54652a7881e70a40e355abb6d8d7e8682392459054fc565b2cf11e908",
+  "sampled_frames": 386,
+  "foot_terrain_touch_frames": {
+    "floor": {
+      "frames_with_touch": 328,
+      "left_frames": 201,
+      "right_frames": 196,
+      "first": {
+        "wall_s": 0.02494,
+        "sim_s": 7.842,
+        "x_m": -0.0368,
+        "y_m": 0.002
+      },
+      "last": {
+        "wall_s": 10.19997,
+        "sim_s": 18.082,
+        "x_m": 7.1975,
+        "y_m": 3.2445
+      }
+    },
+    "floor_1": {
+      "frames_with_touch": 28,
+      "left_frames": 18,
+      "right_frames": 14,
+      "first": {
+        "wall_s": 5.41551,
+        "sim_s": 13.298,
+        "x_m": 4.1114,
+        "y_m": -0.3616
+      },
+      "last": {
+        "wall_s": 6.65994,
+        "sim_s": 14.514,
+        "x_m": 5.4125,
+        "y_m": 0.3943
+      }
+    }
+  },
+  "first_x_crossings": {
+    "5": {
+      "wall_s": 6.10343,
+      "sim_s": 13.986,
+      "x_m": 5.004,
+      "y_m": 0.0162,
+      "foot_terrain_touches": []
+    }
+  }
+}

@@ -38,12 +38,16 @@ def main() -> None:
     parser.add_argument("--ffmpeg", type=Path, default=Path("/tmp/php-ffmpeg/usr/bin/ffmpeg"))
     parser.add_argument("--max-seconds", type=float, default=0.0,
                         help="render only the first N seconds for a visual check")
+    parser.add_argument("--disable-shadows", action="store_true",
+                        help="hide shadow-map artifacts on software OpenGL; visuals only")
     args = parser.parse_args()
     if args.fps <= 0 or args.width <= 0 or args.height <= 0:
         parser.error("fps and dimensions must be positive")
     model_path = args.trial / "replay_model.mjb"
     qpos_path = args.trial / "qpos.csv"
     model = load_model(args.trial)
+    if args.disable_shadows:
+        model.light_castshadow[:] = False
     model.vis.global_.offwidth = max(model.vis.global_.offwidth, args.width)
     model.vis.global_.offheight = max(model.vis.global_.offheight, args.height)
     walls, sims, positions = load_states(qpos_path, model.nq)
@@ -86,6 +90,7 @@ def main() -> None:
               "size": [args.width, args.height], "frames": frames,
               "duration_s": round(frames / args.fps, 3),
               "sample_count": len(walls), "sample_duration_s": round(walls[-1], 3),
+              "shadows_disabled": args.disable_shadows,
               "sha256": {"video": sha256(args.output), "qpos": sha256(qpos_path),
                          "model": sha256(model_path)}}
     report_path = args.output.with_suffix(".json")

@@ -1,0 +1,20 @@
+{
+  "trial": "outputs/reproduction/official_benchmark/trial_060_guided",
+  "video": "demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/demo.mp4",
+  "source": "recorded_qpos_same_trial_quaternion_safe_interpolation",
+  "fps": 30,
+  "size": [
+    1280,
+    720
+  ],
+  "frames": 402,
+  "duration_s": 13.4,
+  "sample_count": 513,
+  "sample_duration_s": 13.398,
+  "shadows_disabled": true,
+  "sha256": {
+    "video": "60d0600cfd5bcb007c40c50142016d25852da35deb269f094a4cc49d62ad5f41",
+    "qpos": "302ff68cf55e9d3fb228886961413da66599b4401e0b5e87641f7e642f716a65",
+    "model": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+  }
+}

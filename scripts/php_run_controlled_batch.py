@@ -67,6 +67,7 @@ def run_trial(directory: Path, steer: str, python: str,
               *, depth_diagnostic: bool = False,
               post_first_guard: bool = False,
               post_first_min_yaw: float = 15.0,
+              guided_max_pulse: float = 0.16,
               target_x: float = 27.4,
               preflight_report: dict | None = None) -> dict:
     if directory.exists():
@@ -82,7 +83,8 @@ def run_trial(directory: Path, steer: str, python: str,
                         "--display", ":99", "--fps", "8", "--width", "960"]
     benchmark_command = ["nice", "-n", "15", python,
                          "scripts/php_official_benchmark.py", "--steer", steer,
-                         "--guided-max-pulse", "0.16", "--target-x", str(target_x),
+                         "--guided-max-pulse", str(guided_max_pulse),
+                         "--target-x", str(target_x),
                          "--max-seconds", "60", "--interactive-demo",
                          "--display", ":99", "--output", str(directory)]
     if post_first_guard:
@@ -231,6 +233,8 @@ def main() -> None:
     parser.add_argument("--post-first-guard", action="store_true",
                         help="diagnostic guided-only correction after block 1")
     parser.add_argument("--post-first-min-yaw", type=float, default=15.0)
+    parser.add_argument("--guided-max-pulse", type=float, default=0.16,
+                        help="upper duration in seconds for guided a/d pulses")
     parser.add_argument("--target-x", type=float, default=27.4,
                         help="stop x; 13.8 isolates the first two blocks in a diagnostic")
     parser.add_argument("--start-id", type=int, default=36)
@@ -253,6 +257,8 @@ def main() -> None:
         parser.error("target-x must be positive")
     if not 0 < args.post_first_min_yaw < 90:
         parser.error("post-first-min-yaw must be in (0, 90)")
+    if not 0 < args.guided_max_pulse <= 0.30:
+        parser.error("guided-max-pulse must be in (0, 0.30]")
     if (not 0 < args.max_gpu_util <= 100 or args.max_gpu_memory_mib <= 0 or
             args.max_cpu_load_1m <= 0):
         parser.error("resource thresholds must be positive")
@@ -267,6 +273,7 @@ def main() -> None:
              "sequence": sequence, "start_id": args.start_id,
              "post_first_guard": args.post_first_guard,
              "post_first_min_yaw_deg": args.post_first_min_yaw,
+             "guided_max_pulse_s": args.guided_max_pulse,
              "target_x": args.target_x,
              "trials": [], "preflights": []}
     for offset, mode in enumerate(sequence if args.run else sequence[:1]):
@@ -285,6 +292,7 @@ def main() -> None:
                 directory, mode, sys.executable,
                 post_first_guard=args.post_first_guard,
                 post_first_min_yaw=args.post_first_min_yaw,
+                guided_max_pulse=args.guided_max_pulse,
                 target_x=args.target_x,
                 preflight_report={"runner_sha256": batch["runner_sha256"],
                                   "preflight": check},
