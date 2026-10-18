@@ -63,7 +63,8 @@ def main() -> None:
     capture_tail_s = max(0.0, times[-1] - scored_times[-1])
     poster = package / "poster.jpg"
     poster_at = (min(6.0, render["duration_s"] - 1.0)
-                 if result["target_x"] < 27.4 and result["status"] != "x_target_reached" else
+                 if result["target_x"] <= 9.0 or
+                 (result["target_x"] < 27.4 and result["status"] != "x_target_reached") else
                  min(10.5, render["duration_s"] - 1.0)
                  if result["target_x"] < 27.4 else
                  min(20.0, render["duration_s"] / 2))

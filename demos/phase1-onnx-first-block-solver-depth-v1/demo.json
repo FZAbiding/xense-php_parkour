@@ -1,0 +1,20 @@
+{
+  "trial": "outputs/reproduction/official_benchmark/diagnostic_006_none",
+  "video": "demos/phase1-onnx-first-block-solver-depth-v1/demo.mp4",
+  "source": "recorded_qpos_same_trial_quaternion_safe_interpolation",
+  "fps": 30,
+  "size": [
+    1280,
+    720
+  ],
+  "frames": 310,
+  "duration_s": 10.333,
+  "sample_count": 415,
+  "sample_duration_s": 10.318,
+  "shadows_disabled": true,
+  "sha256": {
+    "video": "50018ca4892c2d86450b96e3bf1310c9003988773bda7dc88273e3c1205dacd8",
+    "qpos": "a03de724f37df1877f60add2ded85959ad46a293f161ef56fe59c2da238cea86",
+    "model": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "kind": "separate_depth_probe_not_fixed_protocol",
+  "trial": "outputs/reproduction/official_benchmark/diagnostic_008_none",
+  "steer": "none",
+  "target_x": 8.8,
+  "preflight": {
+    "checked_at_utc": "2026-10-18T09:44:42.443989+00:00",
+    "readings": [
+      {
+        "util_percent": 5,
+        "memory_used_mib": 3562,
+        "cpu_load_1m": 10.03
+      },
+      {
+        "util_percent": 7,
+        "memory_used_mib": 3562,
+        "cpu_load_1m": 9.39
+      },
+      {
+        "util_percent": 6,
+        "memory_used_mib": 3562,
+        "cpu_load_1m": 8.8
+      },
+      {
+        "util_percent": 5,
+        "memory_used_mib": 3562,
+        "cpu_load_1m": 8.25
+      },
+      {
+        "util_percent": 5,
+        "memory_used_mib": 3562,
+        "cpu_load_1m": 7.91
+      },
+      {
+        "util_percent": 5,
+        "memory_used_mib": 3562,
+        "cpu_load_1m": 7.44
+      },
+      {
+        "util_percent": 5,
+        "memory_used_mib": 3562,
+        "cpu_load_1m": 6.92
+      }
+    ],
+    "max_util_percent_exclusive": 50,
+    "max_memory_used_mib_exclusive": 10000,
+    "max_cpu_load_1m_exclusive": 10.0,
+    "ready": false
+  },
+  "probe_script_sha256": "c2f28f0414527ae94cf6b568c87d32051b52c6ff28e3fe19f348959568fb6e5a",
+  "stopped_reason": "shared_host_busy"
+}
