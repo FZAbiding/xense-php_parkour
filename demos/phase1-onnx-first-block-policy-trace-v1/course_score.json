@@ -1,0 +1,179 @@
+{
+  "trace": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/diagnostic_009_none/pelvis.csv",
+  "max_x_m": 8.802,
+  "blocks_cleared": 1,
+  "consecutive_cleared": 1,
+  "full_course_complete": false,
+  "blocks_mounted": 1,
+  "blocks_recovered_later": 0,
+  "blocks": [
+    {
+      "block": 1,
+      "height_m": 0.38,
+      "x_range_m": [
+        4.3,
+        5.7
+      ],
+      "status": "cleared",
+      "mounted_at_s": 5.65,
+      "first_exit_at_s": 7.87,
+      "first_exit_y_m": 0.756,
+      "recovered_later_at_s": null,
+      "cleared_at_s": 7.87
+    },
+    {
+      "block": 2,
+      "height_m": 0.38,
+      "x_range_m": [
+        9.4,
+        10.6
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 3,
+      "height_m": 0.76,
+      "x_range_m": [
+        14.34,
+        15.66
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 4,
+      "height_m": 0.76,
+      "x_range_m": [
+        19.43,
+        20.57
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 5,
+      "height_m": 0.38,
+      "x_range_m": [
+        24.18,
+        25.82
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 6,
+      "height_m": 0.38,
+      "x_range_m": [
+        29.3,
+        30.7
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 7,
+      "height_m": 0.76,
+      "x_range_m": [
+        34.35,
+        35.65
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 8,
+      "height_m": 0.76,
+      "x_range_m": [
+        39.4,
+        40.6
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 9,
+      "height_m": 0.38,
+      "x_range_m": [
+        44.21,
+        45.79
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 10,
+      "height_m": 0.38,
+      "x_range_m": [
+        49.26,
+        50.74
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 11,
+      "height_m": 0.76,
+      "x_range_m": [
+        54.39,
+        55.61
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    },
+    {
+      "block": 12,
+      "height_m": 0.76,
+      "x_range_m": [
+        59.39,
+        60.61
+      ],
+      "status": "not_reached",
+      "mounted_at_s": null,
+      "first_exit_at_s": null,
+      "first_exit_y_m": null,
+      "recovered_later_at_s": null,
+      "cleared_at_s": null
+    }
+  ]
+}

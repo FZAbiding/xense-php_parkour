@@ -312,7 +312,12 @@ def main() -> None:
         sim, _, handle = start_process(sim_cmd, env=env, log=args.output / "sim.log")
         outputs.append(handle)
         wait_log(args.output / "sim.log", "[DepthShmPlugin] created", sim, 60)
-        inf_cmd = [str(PYTHON), "src/holosoma_inference/holosoma_inference/run_policy.py",
+        policy_trace_dir = env.get("PHP_POLICY_TRACE_DIR")
+        if policy_trace_dir and Path(policy_trace_dir).resolve() != args.output.resolve():
+            raise ValueError("policy trace directory must match benchmark output")
+        inference_entry = (str(ROOT / "scripts/php_trace_policy.py") if policy_trace_dir else
+                           "src/holosoma_inference/holosoma_inference/run_policy.py")
+        inf_cmd = [str(PYTHON), inference_entry,
                    "inference:g1-wbt-distillation-d435i", "--task.interface", "lo",
                    "--task.model-path", repr([str(path) for path in models])]
         inference, master, handle = start_process(inf_cmd, env=env,

@@ -1,0 +1,81 @@
+/home/xense/miniforge3/envs/php/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2346: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/home/xense/miniforge3/envs/php/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2346: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+2026-10-18 17:51:35.159 | INFO     | holosoma_inference.run_policy:run_policy:104 - 🚀 Starting Policy with Tyro configuration...
+2026-10-18 17:51:35.160 | INFO     | holosoma_inference.run_policy:run_policy:105 - 🤖 Robot: g1_29dof
+2026-10-18 17:51:35.160 | INFO     | holosoma_inference.run_policy:run_policy:106 - 📋 Observation groups: ['actor_obs', 'depth_obs']
+2026-10-18 17:51:35.160 | INFO     | holosoma_inference.run_policy:run_policy:107 - ⚙️ RL Rate: 50.0 Hz
+2026-10-18 17:51:35.160 | INFO     | holosoma_inference.run_policy:run_policy:108 - 📁 Model path: ['/home/xense/src/php_parkour/outputs/reproduction/student/depth_backbone.onnx', '/home/xense/src/php_parkour/outputs/reproduction/student/student.onnx']
+2026-10-18 17:51:35.163 | INFO     | holosoma_inference.run_policy:run_policy:119 - Using DepthDistillationPolicy
+1792317095.167014 [0]     python: selected interface "lo" is not multicast-capable: disabling multicast
+UnitreeInterface initialized: G1-HG (29 motors, HG messages) on interface: lo
+[DEBUG] LowCommandWriter - No motor command available!
+2026-10-18 17:51:35.574 | INFO     | holosoma_inference.policies.depth_distillation:_load_depth_backbone:251 - [DepthDistillation] backbone: input=[1, 58, 87] -> latent_dim=32, frames=1
+2026-10-18 17:51:35.614 | INFO     | holosoma_inference.policies.depth_distillation:_load_student_model:291 - [DepthDistillation] action_scale from metadata: [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1.]
+2026-10-18 17:51:35.615 | INFO     | holosoma_inference.policies.depth_distillation:_load_student_model:303 - [DepthDistillation] student: inputs=['obs', 'time_step']
+2026-10-18 17:51:35.615 | INFO     | holosoma_inference.policies.base:_resolve_control_gains:469 - Using KP/KD from config (override)
+2026-10-18 17:51:35.656 | INFO     | holosoma_inference.inputs.impl.keyboard:create:279 - Keyboard direction keys are hold-to-move (release returns to stand).
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.sensors.depth_shm:_adopt:117 - [DepthShmSensor] attached to 'depth_img_shm' shape=(1, 1, 58, 87)
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:run_policy:122 - ✅ Policy initialized successfully!
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:33 - ================================================================================
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:34 - 🎮 POLICY CONTROLS
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:35 - ================================================================================
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:36 - 
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:58 - ⌨️  Using KEYBOARD control mode
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:59 - 
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:60 - ⚠️  IMPORTANT: Make sure THIS TERMINAL is active to receive keyboard input!
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:61 - ⚠️  All commands below must be entered in THIS terminal window.
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:62 - 
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:63 - General Controls:
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:64 -   ]  - Start the policy
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:65 -   o  - Stop the policy
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:66 -   i  - Set robot to default pose
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:73 - 
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:74 - Locomotion Controls:
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:75 -   =          - Switch walking/standing mode
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:76 -   w/s        - Increase/decrease forward velocity
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:77 -   a/d        - Increase/decrease lateral velocity
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:78 -   q/e        - Increase/decrease angular velocity (turn left/right)
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:79 -   z          - Set all velocities to zero
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:81 - 
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:82 - 🎬 MuJoCo Simulator Controls (⚠️  ONLY in MuJoCo window, NOT this terminal!):
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:83 -   7/8        - Decrease/increase elastic band length
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:84 -   9          - Toggle elastic band enable/disable
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:85 -   BACKSPACE  - Reset simulation
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:95 - 
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:96 - ================================================================================
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:97 - 👆 Press the appropriate button/key to begin!
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:98 - ================================================================================
+2026-10-18 17:51:35.662 | INFO     | holosoma_inference.run_policy:_print_control_guide:99 - 
+2026-10-18 17:51:42.503 | INFO     | holosoma_inference.policies.base:_handle_start_policy:846 - Using policy actions
+2026-10-18 17:51:42.503 | INFO     | holosoma_inference.policies.depth_distillation:_handle_start_policy:647 - Depth distillation policy started
+2026-10-18 17:51:42.503 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-18 17:51:42.666 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 49.93 | read_state: 0.054±0.036ms | preprocessing: 0.023±0.013ms | inference: 0.930±0.155ms | postprocessing: 0.005±0.003ms | action_pub: 0.050±0.016ms | total: 0.371±0.357ms
+2026-10-18 17:51:42.803 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 1 (forward)
+2026-10-18 17:51:42.803 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-18 17:51:43.668 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.31 | read_state: 0.041±0.006ms | preprocessing: 0.000±0.000ms | inference: 1.573±1.605ms | postprocessing: 0.010±0.011ms | action_pub: 0.041±0.005ms | total: 1.816±1.681ms
+2026-10-18 17:51:44.667 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.44 | read_state: 0.039±0.006ms | preprocessing: 0.000±0.000ms | inference: 1.990±2.590ms | postprocessing: 0.009±0.002ms | action_pub: 0.040±0.005ms | total: 2.140±2.600ms
+2026-10-18 17:51:45.664 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 51.49 | read_state: 0.046±0.008ms | preprocessing: 0.001±0.001ms | inference: 1.433±1.705ms | postprocessing: 0.010±0.002ms | action_pub: 0.045±0.006ms | total: 1.599±1.711ms
+2026-10-18 17:51:46.669 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.93 | read_state: 0.051±0.007ms | preprocessing: 0.000±0.000ms | inference: 2.112±2.339ms | postprocessing: 0.015±0.022ms | action_pub: 0.051±0.007ms | total: 2.297±2.338ms
+2026-10-18 17:51:47.678 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.82 | read_state: 0.049±0.007ms | preprocessing: 0.000±0.000ms | inference: 1.944±2.535ms | postprocessing: 0.012±0.010ms | action_pub: 0.048±0.004ms | total: 2.123±2.539ms
+2026-10-18 17:51:48.669 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.53 | read_state: 0.046±0.008ms | preprocessing: 0.000±0.000ms | inference: 2.216±3.479ms | postprocessing: 0.012±0.008ms | action_pub: 0.110±0.425ms | total: 2.450±3.495ms
+2026-10-18 17:51:49.665 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.85 | read_state: 0.047±0.014ms | preprocessing: 0.000±0.000ms | inference: 2.030±2.418ms | postprocessing: 0.011±0.002ms | action_pub: 0.050±0.015ms | total: 2.202±2.423ms
+2026-10-18 17:51:50.672 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.56 | read_state: 0.048±0.008ms | preprocessing: 0.000±0.000ms | inference: 2.089±2.145ms | postprocessing: 0.012±0.002ms | action_pub: 0.049±0.005ms | total: 2.264±2.150ms
+2026-10-18 17:51:51.666 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 51.20 | read_state: 0.051±0.008ms | preprocessing: 0.000±0.000ms | inference: 2.061±2.470ms | postprocessing: 0.011±0.001ms | action_pub: 0.144±0.667ms | total: 2.335±2.519ms
+2026-10-18 17:51:52.669 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.80 | read_state: 0.053±0.009ms | preprocessing: 0.000±0.000ms | inference: 2.035±2.440ms | postprocessing: 0.011±0.001ms | action_pub: 0.086±0.264ms | total: 2.253±2.448ms
+2026-10-18 17:51:53.548 | INFO     | holosoma_inference.policies.depth_distillation:set_velocity_command:535 - Velocity command -> index 0 (stand)
+2026-10-18 17:51:53.548 | INFO     | holosoma_inference.policies.depth_distillation:_print_control_status:722 - Active policy: student.onnx
+2026-10-18 17:51:53.675 | INFO     | holosoma_inference.policies.base:run:905 - RL FPS: 50.43 | read_state: 0.058±0.020ms | preprocessing: 0.000±0.000ms | inference: 2.231±2.854ms | postprocessing: 0.011±0.002ms | action_pub: 0.072±0.096ms | total: 2.452±2.861ms
+2026-10-18 17:51:53.923 | INFO     | holosoma_inference.run_policy:run_policy:129 - ✅ Policy execution completed!
+Command: stand (idx=0) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: forward (idx=1) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+Command: stand (idx=0) | Speed: LOW | Mode: policy
+💡 Keys: w/s/a/d/q/e (direction) | z (stand) | = (speed mode) | ] start | o damp | i stiff
+/home/xense/miniforge3/envs/php/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/home/xense/miniforge3/envs/php/lib/python3.11/multiprocessing/resource_tracker.py:267: UserWarning: resource_tracker: '/depth_img_shm': [Errno 2] No such file or directory: '/depth_img_shm'
+  warnings.warn('resource_tracker: %r: %s' % (name, e))

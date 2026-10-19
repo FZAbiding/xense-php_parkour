@@ -12,10 +12,13 @@
 | [0.30 秒脉冲探索 v1](demos/phase1-onnx-postfirst-guard8-pulse030-v1/demo.mp4) · [交互包](demos/phase1-onnx-postfirst-guard8-pulse030-v1/README.md) | 059 | x≈6.31 m 实际发出 1 次 0.30 秒 `d` | 第一块尾端此前已偏航约 +75°，最终离开路线，第 2 块未到达；质量 `nominal` |
 | [0.30 秒上限重复试验](demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/demo.mp4) · [交互包](demos/phase1-onnx-postfirst-guard8-cap030-repeat-v1/README.md) | 060 | 上限 0.30 秒，但实际早期只发出 1 次 **0.16 秒** `d` | 第二块脚部接触后出块 y=+1.168 m，超限 0.168 m；质量 `nominal` |
 | [第一块求解器/深度诊断](demos/phase1-onnx-first-block-solver-depth-v1/demo.mp4) · [交互包](demos/phase1-onnx-first-block-solver-depth-v1/README.md) | 独立诊断 006 | W-only，无额外方向脉冲；旁路采集真实接触力、全身速度和深度 | x=8.8 m 主动停止，第一块合格；质量 `nominal`，**仅诊断第一块** |
+| [第一块策略 tick 诊断](demos/phase1-onnx-first-block-policy-trace-v1/demo.mp4) · [交互包](demos/phase1-onnx-first-block-policy-trace-v1/README.md) | 独立诊断 009 | W-only，额外记录官方 ONNX 的 29 维动作和策略实际读取的深度数组指纹 | x=8.8 m 主动停止，第一块合格；质量 `nominal`，**仍未重现 059 的急转** |
 
 五条都采用 x=13.8 m 的短程终点；056–058 和 060 到达该点后主动停止，059 则提前离开路线。它们不能写成完整 12 块路线的 1/12 或 2/12 成绩，也不能从未配对轨迹推断外部纠偏的因果收益。视频都由同一次评测保存的模型和关节状态生成 1280×720、30 fps 的实体仿真画面；压缩状态、原始窗口录像、评分、预检和哈希清单留在各自交互包。状态录制通常比评分轨迹多约 0.5 秒收尾，版本清单标出该段，收尾不计成绩。[短程续行报告](reports/phase1_short_guard_followup_2026-10-17.md)同时列出无效试次、足部接触重建和纠偏前已出现的横向分叉。059/060 的配置上限相同，但实际早期输入时长不同，不能合并声称“0.30 秒脉冲做了两次”。
 
 独立诊断 006 的终点更早，为 x=8.8 m；[实时接触力与时序报告](reports/phase1_first_block_live_diagnostic_2026-10-18.md)说明为何它是一条正常的第一块测量对照，而不是第二块结果。它的视频与交互包额外包含深度、关节速度和原求解器接触力采样；005、007 起步拒绝，008 资源预检拒绝，因此三者没有可演示的步行轨迹。
+
+独立诊断 009 同样只到 x=8.8 m；[逐策略 tick 报告](reports/phase1_policy_tick_diagnostic_2026-10-19.md)进一步给出每次策略实际读取的深度数组指纹与两种关节顺序的动作。571/571 个 tick 均能唯一匹配到同次旁路帧的生产序号，第一块 66 个 tick 全为 LOW forward；这验证了诊断链，尚未抓到异常本身。009 的视频和交互包同样保留原始动作/深度数据，不属于固定协议成绩分布。
 
 本轮共享 GPU 持续高负载，成片改用独立 `:98` Xvfb 上的 `MUJOCO_GL=glfw`、`LIBGL_ALWAYS_SOFTWARE=1`、`GALLIUM_DRIVER=llvmpipe`、`LP_NUM_THREADS=2` 和 `nice -n 15`；1 秒、31 帧的 1280×720 探针耗时约 3.92 秒。逐帧目视发现该软件驱动的阴影贴图会在远处地面和台阶产生条纹；将回放模型的 `light_castshadow` 关闭后，单帧检查条纹消失，因此本轮成片统一传入 `--disable-shadows`。软件渲染与关闭投影只改变画面，输入仍是原试次的 `replay_model.mjb` 和 `qpos.csv`，源模型哈希保持不变。它没有重新运行策略，也不会提升物理仿真或策略频率；观看完整视频和启动可拖动缩放的交互回放仍按各版本 README 操作。
 

@@ -1,0 +1,557 @@
+{
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/diagnostic_009_none",
+  "ticks_total": 571,
+  "ticks_after_walk_start": 556,
+  "ticks_on_first_block": 66,
+  "depth_hash_matched_ticks": 571,
+  "depth_hash_unmatched_ticks": 0,
+  "depth_sequence_ambiguous_ticks": 0,
+  "first_block_yaw_range_deg": [
+    8.49,
+    25.27
+  ],
+  "first_block_action_l2_range": [
+    1.0684,
+    2.7426
+  ],
+  "first_block_action_change_l2_peak": 1.1439,
+  "first_block_command_indices": [
+    1
+  ],
+  "limits": "Hash matches exact newest depth-array bytes but not camera exposure time. The sequence is unknown if identical bytes occur at multiple sequence numbers. Action magnitude alone does not establish a cause of yaw.",
+  "source_sha256": {
+    "policy_ticks": "bb6578b5865cf17f8368a4dc32e5c0e2b867027f72e1a81d3d2d2db5ca6e5175",
+    "depth_npz": "a127c70f76e800afcb5d55ecebf9fa9d8fee6f9ded6cab933640e5e73c385f43",
+    "qpos": "5c4f325284856f4852785b1b24371ed90e2d978da8445c099634b387ee76e543"
+  },
+  "first_block_ticks": [
+    {
+      "tick": 289,
+      "walk_wall_s": 5.495854482,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 138,
+      "depth_last_seen_heartbeat_seq_hint": 138,
+      "depth_newest_read_sha256": "571d383a0442cde667fe520c8d72982d7990ea114a751b205d292a23c4f60408"
+    },
+    {
+      "tick": 290,
+      "walk_wall_s": 5.511647057,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 138,
+      "depth_last_seen_heartbeat_seq_hint": 138,
+      "depth_newest_read_sha256": "571d383a0442cde667fe520c8d72982d7990ea114a751b205d292a23c4f60408"
+    },
+    {
+      "tick": 291,
+      "walk_wall_s": 5.541833263,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 138,
+      "depth_last_seen_heartbeat_seq_hint": 138,
+      "depth_newest_read_sha256": "571d383a0442cde667fe520c8d72982d7990ea114a751b205d292a23c4f60408"
+    },
+    {
+      "tick": 292,
+      "walk_wall_s": 5.54950617,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 138,
+      "depth_last_seen_heartbeat_seq_hint": 138,
+      "depth_newest_read_sha256": "571d383a0442cde667fe520c8d72982d7990ea114a751b205d292a23c4f60408"
+    },
+    {
+      "tick": 293,
+      "walk_wall_s": 5.569589859,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 138,
+      "depth_last_seen_heartbeat_seq_hint": 138,
+      "depth_newest_read_sha256": "571d383a0442cde667fe520c8d72982d7990ea114a751b205d292a23c4f60408"
+    },
+    {
+      "tick": 294,
+      "walk_wall_s": 5.603632776,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 139,
+      "depth_last_seen_heartbeat_seq_hint": 139,
+      "depth_newest_read_sha256": "faa9b19a856aa3d84051f4a72ee1318aa6494ba1be4e1c4ffc499cb7a1d6aebd"
+    },
+    {
+      "tick": 295,
+      "walk_wall_s": 5.61075048,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 139,
+      "depth_last_seen_heartbeat_seq_hint": 139,
+      "depth_newest_read_sha256": "faa9b19a856aa3d84051f4a72ee1318aa6494ba1be4e1c4ffc499cb7a1d6aebd"
+    },
+    {
+      "tick": 296,
+      "walk_wall_s": 5.632596886,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 139,
+      "depth_last_seen_heartbeat_seq_hint": 139,
+      "depth_newest_read_sha256": "faa9b19a856aa3d84051f4a72ee1318aa6494ba1be4e1c4ffc499cb7a1d6aebd"
+    },
+    {
+      "tick": 297,
+      "walk_wall_s": 5.652648813,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 139,
+      "depth_last_seen_heartbeat_seq_hint": 139,
+      "depth_newest_read_sha256": "faa9b19a856aa3d84051f4a72ee1318aa6494ba1be4e1c4ffc499cb7a1d6aebd"
+    },
+    {
+      "tick": 298,
+      "walk_wall_s": 5.672856816,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 139,
+      "depth_last_seen_heartbeat_seq_hint": 139,
+      "depth_newest_read_sha256": "faa9b19a856aa3d84051f4a72ee1318aa6494ba1be4e1c4ffc499cb7a1d6aebd"
+    },
+    {
+      "tick": 299,
+      "walk_wall_s": 5.695509616,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 140,
+      "depth_last_seen_heartbeat_seq_hint": 140,
+      "depth_newest_read_sha256": "b63478161805a99069b74809e08548b509d6ca57cce1ad818024cd3309f73761"
+    },
+    {
+      "tick": 300,
+      "walk_wall_s": 5.71383867,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 140,
+      "depth_last_seen_heartbeat_seq_hint": 140,
+      "depth_newest_read_sha256": "b63478161805a99069b74809e08548b509d6ca57cce1ad818024cd3309f73761"
+    },
+    {
+      "tick": 301,
+      "walk_wall_s": 5.733722597,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 140,
+      "depth_last_seen_heartbeat_seq_hint": 140,
+      "depth_newest_read_sha256": "b63478161805a99069b74809e08548b509d6ca57cce1ad818024cd3309f73761"
+    },
+    {
+      "tick": 302,
+      "walk_wall_s": 5.75648917,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 140,
+      "depth_last_seen_heartbeat_seq_hint": 140,
+      "depth_newest_read_sha256": "b63478161805a99069b74809e08548b509d6ca57cce1ad818024cd3309f73761"
+    },
+    {
+      "tick": 303,
+      "walk_wall_s": 5.770712774,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 140,
+      "depth_last_seen_heartbeat_seq_hint": 140,
+      "depth_newest_read_sha256": "b63478161805a99069b74809e08548b509d6ca57cce1ad818024cd3309f73761"
+    },
+    {
+      "tick": 304,
+      "walk_wall_s": 5.795605819,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 141,
+      "depth_last_seen_heartbeat_seq_hint": 141,
+      "depth_newest_read_sha256": "5aea607c2975bf0c3a466927d7b2b84f134d7581e2c22e270dc7a95ff6f6e021"
+    },
+    {
+      "tick": 305,
+      "walk_wall_s": 5.810720682,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 141,
+      "depth_last_seen_heartbeat_seq_hint": 141,
+      "depth_newest_read_sha256": "5aea607c2975bf0c3a466927d7b2b84f134d7581e2c22e270dc7a95ff6f6e021"
+    },
+    {
+      "tick": 306,
+      "walk_wall_s": 5.845129845,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 141,
+      "depth_last_seen_heartbeat_seq_hint": 141,
+      "depth_newest_read_sha256": "5aea607c2975bf0c3a466927d7b2b84f134d7581e2c22e270dc7a95ff6f6e021"
+    },
+    {
+      "tick": 307,
+      "walk_wall_s": 5.854979382,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 141,
+      "depth_last_seen_heartbeat_seq_hint": 141,
+      "depth_newest_read_sha256": "5aea607c2975bf0c3a466927d7b2b84f134d7581e2c22e270dc7a95ff6f6e021"
+    },
+    {
+      "tick": 308,
+      "walk_wall_s": 5.874624024,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 141,
+      "depth_last_seen_heartbeat_seq_hint": 141,
+      "depth_newest_read_sha256": "5aea607c2975bf0c3a466927d7b2b84f134d7581e2c22e270dc7a95ff6f6e021"
+    },
+    {
+      "tick": 309,
+      "walk_wall_s": 5.899660504,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 142,
+      "depth_last_seen_heartbeat_seq_hint": 142,
+      "depth_newest_read_sha256": "8838a16b1861bc5ee5555a4b4baf7585ec1f4e2e8613b1e3bf3629a343ba24ac"
+    },
+    {
+      "tick": 310,
+      "walk_wall_s": 5.913625826,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 142,
+      "depth_last_seen_heartbeat_seq_hint": 142,
+      "depth_newest_read_sha256": "8838a16b1861bc5ee5555a4b4baf7585ec1f4e2e8613b1e3bf3629a343ba24ac"
+    },
+    {
+      "tick": 311,
+      "walk_wall_s": 5.933492452,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 142,
+      "depth_last_seen_heartbeat_seq_hint": 142,
+      "depth_newest_read_sha256": "8838a16b1861bc5ee5555a4b4baf7585ec1f4e2e8613b1e3bf3629a343ba24ac"
+    },
+    {
+      "tick": 312,
+      "walk_wall_s": 5.953791804,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 142,
+      "depth_last_seen_heartbeat_seq_hint": 142,
+      "depth_newest_read_sha256": "8838a16b1861bc5ee5555a4b4baf7585ec1f4e2e8613b1e3bf3629a343ba24ac"
+    },
+    {
+      "tick": 313,
+      "walk_wall_s": 5.973810122,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 142,
+      "depth_last_seen_heartbeat_seq_hint": 142,
+      "depth_newest_read_sha256": "8838a16b1861bc5ee5555a4b4baf7585ec1f4e2e8613b1e3bf3629a343ba24ac"
+    },
+    {
+      "tick": 314,
+      "walk_wall_s": 5.993726631,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 143,
+      "depth_last_seen_heartbeat_seq_hint": 143,
+      "depth_newest_read_sha256": "4576c7c6a5cc7415b754f01dd9556fac77b4f8e0cf889d2905d8b460b2d379fa"
+    },
+    {
+      "tick": 315,
+      "walk_wall_s": 6.013593612,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 143,
+      "depth_last_seen_heartbeat_seq_hint": 143,
+      "depth_newest_read_sha256": "4576c7c6a5cc7415b754f01dd9556fac77b4f8e0cf889d2905d8b460b2d379fa"
+    },
+    {
+      "tick": 316,
+      "walk_wall_s": 6.033733234,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 143,
+      "depth_last_seen_heartbeat_seq_hint": 143,
+      "depth_newest_read_sha256": "4576c7c6a5cc7415b754f01dd9556fac77b4f8e0cf889d2905d8b460b2d379fa"
+    },
+    {
+      "tick": 317,
+      "walk_wall_s": 6.065933298,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 143,
+      "depth_last_seen_heartbeat_seq_hint": 143,
+      "depth_newest_read_sha256": "4576c7c6a5cc7415b754f01dd9556fac77b4f8e0cf889d2905d8b460b2d379fa"
+    },
+    {
+      "tick": 318,
+      "walk_wall_s": 6.07376392,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 143,
+      "depth_last_seen_heartbeat_seq_hint": 143,
+      "depth_newest_read_sha256": "4576c7c6a5cc7415b754f01dd9556fac77b4f8e0cf889d2905d8b460b2d379fa"
+    },
+    {
+      "tick": 319,
+      "walk_wall_s": 6.092806599,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 144,
+      "depth_last_seen_heartbeat_seq_hint": 144,
+      "depth_newest_read_sha256": "6a031121d1471070b065284752737c242687660978f13f8c736e0bb39199317b"
+    },
+    {
+      "tick": 320,
+      "walk_wall_s": 6.112655347,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 144,
+      "depth_last_seen_heartbeat_seq_hint": 144,
+      "depth_newest_read_sha256": "6a031121d1471070b065284752737c242687660978f13f8c736e0bb39199317b"
+    },
+    {
+      "tick": 321,
+      "walk_wall_s": 6.134427802,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 144,
+      "depth_last_seen_heartbeat_seq_hint": 144,
+      "depth_newest_read_sha256": "6a031121d1471070b065284752737c242687660978f13f8c736e0bb39199317b"
+    },
+    {
+      "tick": 322,
+      "walk_wall_s": 6.154682943,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 144,
+      "depth_last_seen_heartbeat_seq_hint": 144,
+      "depth_newest_read_sha256": "6a031121d1471070b065284752737c242687660978f13f8c736e0bb39199317b"
+    },
+    {
+      "tick": 323,
+      "walk_wall_s": 6.17141526,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 144,
+      "depth_last_seen_heartbeat_seq_hint": 144,
+      "depth_newest_read_sha256": "6a031121d1471070b065284752737c242687660978f13f8c736e0bb39199317b"
+    },
+    {
+      "tick": 324,
+      "walk_wall_s": 6.190767331,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 145,
+      "depth_last_seen_heartbeat_seq_hint": 145,
+      "depth_newest_read_sha256": "2cdc624350bdbd9327db9bf9041ea98068447a28480289d545de071b2724d849"
+    },
+    {
+      "tick": 325,
+      "walk_wall_s": 6.216823728,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 145,
+      "depth_last_seen_heartbeat_seq_hint": 145,
+      "depth_newest_read_sha256": "2cdc624350bdbd9327db9bf9041ea98068447a28480289d545de071b2724d849"
+    },
+    {
+      "tick": 326,
+      "walk_wall_s": 6.232312847,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 145,
+      "depth_last_seen_heartbeat_seq_hint": 145,
+      "depth_newest_read_sha256": "2cdc624350bdbd9327db9bf9041ea98068447a28480289d545de071b2724d849"
+    },
+    {
+      "tick": 327,
+      "walk_wall_s": 6.256079248,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 145,
+      "depth_last_seen_heartbeat_seq_hint": 145,
+      "depth_newest_read_sha256": "2cdc624350bdbd9327db9bf9041ea98068447a28480289d545de071b2724d849"
+    },
+    {
+      "tick": 328,
+      "walk_wall_s": 6.272632213,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 145,
+      "depth_last_seen_heartbeat_seq_hint": 145,
+      "depth_newest_read_sha256": "2cdc624350bdbd9327db9bf9041ea98068447a28480289d545de071b2724d849"
+    },
+    {
+      "tick": 329,
+      "walk_wall_s": 6.291644654,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 146,
+      "depth_last_seen_heartbeat_seq_hint": 146,
+      "depth_newest_read_sha256": "03ca72ef897c622969a83f1a0c711fa24be99f9e32cb1afb19956b20c3c1a5b2"
+    },
+    {
+      "tick": 330,
+      "walk_wall_s": 6.310945197,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 146,
+      "depth_last_seen_heartbeat_seq_hint": 146,
+      "depth_newest_read_sha256": "03ca72ef897c622969a83f1a0c711fa24be99f9e32cb1afb19956b20c3c1a5b2"
+    },
+    {
+      "tick": 331,
+      "walk_wall_s": 6.334102029,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 146,
+      "depth_last_seen_heartbeat_seq_hint": 146,
+      "depth_newest_read_sha256": "03ca72ef897c622969a83f1a0c711fa24be99f9e32cb1afb19956b20c3c1a5b2"
+    },
+    {
+      "tick": 332,
+      "walk_wall_s": 6.355782588,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 146,
+      "depth_last_seen_heartbeat_seq_hint": 146,
+      "depth_newest_read_sha256": "03ca72ef897c622969a83f1a0c711fa24be99f9e32cb1afb19956b20c3c1a5b2"
+    },
+    {
+      "tick": 333,
+      "walk_wall_s": 6.372579847,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 146,
+      "depth_last_seen_heartbeat_seq_hint": 146,
+      "depth_newest_read_sha256": "03ca72ef897c622969a83f1a0c711fa24be99f9e32cb1afb19956b20c3c1a5b2"
+    },
+    {
+      "tick": 334,
+      "walk_wall_s": 6.392579101,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 147,
+      "depth_last_seen_heartbeat_seq_hint": 147,
+      "depth_newest_read_sha256": "0d679c26460d5160b00bf4c6445c01c4e477df8b77eb472f57cd4e46b403114f"
+    },
+    {
+      "tick": 335,
+      "walk_wall_s": 6.41488427,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 147,
+      "depth_last_seen_heartbeat_seq_hint": 147,
+      "depth_newest_read_sha256": "0d679c26460d5160b00bf4c6445c01c4e477df8b77eb472f57cd4e46b403114f"
+    },
+    {
+      "tick": 336,
+      "walk_wall_s": 6.432735151,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 147,
+      "depth_last_seen_heartbeat_seq_hint": 147,
+      "depth_newest_read_sha256": "0d679c26460d5160b00bf4c6445c01c4e477df8b77eb472f57cd4e46b403114f"
+    },
+    {
+      "tick": 337,
+      "walk_wall_s": 6.453533948,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 147,
+      "depth_last_seen_heartbeat_seq_hint": 147,
+      "depth_newest_read_sha256": "0d679c26460d5160b00bf4c6445c01c4e477df8b77eb472f57cd4e46b403114f"
+    },
+    {
+      "tick": 338,
+      "walk_wall_s": 6.473782239,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 147,
+      "depth_last_seen_heartbeat_seq_hint": 147,
+      "depth_newest_read_sha256": "0d679c26460d5160b00bf4c6445c01c4e477df8b77eb472f57cd4e46b403114f"
+    },
+    {
+      "tick": 339,
+      "walk_wall_s": 6.501238964,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 148,
+      "depth_last_seen_heartbeat_seq_hint": 148,
+      "depth_newest_read_sha256": "4118e328cc2755628233c1a44786d32bab3c972ac1451fc29d4fb534aabfb5e6"
+    },
+    {
+      "tick": 340,
+      "walk_wall_s": 6.513681815,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 148,
+      "depth_last_seen_heartbeat_seq_hint": 148,
+      "depth_newest_read_sha256": "4118e328cc2755628233c1a44786d32bab3c972ac1451fc29d4fb534aabfb5e6"
+    },
+    {
+      "tick": 341,
+      "walk_wall_s": 6.5316481,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 148,
+      "depth_last_seen_heartbeat_seq_hint": 148,
+      "depth_newest_read_sha256": "4118e328cc2755628233c1a44786d32bab3c972ac1451fc29d4fb534aabfb5e6"
+    },
+    {
+      "tick": 342,
+      "walk_wall_s": 6.562957131,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 148,
+      "depth_last_seen_heartbeat_seq_hint": 148,
+      "depth_newest_read_sha256": "4118e328cc2755628233c1a44786d32bab3c972ac1451fc29d4fb534aabfb5e6"
+    },
+    {
+      "tick": 343,
+      "walk_wall_s": 6.575399701,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 148,
+      "depth_last_seen_heartbeat_seq_hint": 148,
+      "depth_newest_read_sha256": "4118e328cc2755628233c1a44786d32bab3c972ac1451fc29d4fb534aabfb5e6"
+    },
+    {
+      "tick": 344,
+      "walk_wall_s": 6.593827318,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 149,
+      "depth_last_seen_heartbeat_seq_hint": 149,
+      "depth_newest_read_sha256": "887ade0af20acc5471342ea3c3f7ded89adbedea939887f6b02b33228e438658"
+    },
+    {
+      "tick": 345,
+      "walk_wall_s": 6.618612259,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 149,
+      "depth_last_seen_heartbeat_seq_hint": 149,
+      "depth_newest_read_sha256": "887ade0af20acc5471342ea3c3f7ded89adbedea939887f6b02b33228e438658"
+    },
+    {
+      "tick": 346,
+      "walk_wall_s": 6.63368395,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 149,
+      "depth_last_seen_heartbeat_seq_hint": 149,
+      "depth_newest_read_sha256": "887ade0af20acc5471342ea3c3f7ded89adbedea939887f6b02b33228e438658"
+    },
+    {
+      "tick": 347,
+      "walk_wall_s": 6.655654347,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 149,
+      "depth_last_seen_heartbeat_seq_hint": 149,
+      "depth_newest_read_sha256": "887ade0af20acc5471342ea3c3f7ded89adbedea939887f6b02b33228e438658"
+    },
+    {
+      "tick": 348,
+      "walk_wall_s": 6.676036541,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 149,
+      "depth_last_seen_heartbeat_seq_hint": 149,
+      "depth_newest_read_sha256": "887ade0af20acc5471342ea3c3f7ded89adbedea939887f6b02b33228e438658"
+    },
+    {
+      "tick": 349,
+      "walk_wall_s": 6.69358312,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 150,
+      "depth_last_seen_heartbeat_seq_hint": 150,
+      "depth_newest_read_sha256": "47c450d5a3f234ac1906ea2feecc570e6ab2c6179976b2d5b8b6b446940ca599"
+    },
+    {
+      "tick": 350,
+      "walk_wall_s": 6.711871167,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 150,
+      "depth_last_seen_heartbeat_seq_hint": 150,
+      "depth_newest_read_sha256": "47c450d5a3f234ac1906ea2feecc570e6ab2c6179976b2d5b8b6b446940ca599"
+    },
+    {
+      "tick": 351,
+      "walk_wall_s": 6.733780326,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 150,
+      "depth_last_seen_heartbeat_seq_hint": 150,
+      "depth_newest_read_sha256": "47c450d5a3f234ac1906ea2feecc570e6ab2c6179976b2d5b8b6b446940ca599"
+    },
+    {
+      "tick": 352,
+      "walk_wall_s": 6.751631976,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 150,
+      "depth_last_seen_heartbeat_seq_hint": 150,
+      "depth_newest_read_sha256": "47c450d5a3f234ac1906ea2feecc570e6ab2c6179976b2d5b8b6b446940ca599"
+    },
+    {
+      "tick": 353,
+      "walk_wall_s": 6.77656985,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 150,
+      "depth_last_seen_heartbeat_seq_hint": 150,
+      "depth_newest_read_sha256": "47c450d5a3f234ac1906ea2feecc570e6ab2c6179976b2d5b8b6b446940ca599"
+    },
+    {
+      "tick": 354,
+      "walk_wall_s": 6.790702768,
+      "velocity_command_idx": 1,
+      "depth_matched_seq": 151,
+      "depth_last_seen_heartbeat_seq_hint": 151,
+      "depth_newest_read_sha256": "b295898bdfff56e19776b0e5e349aa89a61fb57ccb655f395256ad52e284bbe7"
+    }
+  ]
+}

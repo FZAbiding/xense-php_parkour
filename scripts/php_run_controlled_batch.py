@@ -92,9 +92,11 @@ def run_trial(directory: Path, steer: str, python: str,
                                   str(post_first_min_yaw)])
     benchmark_env = os.environ.copy()
     benchmark_env.pop("PHP_DIAGNOSTIC_TRIAL_DIR", None)
+    benchmark_env.pop("PHP_POLICY_TRACE_DIR", None)
     benchmark_env.pop("PHP_STARTUP_TRACE", None)
     if depth_diagnostic:
         benchmark_env["PHP_DIAGNOSTIC_TRIAL_DIR"] = str(directory.resolve())
+        benchmark_env["PHP_POLICY_TRACE_DIR"] = str(directory.resolve())
         benchmark_env["PHP_STARTUP_TRACE"] = "1"
     benchmark_exit = None
     recorder_exit = None
@@ -206,18 +208,28 @@ def run_trial(directory: Path, steer: str, python: str,
         qvel = directory / "qvel.csv"
         contacts = directory / "solver_contacts.jsonl"
         qpos = directory / "qpos.csv"
-        if not all(path.is_file() for path in (qpos, qvel, contacts)):
-            record["error"] = "diagnostic state or solver-contact trace missing"
+        ticks = directory / "policy_ticks.jsonl"
+        if not all(path.is_file() for path in (qpos, qvel, contacts, ticks)):
+            record["error"] = "diagnostic state, contact, or policy-tick trace missing"
             return record
         with qpos.open() as qpos_stream, qvel.open() as qvel_stream, \
-                contacts.open() as contact_stream:
+                contacts.open() as contact_stream, ticks.open() as tick_stream:
             qpos_rows = sum(1 for _ in qpos_stream) - 1
             qvel_rows = sum(1 for _ in qvel_stream) - 1
             contact_rows = sum(1 for _ in contact_stream)
+            tick_rows = [json.loads(line) for line in tick_stream]
         record["diagnostic_samples"] = {
-            "qpos": qpos_rows, "qvel": qvel_rows, "solver_contacts": contact_rows}
+            "qpos": qpos_rows, "qvel": qvel_rows,
+            "solver_contacts": contact_rows, "policy_ticks": len(tick_rows)}
         if qpos_rows < 1 or qpos_rows != qvel_rows or qpos_rows != contact_rows:
             record["error"] = "diagnostic traces have mismatched sample counts"
+            return record
+        if (not tick_rows or
+                any(row["tick"] != i or not row["depth_newest_read_sha256"] or
+                    len(row["action_model_order"]) != 29 or
+                    len(row["action_scaled_robot_order"]) != 29
+                    for i, row in enumerate(tick_rows))):
+            record["error"] = "policy-tick trace incomplete or malformed"
             return record
     if depth_diagnostic and (diagnostic_exit != 0 or
                              record.get("depth_diagnostic", {}).get("status") != "complete"):

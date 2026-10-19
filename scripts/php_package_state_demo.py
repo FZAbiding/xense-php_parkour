@@ -98,6 +98,8 @@ def main() -> None:
                            for event in result.get("steer_events", []))
     diagnostic_names = ("depth_diagnostic.json", "depth_diagnostic.npz",
                         "qvel.csv", "solver_contacts.jsonl")
+    if (args.trial / "policy_ticks.jsonl").is_file():
+        diagnostic_names += ("policy_ticks.jsonl",)
     if diagnostic:
         for name in diagnostic_names:
             shutil.copyfile(args.trial / name, package / name)
@@ -133,6 +135,8 @@ def main() -> None:
         for name in diagnostic_names:
             paths[f"portable_{name}"] = package / name
             paths[f"source_{name}"] = args.trial / name
+    if "policy_ticks.jsonl" in diagnostic_names:
+        paths["policy_trace_script"] = ROOT / "scripts/php_trace_policy.py"
     if preflight:
         paths["portable_preflight"] = package / "preflight.json"
         paths["source_preflight"] = args.trial / "preflight.json"
@@ -186,6 +190,11 @@ def main() -> None:
         else f"额外 `{result['steer']}` 方向修正，短按上限 {result['guided_max_pulse']} 秒"
     )
     diagnostic_note = (
+        "这是一条单独的深度/接触诊断试次，额外采集负载可能改变运行条件，"
+        "不能并入固定协议成绩分布。策略实际读取的最新深度数组和两种关节顺序的动作"
+        "保存在 [policy_ticks.jsonl](policy_ticks.jsonl)；深度心跳序号只是最近观察到的提示，"
+        "若要唯一确认同次旁路帧序号，须用数组 SHA-256 匹配并检查是否存在重复帧。\n\n"
+        if diagnostic and "policy_ticks.jsonl" in diagnostic_names else
         "这是一条单独的深度/接触诊断试次，额外采集负载可能改变运行条件，"
         "不能并入固定协议成绩分布；旁路深度帧不保证与策略每个 tick 的输入完全相同。\n\n"
         if diagnostic else "")

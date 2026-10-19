@@ -1,0 +1,20 @@
+{
+  "trial": "outputs/reproduction/official_benchmark/diagnostic_009_none",
+  "video": "demos/phase1-onnx-first-block-policy-trace-v1/demo.mp4",
+  "source": "recorded_qpos_same_trial_quaternion_safe_interpolation",
+  "fps": 30,
+  "size": [
+    1280,
+    720
+  ],
+  "frames": 342,
+  "duration_s": 11.4,
+  "sample_count": 442,
+  "sample_duration_s": 11.377,
+  "shadows_disabled": true,
+  "sha256": {
+    "video": "ef04e6f57b7f62b591ff2d1a104fe9c2a93a664d134c3188f93836e5e2aa52cf",
+    "qpos": "5c4f325284856f4852785b1b24371ed90e2d978da8445c099634b387ee76e543",
+    "model": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+  }
+}

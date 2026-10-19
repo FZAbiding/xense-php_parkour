@@ -123,7 +123,10 @@ def main() -> None:
     report = {
         "trial": str(trial),
         "method": "original live solver contact force and qvel sampled with qpos",
-        "limits": "discrete samples; no force between samples or original policy action tensor",
+        "limits": ("discrete samples; no force between samples; policy actions are "
+                   "in policy_ticks.jsonl but are not included in this plot"
+                   if (trial / "policy_ticks.jsonl").is_file() else
+                   "discrete samples; no force between samples or original policy action tensor"),
         "hashes": {name: digest(path) for name, path in (
             ("qpos", state_path), ("qvel", velocity_path),
             ("solver_contacts", contacts_path), ("depth_npz", depth_path))},
