@@ -9,7 +9,9 @@ viewer screenshot. Run from the repository root with the ``php`` environment.
 from __future__ import annotations
 
 import argparse
+from collections import deque
 import csv
+from dataclasses import asdict
 import hashlib
 import json
 import math
@@ -26,6 +28,7 @@ from pathlib import Path
 
 from php_score_course import DEFAULT_TERRAIN, blocks
 from php_audit_trial import LiveDepthGuard, LiveRateGuard, audit
+from php_block_guidance import choose_block_direction, course_aims
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -196,7 +199,7 @@ def main() -> None:
                         help="official policy speed class selected with '=' (default: low)")
     parser.add_argument("--pause-after-block", type=float, default=0.0,
                         help="diagnostic stand duration after clearing each block (0 disables)")
-    parser.add_argument("--steer", choices=("none", "centerline", "late_yaw", "inter_obstacle", "post_climb", "predictive", "guided"), default="none",
+    parser.add_argument("--steer", choices=("none", "centerline", "late_yaw", "inter_obstacle", "post_climb", "predictive", "guided", "block_aware"), default="none",
                         help="operator-style left/right corrections from measured lateral offset")
     parser.add_argument("--guided-max-pulse", type=float, default=0.30,
                         help="maximum a/d pulse in guided mode; try 0.16 for conservative correction")
@@ -270,6 +273,12 @@ def main() -> None:
     if args.terrain_obj is not None:
         result["terrain_sha256"] = sha256(args.terrain_obj)
     course_blocks = list(blocks(args.terrain_obj or DEFAULT_TERRAIN))
+    block_aims = course_aims(course_blocks)
+    if args.steer == "block_aware":
+        result["block_aims"] = [asdict(aim) | {"scored_exit_x": aim.scored_exit_x}
+                                for aim in block_aims]
+        result["block_guidance_script_sha256"] = sha256(
+            Path(__file__).with_name("php_block_guidance.py"))
     guided_windows = []
     for position, (number, corners, height) in enumerate(course_blocks):
         if number < 3:
@@ -397,6 +406,10 @@ def main() -> None:
         pause_events = []
         held_steer = None
         steer_events = []
+        guidance_samples = []
+        guided_blocks_attempted = set()
+        heading_history = deque()
+        last_guidance_sample_at = 0.0
         guard_suppressed_events = []
         last_guard_suppressed_at = 0.0
         steer_release_at = 0.0
@@ -445,6 +458,16 @@ def main() -> None:
                 x, y, z = values[:3]
                 max_x = max(max_x, x)
                 now = time.monotonic()
+                if args.steer == "block_aware":
+                    qw, qx, qy, qz = values[3:7]
+                    current_yaw = math.degrees(math.atan2(2 * (qw * qz + qx * qy),
+                                                           1 - 2 * (qy * qy + qz * qz)))
+                    heading_history.append((now, current_yaw))
+                    while heading_history and now - heading_history[0][0] > 0.45:
+                        heading_history.popleft()
+                    oldest_at, oldest_yaw = heading_history[0]
+                    yaw_rate = (((current_yaw - oldest_yaw + 180) % 360) - 180) / (
+                        now - oldest_at) if now - oldest_at >= 0.18 else 0.0
                 if pause_until and now >= pause_until:
                     xtest.fake_input(conn, X.KeyPress, code)
                     conn.sync()
@@ -492,6 +515,55 @@ def main() -> None:
                         steer_events.append({"t": round(elapsed, 2), "x": round(x, 2),
                                              "y": round(y, 2), "key": wanted})
                         held_steer = wanted
+                elif not pause_until and args.steer == "block_aware":
+                    if held_steer is not None and now >= steer_release_at:
+                        xtest.fake_input(conn, X.KeyRelease,
+                                         conn.keysym_to_keycode(XK.string_to_keysym(held_steer)))
+                        conn.sync()
+                        steer_events.append({"t": round(elapsed, 2), "x": round(x, 2),
+                                             "key": None, "phase": "block_aim_release"})
+                        held_steer = None
+                        steer_cooldown_until = now + 0.55
+                    guidance = choose_block_direction(
+                        block_aims, x=x, y=y, z=z, vx=values[7], vy=values[8],
+                        yaw_rate_deg_s=yaw_rate)
+                    if guidance.block is not None and now - last_guidance_sample_at >= 0.2:
+                        last_guidance_sample_at = now
+                        guidance_samples.append({
+                            "t": round(elapsed, 3), "x": round(x, 3),
+                            "y": round(y, 3), "yaw_deg": round(current_yaw, 2),
+                            "yaw_rate_deg_s": round(yaw_rate, 2),
+                            "vy": round(values[8], 3),
+                            "target_block": guidance.block,
+                            "target_exit_x": guidance.target_x,
+                            "target_y": guidance.target_y,
+                            "predicted_exit_y": (round(guidance.predicted_exit_y, 3)
+                                                 if guidance.predicted_exit_y is not None else None),
+                            "proposed_key": guidance.key, "reason": guidance.reason,
+                        })
+                    if (held_steer is None and now >= steer_cooldown_until and
+                            guidance.key is not None and
+                            guidance.block not in guided_blocks_attempted):
+                        pulse_s = min(args.guided_max_pulse,
+                                      0.30 if abs(guidance.error_m) > 0.8 else 0.22)
+                        xtest.fake_input(conn, X.KeyPress,
+                                         conn.keysym_to_keycode(XK.string_to_keysym(guidance.key)))
+                        conn.sync()
+                        held_steer = guidance.key
+                        guided_blocks_attempted.add(guidance.block)
+                        steer_release_at = now + pulse_s
+                        steer_events.append({
+                            "t": round(elapsed, 2), "x": round(x, 2),
+                            "y": round(y, 2), "yaw_deg": round(current_yaw, 1),
+                            "yaw_rate_deg_s": round(yaw_rate, 1),
+                            "vy": round(values[8], 2),
+                            "target_block": guidance.block,
+                            "target_exit_x": round(guidance.target_x, 2),
+                            "target_y": round(guidance.target_y, 2),
+                            "predicted_y": round(guidance.predicted_exit_y, 2),
+                            "phase": "block_aim", "pulse_s": pulse_s,
+                            "key": guidance.key,
+                        })
                 elif not pause_until and args.steer in ("late_yaw", "inter_obstacle", "post_climb", "predictive", "guided"):
                     now = time.monotonic()
                     if held_steer is not None and now >= steer_release_at:
@@ -615,6 +687,7 @@ def main() -> None:
         result.update({"elapsed_s": round(time.monotonic() - begin, 2),
                        "final_xyz": [round(v, 3) for v in values[:3]],
                        "max_x": round(max_x, 3), "steer_events": steer_events,
+                       "guidance_samples": guidance_samples,
                        "guard_suppressed_events": guard_suppressed_events,
                        "pause_events": pause_events})
         time.sleep(0.3)

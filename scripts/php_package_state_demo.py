@@ -163,7 +163,10 @@ def main() -> None:
                           "post_first_actual_pulse_s": post_first_durations,
                           "direction_pulses_total": direction_pulses,
                           "target_x": result["target_x"],
-                          "forward_key": "held W as in prior evaluations"},
+                          "forward_key": "held W as in prior evaluations",
+                          "external_block_guidance": result["steer"] == "block_aware",
+                          "block_guidance_script_sha256": result.get(
+                              "block_guidance_script_sha256")},
                 "outcome": {"status": result["status"],
                             "consecutive_cleared": score["consecutive_cleared"],
                             "blocks_cleared_total": score["blocks_cleared"],
@@ -189,6 +192,10 @@ def main() -> None:
     steer_description = (
         "仅保持官方前进指令 W，无额外左右修正"
         if result["steer"] == "none"
+        else ("官方 ONNX 加外部已知台阶几何位置引导，"
+              f"实际发出 {direction_pulses} 次 a/d 短按，"
+              f"单次上限 {result['guided_max_pulse']} 秒")
+        if result["steer"] == "block_aware"
         else f"配置了 `{result['steer']}`，本次未触发左右修正，实际仅保持官方前进指令 W"
         if direction_pulses == 0
         else f"额外 `{result['steer']}` 方向修正，短按上限 {result['guided_max_pulse']} 秒"
@@ -232,7 +239,9 @@ def main() -> None:
         f"第 2 块首次出块 y={second_block['first_exit_y_m']:+.3f} m，"
         f"逐块判定为 `{second_block['status']}`；不能把踩上台阶等同于通过台阶。\n\n"
         if second_block and second_block.get("first_exit_y_m") is not None and
-        second_block["status"] != "cleared" else "")
+        second_block["status"] != "cleared" else
+        "第 2 块已登上，但试次在首次出块评分前结束；没有跨过第 2 块。\n\n"
+        if second_block and second_block["status"] == "mounted" else "")
     (package / "README.md").write_text(
         f"# {args.version}\n\n"
         f"[观看 30 fps 实体仿真视频](demo.mp4) · [预览图](poster.jpg) · "

@@ -1,0 +1,47 @@
+{
+  "runner_sha256": "1ec75b46ad9890bda3a268117863e8ad5cff6329a91f6174e4c79771302ec01e",
+  "preflight": {
+    "checked_at_utc": "2026-10-19T11:38:51.592754+00:00",
+    "readings": [
+      {
+        "util_percent": 32,
+        "memory_used_mib": 7003,
+        "cpu_load_1m": 7.28
+      },
+      {
+        "util_percent": 42,
+        "memory_used_mib": 6936,
+        "cpu_load_1m": 7.82
+      },
+      {
+        "util_percent": 43,
+        "memory_used_mib": 6950,
+        "cpu_load_1m": 9.99
+      },
+      {
+        "util_percent": 42,
+        "memory_used_mib": 6980,
+        "cpu_load_1m": 9.67
+      },
+      {
+        "util_percent": 43,
+        "memory_used_mib": 6966,
+        "cpu_load_1m": 9.46
+      },
+      {
+        "util_percent": 43,
+        "memory_used_mib": 6972,
+        "cpu_load_1m": 9.18
+      },
+      {
+        "util_percent": 43,
+        "memory_used_mib": 6991,
+        "cpu_load_1m": 8.93
+      }
+    ],
+    "max_util_percent_exclusive": 50,
+    "max_memory_used_mib_exclusive": 10000,
+    "max_cpu_load_1m_exclusive": 10.0,
+    "ready": true
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "error": null,
+  "frame_count": 243,
+  "shape": [
+    1,
+    1,
+    58,
+    87
+  ],
+  "shm_name": "depth_img_shm",
+  "heartbeat_endpoint": "ipc:///tmp/depth_img_shm.heartbeat",
+  "first_seq": 1,
+  "last_seq": 243,
+  "sequence_gaps": 0,
+  "frame_min": -0.5247448682785034,
+  "frame_max": 0.5,
+  "frame_mean": 0.2466331422328949,
+  "result_present": true,
+  "walk_start_monotonic_s": 442443.957926782,
+  "meaning": "Heartbeat t_capture is publish time, not exact camera exposure time; receiver_monotonic_s minus walk_start_monotonic_s aligns samples approximately to qpos wall_s; sidecar frames are not proven to be the exact pixels used by each policy tick."
+}

@@ -1,0 +1,199 @@
+{
+  "version": "phase1-onnx-block-aware-v1",
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/diagnostic_012_block_aware",
+  "trial_kind": "separate_depth_diagnostic",
+  "method": "full-frame MuJoCo state replay of the same scored trial",
+  "source_truth": "qpos.csv and replay_model.mjb sampled during ONNX evaluation",
+  "interpolation": "MuJoCo mj_differentiatePos/mj_integratePos",
+  "visual_only_changes": "solid tan block colors, dark gray ground, camera/sidebars, shadow casting disabled",
+  "input": {
+    "model_sha256": {
+      "depth_backbone.onnx": "5b22466a218944e3b0ab0f4f82a910e3eec35375ee03e7fb94eb65fa88431b56",
+      "student.onnx": "e426c4206181d511b838c76efc48e43636299b76cb5a15183977011589931628"
+    },
+    "speed_mode": "low",
+    "steer": "block_aware",
+    "guided_max_pulse": 0.24,
+    "post_first_guard": false,
+    "post_first_min_yaw_deg": 15.0,
+    "post_first_pulses": 0,
+    "post_first_actual_pulse_s": [],
+    "direction_pulses_total": 6,
+    "target_x": 13.8,
+    "forward_key": "held W as in prior evaluations",
+    "external_block_guidance": true,
+    "block_guidance_script_sha256": "c8f2a5e26631071fcb1b6f00f9aa1f7d9a629d1900fc14a8dbe46f5109d57be3"
+  },
+  "outcome": {
+    "status": "fell",
+    "consecutive_cleared": 1,
+    "blocks_cleared_total": 1,
+    "max_x_m": 11.138,
+    "quality": "nominal",
+    "sim_fps_median": 490.1,
+    "policy_fps_median": 50.7
+  },
+  "video": {
+    "codec_name": "h264",
+    "width": 1280,
+    "height": 720,
+    "avg_frame_rate": "30/1",
+    "nb_frames": "482"
+  },
+  "state_samples": {
+    "count": 569,
+    "median_gap_ms": 26.6,
+    "max_gap_ms": 125.1,
+    "scored_trajectory_duration_s": 15.438,
+    "state_capture_tail_s": 0.597
+  },
+  "raw_capture": {
+    "fps": 8,
+    "frames": 127,
+    "frames_duplicated": 0,
+    "status": "complete"
+  },
+  "preflight_recorded": true,
+  "diagnostic_state_integrity": {
+    "qpos_raw": 569,
+    "qvel_raw": 569,
+    "solver_contacts_raw": 569,
+    "aligned_prefix": 569,
+    "unscored_terminal_contact_rows_missing": 0
+  },
+  "other_trials": [],
+  "files": {
+    "video": {
+      "path": "demos/phase1-onnx-block-aware-v1/demo.mp4",
+      "sha256": "ebb6be84dd8b041092cff121cdaec2a5a8784b656c8f182b32963a76d3b0f6d6"
+    },
+    "poster": {
+      "path": "demos/phase1-onnx-block-aware-v1/poster.jpg",
+      "sha256": "9fabfff90a1d4e8cd9467bd8d3ec13759330acd401f4e3bcedbefe4fa662edb0"
+    },
+    "portable_model": {
+      "path": "demos/phase1-onnx-block-aware-v1/replay_model.mjb.gz",
+      "sha256": "07b0b19ba1dbb68b46a4d83d66a30bf40acb140135fcaf69623b77ef22941cd2"
+    },
+    "portable_states": {
+      "path": "demos/phase1-onnx-block-aware-v1/qpos.csv.gz",
+      "sha256": "c3990ae402308d60a71d6e8e3fc6522ab24be5925d5bf25662e5eaa5118db30e"
+    },
+    "portable_raw_capture": {
+      "path": "demos/phase1-onnx-block-aware-v1/raw_capture.mp4",
+      "sha256": "d3d5214a48be5070c4f774af4fe2637c1b57e445f862a62782af47ea7d4000c6"
+    },
+    "portable_trajectory": {
+      "path": "demos/phase1-onnx-block-aware-v1/pelvis.csv",
+      "sha256": "e71ed9086cc5d95195db06468161bf6af118cbeb52943cf5b98bcd09e619db93"
+    },
+    "portable_result": {
+      "path": "demos/phase1-onnx-block-aware-v1/result.json",
+      "sha256": "10f3bb748c4f63ba7dfde619e480b409177deac32d3b576e2af38c53e8d7352c"
+    },
+    "portable_score": {
+      "path": "demos/phase1-onnx-block-aware-v1/course_score.json",
+      "sha256": "7123879d353fc6a686e8032b046dcc62ee374e00cf6b9988d411630ba9e843df"
+    },
+    "portable_audit": {
+      "path": "demos/phase1-onnx-block-aware-v1/audit.json",
+      "sha256": "e4f1231bcb5d4daad5b72b0c114e59f4eb64fd3151e3bfbea0d278f714e4c2b6"
+    },
+    "portable_visual_diagnostics": {
+      "path": "demos/phase1-onnx-block-aware-v1/visual_diagnostics.json",
+      "sha256": "eba0092372325c55085403954f39b9a004f679df0b7b51d14d50143ca09d2955"
+    },
+    "source_model": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/replay_model.mjb",
+      "sha256": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+    },
+    "source_states": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/qpos.csv",
+      "sha256": "2b951590bb51d97dbe7ec941ff258747f597b3a61b7955e69885482c5b59fd93"
+    },
+    "raw_capture": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/demo_capture.mp4",
+      "sha256": "d3d5214a48be5070c4f774af4fe2637c1b57e445f862a62782af47ea7d4000c6"
+    },
+    "trajectory": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/pelvis.csv",
+      "sha256": "e71ed9086cc5d95195db06468161bf6af118cbeb52943cf5b98bcd09e619db93"
+    },
+    "result": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/result.json",
+      "sha256": "10f3bb748c4f63ba7dfde619e480b409177deac32d3b576e2af38c53e8d7352c"
+    },
+    "course_score": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/course_score.json",
+      "sha256": "7123879d353fc6a686e8032b046dcc62ee374e00cf6b9988d411630ba9e843df"
+    },
+    "audit": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/audit.json",
+      "sha256": "e4f1231bcb5d4daad5b72b0c114e59f4eb64fd3151e3bfbea0d278f714e4c2b6"
+    },
+    "visual_diagnostics": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/visual_diagnostics.json",
+      "sha256": "eba0092372325c55085403954f39b9a004f679df0b7b51d14d50143ca09d2955"
+    },
+    "render_script": {
+      "path": "scripts/php_render_state_video.py",
+      "sha256": "544232c691f80eed2d5f5f65f72ab00558d4875aa21136b43840739c8b635b8b"
+    },
+    "replay_script": {
+      "path": "scripts/php_replay_demo.py",
+      "sha256": "be6726271ff5e81f1a5ac1f2474f9d3129514530df3417870c7cff7582d10216"
+    },
+    "portable_depth_diagnostic.json": {
+      "path": "demos/phase1-onnx-block-aware-v1/depth_diagnostic.json",
+      "sha256": "92fc1fcfd9bac64e337bbe9ad95e965c0194a9381851ab4e4d449b97cca24aee"
+    },
+    "source_depth_diagnostic.json": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/depth_diagnostic.json",
+      "sha256": "92fc1fcfd9bac64e337bbe9ad95e965c0194a9381851ab4e4d449b97cca24aee"
+    },
+    "portable_depth_diagnostic.npz": {
+      "path": "demos/phase1-onnx-block-aware-v1/depth_diagnostic.npz",
+      "sha256": "59906e235caa7533bdf84d65d2e8524bd05f1872ac55b7620d6d6ceeb0e36118"
+    },
+    "source_depth_diagnostic.npz": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/depth_diagnostic.npz",
+      "sha256": "59906e235caa7533bdf84d65d2e8524bd05f1872ac55b7620d6d6ceeb0e36118"
+    },
+    "portable_qvel.csv": {
+      "path": "demos/phase1-onnx-block-aware-v1/qvel.csv",
+      "sha256": "727b31f4fbc8e9cf289786e055e2fd9029a95b402a40af8900a369f189760c4e"
+    },
+    "source_qvel.csv": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/qvel.csv",
+      "sha256": "727b31f4fbc8e9cf289786e055e2fd9029a95b402a40af8900a369f189760c4e"
+    },
+    "portable_solver_contacts.jsonl": {
+      "path": "demos/phase1-onnx-block-aware-v1/solver_contacts.jsonl",
+      "sha256": "34c31822de108518948fbc3641dc3a586f5330590464b48ca62095f9ba9c5bec"
+    },
+    "source_solver_contacts.jsonl": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/solver_contacts.jsonl",
+      "sha256": "34c31822de108518948fbc3641dc3a586f5330590464b48ca62095f9ba9c5bec"
+    },
+    "portable_policy_ticks.jsonl": {
+      "path": "demos/phase1-onnx-block-aware-v1/policy_ticks.jsonl",
+      "sha256": "5c323c86aab8c1e1a0ad747960de318c0bd55d77c26a01918478236bc85bd10d"
+    },
+    "source_policy_ticks.jsonl": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/policy_ticks.jsonl",
+      "sha256": "5c323c86aab8c1e1a0ad747960de318c0bd55d77c26a01918478236bc85bd10d"
+    },
+    "policy_trace_script": {
+      "path": "scripts/php_trace_policy.py",
+      "sha256": "71f4151fa584a95a05353617947b19bce5de38221bb5d1a204dcc65f05647520"
+    },
+    "portable_preflight": {
+      "path": "demos/phase1-onnx-block-aware-v1/preflight.json",
+      "sha256": "8d21b9141c8a09c619d259d5275058bbcf9c9279a30a98ff650940d9be6b91aa"
+    },
+    "source_preflight": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_012_block_aware/preflight.json",
+      "sha256": "8d21b9141c8a09c619d259d5275058bbcf9c9279a30a98ff650940d9be6b91aa"
+    }
+  }
+}

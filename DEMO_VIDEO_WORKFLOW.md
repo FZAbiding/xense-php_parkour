@@ -14,6 +14,7 @@
 | [第一块求解器/深度诊断](demos/phase1-onnx-first-block-solver-depth-v1/demo.mp4) · [交互包](demos/phase1-onnx-first-block-solver-depth-v1/README.md) | 独立诊断 006 | W-only，无额外方向脉冲；旁路采集真实接触力、全身速度和深度 | x=8.8 m 主动停止，第一块合格；质量 `nominal`，**仅诊断第一块** |
 | [第一块策略 tick 诊断](demos/phase1-onnx-first-block-policy-trace-v1/demo.mp4) · [交互包](demos/phase1-onnx-first-block-policy-trace-v1/README.md) | 独立诊断 009 | W-only，额外记录官方 ONNX 的 29 维动作和策略实际读取的深度数组指纹 | x=8.8 m 主动停止，第一块合格；质量 `nominal`，**仍未重现 059 的急转** |
 | [第二块未通过的逐 tick 诊断](demos/phase1-onnx-second-block-trace-v1/demo.mp4) · [交互包](demos/phase1-onnx-second-block-trace-v1/README.md) | 独立诊断 010 | W-only，同次动作、深度数组、求解器接触力 | 脚踩第二块，但首次出块 y=−1.282 m；质量 `nominal`，严格连续 1 块 |
+| [按方块位置引导 v1](demos/phase1-onnx-block-aware-v1/demo.mp4) · [交互包](demos/phase1-onnx-block-aware-v1/README.md) | 独立诊断 012 | 官方 ONNX + 已知 OBJ 几何/骨盆遥测，实际 6 次 `a/d`，最多 0.24 秒 | 踩上第二块但出块前摔倒；质量 `nominal`，严格连续 1 块；[失败分析](reports/phase1_block_aware_2026-10-19.md) |
 
 五条都采用 x=13.8 m 的短程终点；056–058 和 060 到达该点后主动停止，059 则提前离开路线。它们不能写成完整 12 块路线的 1/12 或 2/12 成绩，也不能从未配对轨迹推断外部纠偏的因果收益。视频都由同一次评测保存的模型和关节状态生成 1280×720、30 fps 的实体仿真画面；压缩状态、原始窗口录像、评分、预检和哈希清单留在各自交互包。状态录制通常比评分轨迹多约 0.5 秒收尾，版本清单标出该段，收尾不计成绩。[短程续行报告](reports/phase1_short_guard_followup_2026-10-17.md)同时列出无效试次、足部接触重建和纠偏前已出现的横向分叉。059/060 的配置上限相同，但实际早期输入时长不同，不能合并声称“0.30 秒脉冲做了两次”。
 

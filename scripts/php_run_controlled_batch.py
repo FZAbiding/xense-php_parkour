@@ -256,8 +256,8 @@ def main() -> None:
     parser.add_argument("--interval", type=float, default=5.0)
     args = parser.parse_args()
     sequence = args.sequence.split(",")
-    if not sequence or any(mode not in ("none", "guided") for mode in sequence):
-        parser.error("--sequence must contain only comma-separated none/guided")
+    if not sequence or any(mode not in ("none", "guided", "block_aware") for mode in sequence):
+        parser.error("--sequence must contain only comma-separated none/guided/block_aware")
     if args.post_first_guard and any(mode != "guided" for mode in sequence):
         parser.error("--post-first-guard requires a guided-only sequence")
     if args.start_id < 1 or args.samples < 1 or args.interval < 0:

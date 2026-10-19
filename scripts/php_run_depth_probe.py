@@ -23,7 +23,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", action="store_true")
     parser.add_argument("--trial-id", type=int, default=1)
-    parser.add_argument("--steer", choices=("none", "guided"), default="none")
+    parser.add_argument("--steer", choices=("none", "guided", "block_aware"), default="none")
+    parser.add_argument("--guided-max-pulse", type=float, default=0.16,
+                        help="maximum a/d pulse for guided or block_aware mode")
     parser.add_argument("--target-x", type=float, default=27.4,
                         help="diagnostic stop point; 8.8 isolates the first block")
     parser.add_argument("--samples", type=int, default=7)
@@ -37,6 +39,8 @@ def main() -> None:
         parser.error("trial-id and samples must be positive; interval must be nonnegative")
     if args.target_x <= 0:
         parser.error("target-x must be positive")
+    if not 0 < args.guided_max_pulse <= 0.30:
+        parser.error("guided-max-pulse must be in (0, 0.30]")
     if (not 0 < args.max_gpu_util <= 100 or args.max_gpu_memory_mib <= 0 or
             args.max_cpu_load_1m <= 0):
         parser.error("resource thresholds must be positive")
@@ -54,6 +58,7 @@ def main() -> None:
         "trial": str(directory.relative_to(ROOT)),
         "steer": args.steer,
         "target_x": args.target_x,
+        "guided_max_pulse": args.guided_max_pulse,
         "preflight": check,
         "probe_script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     }
@@ -65,6 +70,7 @@ def main() -> None:
             record["result"] = run_trial(directory, args.steer, sys.executable,
                                          depth_diagnostic=True,
                                          target_x=args.target_x,
+                                         guided_max_pulse=args.guided_max_pulse,
                                          preflight_report={
                                              "runner_sha256": record["probe_script_sha256"],
                                              "preflight": check})
