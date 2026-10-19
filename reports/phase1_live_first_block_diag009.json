@@ -9,6 +9,13 @@
     "depth_npz": "a127c70f76e800afcb5d55ecebf9fa9d8fee6f9ded6cab933640e5e73c385f43"
   },
   "matched_sample_count": 442,
+  "state_integrity": {
+    "qpos_raw": 442,
+    "qvel_raw": 442,
+    "solver_contacts_raw": 442,
+    "aligned_prefix": 442,
+    "unscored_terminal_contact_rows_missing": 0
+  },
   "plot_window_x_m": [
     3.8,
     6.2

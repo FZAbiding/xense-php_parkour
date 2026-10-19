@@ -1,0 +1,197 @@
+{
+  "version": "phase1-onnx-second-block-trace-v1",
+  "trial": "/home/xense/src/php_parkour/outputs/reproduction/official_benchmark/diagnostic_010_none",
+  "trial_kind": "separate_depth_diagnostic",
+  "method": "full-frame MuJoCo state replay of the same scored trial",
+  "source_truth": "qpos.csv and replay_model.mjb sampled during ONNX evaluation",
+  "interpolation": "MuJoCo mj_differentiatePos/mj_integratePos",
+  "visual_only_changes": "solid tan block colors, dark gray ground, camera/sidebars, shadow casting disabled",
+  "input": {
+    "model_sha256": {
+      "depth_backbone.onnx": "5b22466a218944e3b0ab0f4f82a910e3eec35375ee03e7fb94eb65fa88431b56",
+      "student.onnx": "e426c4206181d511b838c76efc48e43636299b76cb5a15183977011589931628"
+    },
+    "speed_mode": "low",
+    "steer": "none",
+    "guided_max_pulse": 0.16,
+    "post_first_guard": false,
+    "post_first_min_yaw_deg": 15.0,
+    "post_first_pulses": 0,
+    "post_first_actual_pulse_s": [],
+    "direction_pulses_total": 0,
+    "target_x": 13.8,
+    "forward_key": "held W as in prior evaluations"
+  },
+  "outcome": {
+    "status": "x_target_reached",
+    "consecutive_cleared": 1,
+    "blocks_cleared_total": 1,
+    "max_x_m": 13.816,
+    "quality": "nominal",
+    "sim_fps_median": 494.9,
+    "policy_fps_median": 50.4
+  },
+  "video": {
+    "codec_name": "h264",
+    "width": 1280,
+    "height": 720,
+    "avg_frame_rate": "30/1",
+    "nb_frames": "490"
+  },
+  "state_samples": {
+    "count": 678,
+    "median_gap_ms": 21.9,
+    "max_gap_ms": 50.2,
+    "scored_trajectory_duration_s": 15.748,
+    "state_capture_tail_s": 0.575
+  },
+  "raw_capture": {
+    "fps": 8,
+    "frames": 130,
+    "frames_duplicated": 0,
+    "status": "complete"
+  },
+  "preflight_recorded": true,
+  "diagnostic_state_integrity": {
+    "qpos_raw": 678,
+    "qvel_raw": 678,
+    "solver_contacts_raw": 677,
+    "aligned_prefix": 677,
+    "unscored_terminal_contact_rows_missing": 1
+  },
+  "other_trials": [],
+  "files": {
+    "video": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/demo.mp4",
+      "sha256": "bd144a3c29a43ab2b694d96f99e08c9df2715ec6b1a0c580ff9a3f03a8a53032"
+    },
+    "poster": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/poster.jpg",
+      "sha256": "12c62f17597f06a65fffc3b70bc06a0a665a759633620e325688636b32cc49f5"
+    },
+    "portable_model": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/replay_model.mjb.gz",
+      "sha256": "07b0b19ba1dbb68b46a4d83d66a30bf40acb140135fcaf69623b77ef22941cd2"
+    },
+    "portable_states": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/qpos.csv.gz",
+      "sha256": "892689bf322d5ab70e28f01cea242bd7c1e905137bcd126f1c20608908d770c5"
+    },
+    "portable_raw_capture": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/raw_capture.mp4",
+      "sha256": "b02279a850db4657fcc3cad986e583e96cb630cb4342395d39d233e748a79ccd"
+    },
+    "portable_trajectory": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/pelvis.csv",
+      "sha256": "649c9cc69ce9bf1c8d3a530c3a3f3d7c504b56b8c541857b0f45fe6eb5cfa2e4"
+    },
+    "portable_result": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/result.json",
+      "sha256": "2ffeb006abb327f55674fd737348f80b03f9488d2d0de6b26937437a3f478b53"
+    },
+    "portable_score": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/course_score.json",
+      "sha256": "a8cbdb5da7930b140ad6fb92f1775765012d953c88bcc042059e32e2c72feb4d"
+    },
+    "portable_audit": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/audit.json",
+      "sha256": "2b0bb85f2c90432bb88221ce11e0785ff969c8e761fe435d0c97a2309e74c9f1"
+    },
+    "portable_visual_diagnostics": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/visual_diagnostics.json",
+      "sha256": "eba0092372325c55085403954f39b9a004f679df0b7b51d14d50143ca09d2955"
+    },
+    "source_model": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/replay_model.mjb",
+      "sha256": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+    },
+    "source_states": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/qpos.csv",
+      "sha256": "eddf46bf7d9efb13277b4b5a3a439b81b82d68cb3c2a0442b087043d18601e46"
+    },
+    "raw_capture": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/demo_capture.mp4",
+      "sha256": "b02279a850db4657fcc3cad986e583e96cb630cb4342395d39d233e748a79ccd"
+    },
+    "trajectory": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/pelvis.csv",
+      "sha256": "649c9cc69ce9bf1c8d3a530c3a3f3d7c504b56b8c541857b0f45fe6eb5cfa2e4"
+    },
+    "result": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/result.json",
+      "sha256": "2ffeb006abb327f55674fd737348f80b03f9488d2d0de6b26937437a3f478b53"
+    },
+    "course_score": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/course_score.json",
+      "sha256": "a8cbdb5da7930b140ad6fb92f1775765012d953c88bcc042059e32e2c72feb4d"
+    },
+    "audit": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/audit.json",
+      "sha256": "2b0bb85f2c90432bb88221ce11e0785ff969c8e761fe435d0c97a2309e74c9f1"
+    },
+    "visual_diagnostics": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/visual_diagnostics.json",
+      "sha256": "eba0092372325c55085403954f39b9a004f679df0b7b51d14d50143ca09d2955"
+    },
+    "render_script": {
+      "path": "scripts/php_render_state_video.py",
+      "sha256": "544232c691f80eed2d5f5f65f72ab00558d4875aa21136b43840739c8b635b8b"
+    },
+    "replay_script": {
+      "path": "scripts/php_replay_demo.py",
+      "sha256": "be6726271ff5e81f1a5ac1f2474f9d3129514530df3417870c7cff7582d10216"
+    },
+    "portable_depth_diagnostic.json": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/depth_diagnostic.json",
+      "sha256": "de8a00f24bdfaad354c8aadfad54ebd2db1be985f832e675d09c470c071c900d"
+    },
+    "source_depth_diagnostic.json": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/depth_diagnostic.json",
+      "sha256": "de8a00f24bdfaad354c8aadfad54ebd2db1be985f832e675d09c470c071c900d"
+    },
+    "portable_depth_diagnostic.npz": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/depth_diagnostic.npz",
+      "sha256": "8c59e677663f0c8a27676272b2c5a0c9c36087b9986645e958bcb8f3955dff6c"
+    },
+    "source_depth_diagnostic.npz": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/depth_diagnostic.npz",
+      "sha256": "8c59e677663f0c8a27676272b2c5a0c9c36087b9986645e958bcb8f3955dff6c"
+    },
+    "portable_qvel.csv": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/qvel.csv",
+      "sha256": "654fd83f406c141fc162bf4d690789a440c8d4847d997284dfb652c048cc87b4"
+    },
+    "source_qvel.csv": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/qvel.csv",
+      "sha256": "654fd83f406c141fc162bf4d690789a440c8d4847d997284dfb652c048cc87b4"
+    },
+    "portable_solver_contacts.jsonl": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/solver_contacts.jsonl",
+      "sha256": "cb3459bfbd603987ce82cd4c8b14a52ea7c17dcf4b93e64195a4a005ca8a21ff"
+    },
+    "source_solver_contacts.jsonl": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/solver_contacts.jsonl",
+      "sha256": "cb3459bfbd603987ce82cd4c8b14a52ea7c17dcf4b93e64195a4a005ca8a21ff"
+    },
+    "portable_policy_ticks.jsonl": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/policy_ticks.jsonl",
+      "sha256": "ab8a81ee5c47c7f9cd2de67764a2c5d9f79bd8d96875edc478f99c53b84fd278"
+    },
+    "source_policy_ticks.jsonl": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/policy_ticks.jsonl",
+      "sha256": "ab8a81ee5c47c7f9cd2de67764a2c5d9f79bd8d96875edc478f99c53b84fd278"
+    },
+    "policy_trace_script": {
+      "path": "scripts/php_trace_policy.py",
+      "sha256": "71f4151fa584a95a05353617947b19bce5de38221bb5d1a204dcc65f05647520"
+    },
+    "portable_preflight": {
+      "path": "demos/phase1-onnx-second-block-trace-v1/preflight.json",
+      "sha256": "d1023598603ef41699b93dd837633dfa39530b74513c51ec33ad7bb239a35b4c"
+    },
+    "source_preflight": {
+      "path": "outputs/reproduction/official_benchmark/diagnostic_010_none/preflight.json",
+      "sha256": "d1023598603ef41699b93dd837633dfa39530b74513c51ec33ad7bb239a35b4c"
+    }
+  }
+}

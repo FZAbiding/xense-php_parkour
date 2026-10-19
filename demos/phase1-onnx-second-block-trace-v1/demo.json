@@ -1,0 +1,20 @@
+{
+  "trial": "outputs/reproduction/official_benchmark/diagnostic_010_none",
+  "video": "demos/phase1-onnx-second-block-trace-v1/demo.mp4",
+  "source": "recorded_qpos_same_trial_quaternion_safe_interpolation",
+  "fps": 30,
+  "size": [
+    1280,
+    720
+  ],
+  "frames": 490,
+  "duration_s": 16.333,
+  "sample_count": 678,
+  "sample_duration_s": 16.323,
+  "shadows_disabled": true,
+  "sha256": {
+    "video": "bd144a3c29a43ab2b694d96f99e08c9df2715ec6b1a0c580ff9a3f03a8a53032",
+    "qpos": "eddf46bf7d9efb13277b4b5a3a439b81b82d68cb3c2a0442b087043d18601e46",
+    "model": "9f1b1e83871af7364fc4008e3c27a80551944c0a3771de67ad963bd23cb6cb64"
+  }
+}

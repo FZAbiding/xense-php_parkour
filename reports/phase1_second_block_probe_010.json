@@ -1,0 +1,90 @@
+{
+  "kind": "separate_depth_probe_not_fixed_protocol",
+  "trial": "outputs/reproduction/official_benchmark/diagnostic_010_none",
+  "steer": "none",
+  "target_x": 13.8,
+  "preflight": {
+    "checked_at_utc": "2026-10-19T07:25:28.472762+00:00",
+    "readings": [
+      {
+        "util_percent": 2,
+        "memory_used_mib": 1311,
+        "cpu_load_1m": 2.13
+      },
+      {
+        "util_percent": 6,
+        "memory_used_mib": 1311,
+        "cpu_load_1m": 1.96
+      },
+      {
+        "util_percent": 2,
+        "memory_used_mib": 1311,
+        "cpu_load_1m": 1.81
+      },
+      {
+        "util_percent": 2,
+        "memory_used_mib": 1311,
+        "cpu_load_1m": 1.66
+      },
+      {
+        "util_percent": 3,
+        "memory_used_mib": 1311,
+        "cpu_load_1m": 1.53
+      },
+      {
+        "util_percent": 2,
+        "memory_used_mib": 1311,
+        "cpu_load_1m": 1.65
+      },
+      {
+        "util_percent": 3,
+        "memory_used_mib": 1311,
+        "cpu_load_1m": 1.59
+      }
+    ],
+    "max_util_percent_exclusive": 50,
+    "max_memory_used_mib_exclusive": 10000,
+    "max_cpu_load_1m_exclusive": 10.0,
+    "ready": true
+  },
+  "probe_script_sha256": "c2f28f0414527ae94cf6b568c87d32051b52c6ff28e3fe19f348959568fb6e5a",
+  "result": {
+    "trial": "outputs/reproduction/official_benchmark/diagnostic_010_none",
+    "steer": "none",
+    "benchmark_exit": 0,
+    "recorder_exit": 0,
+    "diagnostic_exit": 0,
+    "depth_diagnostic": {
+      "status": "complete",
+      "error": null,
+      "frame_count": 247,
+      "shape": [
+        1,
+        1,
+        58,
+        87
+      ],
+      "shm_name": "depth_img_shm",
+      "heartbeat_endpoint": "ipc:///tmp/depth_img_shm.heartbeat",
+      "first_seq": 1,
+      "last_seq": 247,
+      "sequence_gaps": 0,
+      "frame_min": -0.5158612728118896,
+      "frame_max": 0.5,
+      "frame_mean": 0.23040704429149628,
+      "result_present": true,
+      "walk_start_monotonic_s": 427240.441289916,
+      "meaning": "Heartbeat t_capture is publish time, not exact camera exposure time; receiver_monotonic_s minus walk_start_monotonic_s aligns samples approximately to qpos wall_s; sidecar frames are not proven to be the exact pixels used by each policy tick."
+    },
+    "status": "x_target_reached",
+    "consecutive_cleared": 1,
+    "quality": "nominal",
+    "diagnostic_samples": {
+      "qpos": 678,
+      "qvel": 678,
+      "solver_contacts": 677,
+      "policy_ticks": 823
+    },
+    "error": "diagnostic traces have mismatched sample counts"
+  }
+}

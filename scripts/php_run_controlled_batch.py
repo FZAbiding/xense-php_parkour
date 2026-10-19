@@ -21,6 +21,8 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from php_diagnostic_integrity import aligned_solver_rows
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ROOT = ROOT / "outputs/reproduction/official_benchmark"
@@ -205,25 +207,20 @@ def run_trial(directory: Path, steer: str, python: str,
     record["quality"] = json.loads(
         (directory / "audit.json").read_text())["quality"]
     if depth_diagnostic:
-        qvel = directory / "qvel.csv"
-        contacts = directory / "solver_contacts.jsonl"
-        qpos = directory / "qpos.csv"
         ticks = directory / "policy_ticks.jsonl"
-        if not all(path.is_file() for path in (qpos, qvel, contacts, ticks)):
+        if not all((directory / name).is_file() for name in
+                   ("qpos.csv", "qvel.csv", "solver_contacts.jsonl",
+                    "policy_ticks.jsonl")):
             record["error"] = "diagnostic state, contact, or policy-tick trace missing"
             return record
-        with qpos.open() as qpos_stream, qvel.open() as qvel_stream, \
-                contacts.open() as contact_stream, ticks.open() as tick_stream:
-            qpos_rows = sum(1 for _ in qpos_stream) - 1
-            qvel_rows = sum(1 for _ in qvel_stream) - 1
-            contact_rows = sum(1 for _ in contact_stream)
-            tick_rows = [json.loads(line) for line in tick_stream]
-        record["diagnostic_samples"] = {
-            "qpos": qpos_rows, "qvel": qvel_rows,
-            "solver_contacts": contact_rows, "policy_ticks": len(tick_rows)}
-        if qpos_rows < 1 or qpos_rows != qvel_rows or qpos_rows != contact_rows:
-            record["error"] = "diagnostic traces have mismatched sample counts"
+        try:
+            _, _, _, state_integrity = aligned_solver_rows(directory)
+        except ValueError as exc:
+            record["error"] = f"diagnostic traces invalid: {exc}"
             return record
+        with ticks.open() as tick_stream:
+            tick_rows = [json.loads(line) for line in tick_stream]
+        record["diagnostic_samples"] = state_integrity | {"policy_ticks": len(tick_rows)}
         if (not tick_rows or
                 any(row["tick"] != i or not row["depth_newest_read_sha256"] or
                     len(row["action_model_order"]) != 29 or

@@ -13,6 +13,8 @@ import statistics
 import subprocess
 from pathlib import Path
 
+from php_diagnostic_integrity import aligned_solver_rows
+
 
 ROOT = Path(__file__).resolve().parents[1]
 FFMPEG = Path("/tmp/php-ffmpeg/usr/bin/ffmpeg")
@@ -90,6 +92,7 @@ def main() -> None:
         shutil.copyfile(args.trial / "preflight.json", package / "preflight.json")
     shutil.copyfile(args.trial / "demo_capture.mp4", package / "raw_capture.mp4")
     diagnostic = (args.trial / "depth_diagnostic.json").is_file()
+    diagnostic_integrity = aligned_solver_rows(args.trial)[3] if diagnostic else None
     post_first_durations = [event["pulse_s"] for event in result.get("steer_events", [])
                             if event.get("phase") == "post_first_guard"
                             and event.get("key") in ("a", "d")]
@@ -177,6 +180,7 @@ def main() -> None:
                 "raw_capture": {key: capture[key] for key in
                                 ("fps", "frames", "frames_duplicated", "status")},
                 "preflight_recorded": preflight,
+                "diagnostic_state_integrity": diagnostic_integrity,
                 "other_trials": other_trials,
                 "files": {name: {"path": str(path.relative_to(ROOT)),
                                  "sha256": digest(path)}
@@ -210,6 +214,11 @@ def main() -> None:
     preflight_note = (
         "[启动资源预检](preflight.json)保存了这次试验实际采用的门槛、逐次 GPU/CPU 读数"
         "和运行器哈希。\n\n" if preflight else "")
+    diagnostic_tail_note = (
+        "原始接触日志比位置/速度少最后 1 帧；该帧发生在终点评分之后，"
+        "前面的逐帧时间完全对齐。原始文件保留未修改，分析只使用共同的完整前缀。\n\n"
+        if diagnostic_integrity and
+        diagnostic_integrity["unscored_terminal_contact_rows_missing"] == 1 else "")
     score_description = (
         f"前 {score['consecutive_cleared']} 块合格；在 x={result['target_x']} m 主动停止，"
         "未评估全程 12 块"
@@ -218,6 +227,12 @@ def main() -> None:
         f"实际以 `{result['status']}` 提前结束，未评估全程 12 块"
         if result["target_x"] < 27.4 else
         f"严格连续成绩 {score['consecutive_cleared']}/12")
+    second_block = next((block for block in score["blocks"] if block["block"] == 2), None)
+    second_block_note = (
+        f"第 2 块首次出块 y={second_block['first_exit_y_m']:+.3f} m，"
+        f"逐块判定为 `{second_block['status']}`；不能把踩上台阶等同于通过台阶。\n\n"
+        if second_block and second_block.get("first_exit_y_m") is not None and
+        second_block["status"] != "cleared" else "")
     (package / "README.md").write_text(
         f"# {args.version}\n\n"
         f"[观看 30 fps 实体仿真视频](demo.mp4) · [预览图](poster.jpg) · "
@@ -231,9 +246,11 @@ def main() -> None:
         "视频按同一次评测保存的 `qpos.csv` 与 `replay_model.mjb` 在 MuJoCo 中逐帧回放，"
         "帧间采用关节与四元数安全插值；原始窗口录屏也保留在试验目录。"
         "视频是评测状态的可视化，成绩来自同一次 `pelvis.csv` 的逐块评分。\n\n"
+        f"{second_block_note}"
         f"状态回放比评分轨迹多保留约 {capture_tail_s:.2f} 秒的收尾画面；"
         "收尾不计入逐块成绩或最大前进距离。\n\n"
         f"{diagnostic_note}"
+        f"{diagnostic_tail_note}"
         f"{preflight_note}"
         "此目录还包含压缩模型、关节状态、原始窗口录屏与评分依据。"
         "在仓库根目录启动可拖动、缩放的回放：\n\n"

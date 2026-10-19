@@ -4,11 +4,12 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import hashlib
 import json
 import math
 from pathlib import Path
+
+from php_diagnostic_integrity import aligned_solver_rows
 
 import matplotlib
 matplotlib.use("Agg")
@@ -44,18 +45,7 @@ def main() -> None:
     velocity_path = trial / "qvel.csv"
     contacts_path = trial / "solver_contacts.jsonl"
     depth_path = trial / "depth_diagnostic.npz"
-    with state_path.open(newline="") as stream:
-        states = list(csv.DictReader(stream))
-    with velocity_path.open(newline="") as stream:
-        velocities = list(csv.DictReader(stream))
-    with contacts_path.open() as stream:
-        contacts = [json.loads(line) for line in stream]
-    if not states or len(states) != len(velocities) or len(states) != len(contacts):
-        raise ValueError("qpos, qvel, and solver contact sample counts differ")
-    for state, velocity, contact in zip(states, velocities, contacts):
-        if (abs(float(state["sim_s"]) - float(velocity["sim_s"])) > 1e-5 or
-                abs(float(state["sim_s"]) - float(contact["sim_s"])) > 1e-5):
-            raise ValueError("solver records do not share a simulation time")
+    states, velocities, contacts, state_integrity = aligned_solver_rows(trial)
     selected = []
     for state, velocity, contact in zip(states, velocities, contacts):
         x = float(state["qpos_0"])
@@ -131,6 +121,7 @@ def main() -> None:
             ("qpos", state_path), ("qvel", velocity_path),
             ("solver_contacts", contacts_path), ("depth_npz", depth_path))},
         "matched_sample_count": len(states),
+        "state_integrity": state_integrity,
         "plot_window_x_m": [3.8, 6.2],
         "block_footprint_x_m": [4.3, 5.7],
         "block_footprint_sample_count": len(footprint),
