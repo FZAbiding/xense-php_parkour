@@ -1,5 +1,7 @@
 # [RSS 2026] Perceptive Humanoid Parkour: Chaining Dynamic Human Skills via Motion Matching
 
+> 中文总入口：[PHP Parkour 项目总览：数据、教师训练、双 ONNX 学生与本机复现](PHP_PARKOUR_PROJECT_GUIDE.md)。
+
 Zhen Wu\*, Xiaoyu Huang\*, Lujie Yang\*, Yuanhang Zhang, Xi Chen,
 Pieter Abbeel†, Rocky Duan†, Angjoo Kanazawa†, Carmelo Sferrazza†, Guanya Shi†, C. Karen Liu†
 
